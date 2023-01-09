@@ -1,30 +1,29 @@
-Template of a git profile for others to use!
+```
+# Your Name
 
-### Title
-A short description of who you are and what you do.
+A short bio about yourself.
 
-### Skills
-List of skills or technologies that you are proficient in
-Any relevant certifications or degrees
-### Projects
-A list of your notable projects, including:
-Project title
-Short description of the project
-Link to the project (if applicable)
-### Experience
-A list of your relevant work experience, including:
-Job title
-Company name
-Dates of employment
-Key responsibilities and achievements
-### Education
-A list of your educational qualifications, including:
-Degree title
-Institution
-Dates of attendance
-### Contact
-A way for people to get in touch with you, such as:
-Email address
-LinkedIn profile
-Twitter handle
-I hope this helps! Let me know if you have any questions or need further assistance.
+## Skills
+
+- List your skills here
+- You can also include links to your portfolio or projects that showcase your skills
+
+## Contact
+
+- Email: your.email@example.com
+- LinkedIn: [Your Name](https://www.linkedin.com/in/your-name)
+- Twitter: [@yourhandle](https://twitter.com/yourhandle)
+
+## Projects
+
+Here are a few of my notable projects:
+
+- Project 1: [Project Title](https://github.com/your-username/project-title) - A brief description of the project and what it does.
+- Project 2: [Project Title](https://github.com/your-username/project-title) - A brief description of the project and what it does.
+- Project 3: [Project Title](https://github.com/your-username/project-title) - A brief description of the project and what it does.
+
+## Education
+
+- Degree and field of study, school name and year of graduation (e.g. B.S. in Computer Science, University of Example, 2023)
+
+```
