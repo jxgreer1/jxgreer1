@@ -1,3 +1,5 @@
+Template of a git profile for others to use!
+
 ### Title
 A short description of who you are and what you do.
 
