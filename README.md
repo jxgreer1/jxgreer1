@@ -1,6 +1,6 @@
 ### Hi there 👋
 
-**Hi Im Jack
+** Hi Im Jack
 
 Here are some ideas to get you started:
 
