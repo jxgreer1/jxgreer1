@@ -5,7 +5,7 @@
 <h1 align="center">Jack Greer</h1>
 
 <p align="center">
-  Industrial engineering at Kettering University&nbsp; ·&nbsp; Co-op at Tesla&nbsp; ·&nbsp; I shoot film
+  Industrial Engineering student&nbsp; ·&nbsp; Co-op at Tesla&nbsp; ·&nbsp; Film Photography nerd
 </p>
 
 <p align="center">
@@ -34,20 +34,20 @@ I go on site as well and solve problems daily to help keep lines running.
 
 **Tesla** &nbsp;·&nbsp; Supplier Industrialization Engineer, PCBA &nbsp;·&nbsp; Palo Alto, CA &nbsp;·&nbsp; Jan 2026 to now
 
-Defined and validated end to end production with contract manufacturers. Brought average PCB
+Defined and validated end-to-end production with contract manufacturers. Brought average PCB
 cost down **38%** and cycle time down **73%** across suppliers. Built a capacity planning tool
 that maps supplier EDI demand to line level PCBAs so utilization risk shows up before it bites.
 
 **Brembo North America** &nbsp;·&nbsp; Industrial Engineering Intern &nbsp;·&nbsp; Jackson, MI &nbsp;·&nbsp; Jan to Mar 2025
 
 Moved outsourced production back in house and saved **$200K a year** doing it. Reworked the
-end of arm tooling so maintenance went from weekly to quarterly. 3D scanned 75+ pattern plates
+end-of-arm tooling so maintenance went from weekly to quarterly. 3D-scanned 75+ pattern plates
 and built color maps to track wear.
 
 **Advanced 3D Printing** &nbsp;·&nbsp; PCB Designer &nbsp;·&nbsp; Los Angeles, CA &nbsp;·&nbsp; Jan 2023 to Dec 2024
 
-Designed small plug and play boards that became standard in high speed custom printer builds.
-Sold over **500** of them and ran tier 3 support.
+Designed small plug-and-play boards that became standard in high-speed custom printer builds.
+Sold over **500** of them and ran tier-3 support.
 
 **FRC 1836** &nbsp;·&nbsp; Captain &nbsp;·&nbsp; Los Angeles, CA &nbsp;·&nbsp; Jun 2023 to Jun 2024
 
@@ -64,7 +64,7 @@ pointed the same direction.
 |---|---|
 | **Design** | Altium, KiCad, Fusion 360, SolidWorks, Onshape |
 | **Validation** | Metrology, 3D scanning, PolyWorks, data analysis |
-| **Method** | Lean, 8D, A3, DFM for PCBA, PCB and Flex |
+| **Method** | Lean, 8D, A3, DFM for PCBA, PCB, and Flex |
 | **Stack** | Jira, Enovia, Git, Excel, LLM tooling |
 
 </details>
