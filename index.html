@@ -67,7 +67,7 @@ a{color:inherit}
 /* ---------- hero ---------- */
 .hero{
   text-align:center;
-  padding-block:clamp(72px,12vw,132px) clamp(44px,7vw,72px);
+  padding-block:clamp(84px,14vw,152px) clamp(72px,11vw,116px);
 }
 .eyebrow{
   margin:0 0 clamp(14px,2vw,20px);font-size:clamp(15px,1.8vw,19px);
@@ -87,21 +87,6 @@ a{color:inherit}
   font-size:14px;color:var(--ink-2);
 }
 .where .dot{width:7px;height:7px;border-radius:50%;background:var(--accent);flex:none}
-
-/* ---------- full bleed figure ---------- */
-.bleed{margin:0;position:relative}
-.bleed img{
-  width:100%;height:clamp(300px,54vh,580px);
-  object-fit:cover;object-position:center 73%;
-}
-.bleed figcaption{
-  max-width:var(--wide);margin:0 auto;padding:14px var(--gut) 0;
-  display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
-  font-size:13px;color:var(--ink-2);
-}
-.bleed figcaption a{text-decoration:none;transition:color .2s ease}
-.bleed figcaption a:hover{color:var(--accent)}
-.bleed figcaption .t{color:var(--ink);font-weight:500}
 
 /* ---------- bands ---------- */
 .band{padding-block:clamp(72px,11vw,128px)}
@@ -225,8 +210,6 @@ footer{background:var(--bg-alt);border-top:1px solid var(--rule);padding-block:3
     <p class="where"><span class="dot"></span><span id="city">Flint</span></p>
   </header>
 
-  <figure class="bleed" id="heroshot"></figure>
-
   <section class="band alt" id="currently">
     <div class="inner">
       <h2>Currently at Tesla.</h2>
@@ -341,16 +324,6 @@ footer{background:var(--bg-alt);border-top:1px solid var(--rule);padding-block:3
   function url(p){ return "https://www.instagram.com/p/" + p.p + "/"; }
   function src(p){ return "ig/" + p.f; }
 
-  /* hero = the latest post */
-  var h = POSTS[0], hero = document.getElementById("heroshot");
-  var hi = new Image();
-  hi.src = src(h); hi.alt = h.t; hi.width = h.w; hi.height = h.h; hi.decoding = "async";
-  hero.appendChild(hi);
-  var hc = document.createElement("figcaption");
-  hc.innerHTML = '<span class="t">' + h.t + "</span>" +
-    '<a href="' + url(h) + '" target="_blank" rel="noopener">' + h.d + " &nearr;</a>";
-  hero.appendChild(hc);
-
   /* gallery: alternating one-up and two-up, Apple-ish rhythm */
   function shot(p, i){
     var fig = document.createElement("figure");
@@ -370,7 +343,7 @@ footer{background:var(--bg-alt);border-top:1px solid var(--rule);padding-block:3
     return fig;
   }
 
-  var g = document.getElementById("gallery"), rest = POSTS.slice(1), n = 0, k = 0;
+  var g = document.getElementById("gallery"), rest = POSTS, n = 0, k = 0;
   while (n < rest.length){
     if (k % 3 === 0){
       g.appendChild(shot(rest[n], n)); n += 1;
@@ -410,7 +383,7 @@ footer{background:var(--bg-alt);border-top:1px solid var(--rule);padding-block:3
   if (!still && "IntersectionObserver" in window){
     var targets = [];
     Array.prototype.forEach.call(
-      document.querySelectorAll(".band .inner, .shot, .bleed"),
+      document.querySelectorAll(".band .inner, .shot"),
       function(el){ if (el.getBoundingClientRect().top > window.innerHeight){ el.classList.add("rise"); targets.push(el); } }
     );
     var io = new IntersectionObserver(function(es){
