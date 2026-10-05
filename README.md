@@ -123,7 +123,16 @@ DOMAIN.md                          how to point a domain here
 
 **Hosting.** Settings &rsaquo; Pages &rsaquo; Deploy from a branch &rsaquo; `main` / root.
 
-**Choosing which photos show.** Edit `photos.config.json`:
+**Choosing which photos show.** Open **`picker.html`** (double click it, or visit
+[the hosted copy](https://jxgreer1.github.io/jxgreer1/picker.html)). Every post is
+laid out as a grid: click to show or hide, switch to Manual order to arrange them,
+then copy the JSON it builds into `photos.config.json` and commit.
+
+Auto keeps new posts flowing in and skips whatever you switched off. Manual order
+pins exactly the photos you picked, in your order, so nothing new appears until you
+go back to the picker.
+
+Editing `photos.config.json` by hand works too:
 
 ```jsonc
 {
@@ -134,9 +143,9 @@ DOMAIN.md                          how to point a domain here
 }
 ```
 
-A post code is the part after `/p/` in its URL. `FEED.md` is regenerated on every
-sync and lists every post the feed offered, with its code and whether it is on the
-site, so you can pick from it.
+A post code is the part after `/p/` in its URL. Each sync also regenerates `FEED.md`,
+a table of every post with its code, and `photos.manifest.js` plus `ig/thumbs/`, which
+are what the picker reads.
 
 **Keeping the photos current.** A scheduled Action reads a JSON feed of my Instagram,
 downloads anything new at full resolution, rewrites the `POSTS` array in `index.html`,

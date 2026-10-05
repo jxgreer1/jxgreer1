@@ -32,6 +32,9 @@ IGDIR = os.path.join(ROOT, "ig")
 PAGE = os.path.join(ROOT, "index.html")
 CONFIG = os.path.join(ROOT, "photos.config.json")
 CATALOGUE = os.path.join(ROOT, "FEED.md")
+THUMBS = os.path.join(IGDIR, "thumbs")
+MANIFEST = os.path.join(ROOT, "photos.manifest.js")
+THUMBPX = 440
 UA = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
                     "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0 Safari/537.36"}
 
@@ -120,6 +123,45 @@ def pretty_date(ts):
     return "%s %d, %d" % (d.strftime("%b"), d.day, d.year)
 
 
+def write_thumbs_and_manifest(found):
+    """A small thumbnail for every post the feed offered, shown or not, so
+    picker.html can display the whole set to choose from."""
+    os.makedirs(THUMBS, exist_ok=True)
+    manifest, keep = [], set()
+    for p in found:
+        if not p["code"]:
+            continue
+        name = "%s.jpg" % p["code"]
+        path = os.path.join(THUMBS, name)
+        if not os.path.exists(path):
+            try:
+                with open(path, "wb") as fh:
+                    fh.write(fetch(p["url"], binary=True))
+                im = ImageOps.exif_transpose(Image.open(path)).convert("RGB")
+                im.thumbnail((THUMBPX, THUMBPX), Image.LANCZOS)
+                im.save(path, quality=78, optimize=True, progressive=True)
+            except Exception as e:
+                print("  no thumb for %s (%s)" % (p["code"], e))
+                continue
+        keep.add(name)
+        manifest.append({
+            "code": p["code"],
+            "caption": p["caption"] or "",
+            "date": pretty_date(p["ts"]),
+            "permalink": p["permalink"],
+            "thumb": "ig/thumbs/" + name,
+        })
+    for stale in os.listdir(THUMBS):
+        if stale.endswith(".jpg") and stale not in keep:
+            os.remove(os.path.join(THUMBS, stale))
+    with open(MANIFEST, "w", encoding="utf-8") as fh:
+        fh.write("/* Written by tools/sync_instagram.py. Every post the feed offered.\n"
+                 "   Loaded by picker.html, which works straight off the filesystem. */\n")
+        fh.write("window.PHOTO_MANIFEST = " +
+                 json.dumps(manifest, ensure_ascii=False, indent=2) + ";\n")
+    print("  manifest: %d posts available to pick from" % len(manifest))
+
+
 def write_catalogue(found, shown_codes, cfg):
     lines = [
         "# Every post in the feed",
@@ -162,6 +204,8 @@ def main():
         print("Feed returned no still images; leaving the site untouched.")
         return 0
     print("Feed offered %d posts. Mode: %s." % (len(found), cfg["mode"]))
+
+    write_thumbs_and_manifest(found)
 
     posts = choose(found, cfg)
     if not posts:

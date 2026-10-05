@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pick photos</title>
+<meta name="robots" content="noindex">
+<style>
+:root{
+  color-scheme:light;
+  --bg:#fff; --alt:#F5F5F7; --ink:#1D1D1F; --ink2:#6E6E73;
+  --rule:#D2D2D7; --accent:#0A7D82;
+  --sans:-apple-system,BlinkMacSystemFont,"SF Pro Text","Inter","Segoe UI",Roboto,Arial,sans-serif;
+  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.5}
+img{display:block;max-width:100%}
+button{font:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
+
+header{border-bottom:1px solid var(--rule);padding:22px clamp(16px,4vw,32px) 18px}
+header h1{margin:0;font-size:22px;font-weight:600;letter-spacing:-.015em}
+header p{margin:6px 0 0;color:var(--ink2);max-width:72ch}
+main{padding:clamp(16px,4vw,32px);max-width:1200px;margin:0 auto}
+h2{font-size:13px;text-transform:uppercase;letter-spacing:.07em;color:var(--ink2);
+   margin:0 0 12px;font-weight:600}
+section{margin-bottom:34px}
+
+.bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:18px}
+.seg{display:inline-flex;border:1px solid var(--rule);border-radius:980px;overflow:hidden}
+.seg button{border:0;background:none;padding:7px 15px;cursor:pointer;color:var(--ink2)}
+.seg button[aria-pressed="true"]{background:var(--accent);color:#fff}
+.mini{border:1px solid var(--rule);background:none;border-radius:980px;padding:7px 15px;cursor:pointer;color:var(--ink)}
+.mini:hover{background:var(--alt)}
+.count{color:var(--ink2);margin-left:auto;font-variant-numeric:tabular-nums}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px}
+.card{position:relative;border:0;padding:0;background:none;cursor:pointer;text-align:left;
+      border-radius:12px;overflow:hidden;transition:transform .15s ease}
+.card:hover{transform:translateY(-2px)}
+.card .wrap{position:relative;border-radius:12px;overflow:hidden;background:var(--alt);
+            aspect-ratio:1;outline:2px solid transparent;transition:outline-color .15s ease}
+.card img{width:100%;height:100%;object-fit:cover;transition:opacity .15s ease,filter .15s ease}
+.card[aria-pressed="false"] img{opacity:.38;filter:grayscale(1)}
+.card[aria-pressed="true"] .wrap{outline-color:var(--accent)}
+.tick{position:absolute;top:8px;left:8px;width:22px;height:22px;border-radius:50%;
+      display:grid;place-items:center;font-size:12px;font-weight:600;color:#fff;
+      background:rgba(0,0,0,.35);backdrop-filter:blur(6px)}
+.card[aria-pressed="true"] .tick{background:var(--accent)}
+.meta{padding:7px 2px 0;font-size:12px;color:var(--ink2);
+      overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.meta b{color:var(--ink);font-weight:500}
+
+.chosen{display:flex;flex-wrap:wrap;gap:10px;padding:14px;background:var(--alt);border-radius:14px;min-height:92px}
+.chosen .slot{position:relative;width:84px}
+.chosen .slot img{width:84px;height:84px;object-fit:cover;border-radius:9px}
+.chosen .n{position:absolute;top:5px;left:5px;background:rgba(0,0,0,.55);color:#fff;
+           border-radius:5px;font-size:11px;padding:1px 5px;font-variant-numeric:tabular-nums}
+.chosen .mv{display:flex;gap:4px;margin-top:5px}
+.chosen .mv button{flex:1;border:1px solid var(--rule);background:#fff;border-radius:6px;
+                   cursor:pointer;font-size:12px;line-height:1.6;padding:0;color:var(--ink)}
+.chosen .mv button:hover{background:var(--alt)}
+.chosen .empty{color:var(--ink2);align-self:center}
+
+pre{background:#1D1D1F;color:#EDEDEF;padding:16px;border-radius:12px;overflow-x:auto;
+    font-family:var(--mono);font-size:12.5px;line-height:1.55;margin:0}
+.out{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap;align-items:center}
+.ok{color:var(--accent);font-size:13px}
+.btn{background:var(--accent);color:#fff;border:0;border-radius:980px;padding:9px 18px;cursor:pointer}
+.btn:hover{opacity:.88}
+.hint{color:var(--ink2);font-size:13px;margin:10px 0 0}
+.hint code{font-family:var(--mono);font-size:12px;background:var(--alt);padding:1px 5px;border-radius:4px}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Pick photos</h1>
+  <p>Click a photo to show or hide it. Reorder with the arrows. Copy the result into
+     <code>photos.config.json</code>, commit, and the next sync will match it.</p>
+</header>
+
+<main>
+  <section>
+    <div class="bar">
+      <span class="seg" role="group" aria-label="Mode">
+        <button id="mAuto"   aria-pressed="true">Auto</button>
+        <button id="mManual" aria-pressed="false">Manual order</button>
+      </span>
+      <button class="mini" id="all">Select all</button>
+      <button class="mini" id="none">Select none</button>
+      <span class="count" id="count"></span>
+    </div>
+    <div class="grid" id="grid"></div>
+  </section>
+
+  <section id="orderSec" hidden>
+    <h2>Order on the site</h2>
+    <div class="chosen" id="chosen"></div>
+  </section>
+
+  <section>
+    <h2>photos.config.json</h2>
+    <pre id="out"></pre>
+    <div class="out">
+      <button class="btn" id="copy">Copy</button>
+      <button class="mini" id="dl">Download file</button>
+      <span class="ok" id="said"></span>
+    </div>
+    <p class="hint">
+      <b>Auto</b> keeps new posts flowing in automatically and just skips whatever you
+      switched off. <b>Manual order</b> pins exactly these photos in exactly this order,
+      so nothing new appears until you come back here.
+    </p>
+  </section>
+</main>
+
+<script src="photos.manifest.js"></script>
+<script>
+(function(){
+  "use strict";
+  var ALL = window.PHOTO_MANIFEST || [];
+  var on = {};            // code -> shown?
+  var order = [];         // codes, in display order
+  var mode = "auto";
+
+  ALL.forEach(function(p){ on[p.code] = true; order.push(p.code); });
+
+  var grid = document.getElementById("grid"),
+      chosen = document.getElementById("chosen"),
+      orderSec = document.getElementById("orderSec"),
+      out = document.getElementById("out"),
+      count = document.getElementById("count"),
+      said = document.getElementById("said");
+
+  function byCode(c){ for (var i=0;i<ALL.length;i++) if (ALL[i].code===c) return ALL[i]; return null; }
+  function shown(){ return order.filter(function(c){ return on[c]; }); }
+
+  function config(){
+    var picked = shown();
+    if (mode === "manual"){
+      return { mode:"manual", limit: Math.max(picked.length,1), hide: [], order: picked };
+    }
+    return {
+      mode:"auto",
+      limit: 12,
+      hide: ALL.map(function(p){ return p.code; }).filter(function(c){ return !on[c]; }),
+      order: []
+    };
+  }
+
+  function draw(){
+    grid.textContent = "";
+    ALL.forEach(function(p){
+      var b = document.createElement("button");
+      b.type = "button";
+      b.className = "card";
+      b.setAttribute("aria-pressed", on[p.code] ? "true" : "false");
+      b.title = (p.caption || "") + "  " + p.date;
+      b.innerHTML =
+        '<span class="wrap"><img src="' + p.thumb + '" alt="' + (p.caption||"photo").replace(/"/g,"") + '">' +
+        '<span class="tick">' + (on[p.code] ? "✓" : "") + "</span></span>" +
+        '<span class="meta"><b>' + (p.caption || "No caption") + "</b> " + p.date + "</span>";
+      b.addEventListener("click", function(){ on[p.code] = !on[p.code]; draw(); });
+      grid.appendChild(b);
+    });
+
+    var picked = shown();
+    count.textContent = picked.length + " of " + ALL.length + " shown";
+    orderSec.hidden = (mode !== "manual");
+
+    chosen.textContent = "";
+    if (!picked.length){
+      var e = document.createElement("span");
+      e.className = "empty"; e.textContent = "Nothing selected.";
+      chosen.appendChild(e);
+    }
+    picked.forEach(function(c, i){
+      var p = byCode(c);
+      var slot = document.createElement("div");
+      slot.className = "slot";
+      slot.innerHTML = '<img src="' + p.thumb + '" alt=""><span class="n">' + (i+1) + "</span>" +
+                       '<span class="mv"><button data-d="-1" aria-label="Move earlier">←</button>' +
+                       '<button data-d="1" aria-label="Move later">→</button></span>';
+      slot.querySelectorAll("button").forEach(function(btn){
+        btn.addEventListener("click", function(){
+          var d = parseInt(btn.getAttribute("data-d"), 10);
+          var from = order.indexOf(c), to = from;
+          // step over anything currently hidden
+          do { to += d; } while (order[to] && !on[order[to]]);
+          if (to < 0 || to >= order.length) return;
+          order.splice(from, 1);
+          order.splice(to, 0, c);
+          draw();
+        });
+      });
+      chosen.appendChild(slot);
+    });
+
+    out.textContent = JSON.stringify(config(), null, 2);
+  }
+
+  document.getElementById("all").addEventListener("click", function(){
+    ALL.forEach(function(p){ on[p.code] = true; }); draw();
+  });
+  document.getElementById("none").addEventListener("click", function(){
+    ALL.forEach(function(p){ on[p.code] = false; }); draw();
+  });
+  function setMode(m){
+    mode = m;
+    document.getElementById("mAuto").setAttribute("aria-pressed", m==="auto" ? "true":"false");
+    document.getElementById("mManual").setAttribute("aria-pressed", m==="manual" ? "true":"false");
+    draw();
+  }
+  document.getElementById("mAuto").addEventListener("click", function(){ setMode("auto"); });
+  document.getElementById("mManual").addEventListener("click", function(){ setMode("manual"); });
+
+  function flash(msg){ said.textContent = msg; setTimeout(function(){ said.textContent = ""; }, 2200); }
+  document.getElementById("copy").addEventListener("click", function(){
+    var text = out.textContent;
+    if (navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(function(){ flash("Copied."); },
+                                               function(){ flash("Select the text and copy."); });
+    } else { flash("Select the text and copy."); }
+  });
+  document.getElementById("dl").addEventListener("click", function(){
+    var a = document.createElement("a");
+    a.href = URL.createObjectURL(new Blob([out.textContent], {type:"application/json"}));
+    a.download = "photos.config.json";
+    a.click();
+    URL.revokeObjectURL(a.href);
+    flash("Saved. Replace photos.config.json with it.");
+  });
+
+  draw();
+})();
+</script>
+</body>
+</html>
