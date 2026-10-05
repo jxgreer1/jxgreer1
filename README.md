@@ -161,13 +161,17 @@ A post code is the part after `/p/` in its URL. Each sync also regenerates `FEED
 a table of every post with its code, and `photos.manifest.js` plus `ig/thumbs/`, which
 are what the picker reads.
 
-**Keeping the photos current.** A scheduled Action reads a JSON feed of my Instagram,
-downloads anything new at full resolution, rewrites the `POSTS` array in `index.html`,
-and commits. To switch it on, create a free feed at [behold.so](https://behold.so) and add
-the URL as a repository variable named `BEHOLD_FEED_URL`
-(Settings &rsaquo; Secrets and variables &rsaquo; Actions &rsaquo; Variables). Until then the
-workflow exits cleanly and the committed photos stay put. Run it by hand any time from
-the Actions tab.
+**Keeping the photos current.** A scheduled Action reads the Behold feed nightly,
+archives anything new at full resolution, merges it into `photos.manifest.js`, then
+applies `photos.config.json`. Set it up by adding the feed URL as a repository
+variable named `BEHOLD_FEED_URL` (Settings &rsaquo; Secrets and variables &rsaquo;
+Actions &rsaquo; Variables). Without it the workflow exits cleanly and nothing moves.
+Run it by hand any time from the Actions tab.
+
+The archive only ever grows. A free Behold feed returns a short recent window, so
+posts that scroll out of it stay in the manifest and remain pickable. Carousels are
+split into their slides; `onePerPost` keeps a six slide carousel from swallowing the
+page, and switching it off lets individual slides through.
 
 </details>
 

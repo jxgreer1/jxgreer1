@@ -38,6 +38,10 @@ section{margin-bottom:34px}
    background:#fff;color:var(--ink)}
 #q::placeholder{color:var(--ink2)}
 .none{color:var(--ink2);padding:22px 2px}
+.chk{display:inline-flex;align-items:center;gap:7px;color:var(--ink2);cursor:pointer;font-size:14px}
+.chk input{accent-color:var(--accent);width:15px;height:15px}
+.slide{position:absolute;top:8px;right:8px;background:rgba(0,0,0,.5);color:#fff;
+       border-radius:5px;font-size:11px;padding:1px 6px;backdrop-filter:blur(6px)}
 
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px}
 .card{position:relative;border:0;padding:0;background:none;cursor:pointer;text-align:left;
@@ -94,6 +98,7 @@ pre{background:#1D1D1F;color:#EDEDEF;padding:16px;border-radius:12px;overflow-x:
       </span>
       <button class="mini" id="all">Select all</button>
       <button class="mini" id="none">Select none</button>
+      <label class="chk"><input type="checkbox" id="one" checked> One slide per post</label>
       <input id="q" type="search" placeholder="Search captions or dates" aria-label="Search photos">
       <span class="count" id="count"></span>
     </div>
@@ -116,7 +121,9 @@ pre{background:#1D1D1F;color:#EDEDEF;padding:16px;border-radius:12px;overflow-x:
     <p class="hint">
       <b>Auto</b> keeps new posts flowing in automatically and just skips whatever you
       switched off. <b>Manual order</b> pins exactly these photos in exactly this order,
-      so nothing new appears until you come back here.
+      so nothing new appears until you come back here. <b>One slide per post</b> stops a
+      six slide carousel filling the whole page; switch it off, or use Manual order, to
+      put individual slides up.
     </p>
   </section>
 </main>
@@ -145,11 +152,13 @@ pre{background:#1D1D1F;color:#EDEDEF;padding:16px;border-radius:12px;overflow-x:
   function config(){
     var picked = shown();
     if (mode === "manual"){
-      return { mode:"manual", limit: Math.max(picked.length,1), hide: [], order: picked };
+      return { mode:"manual", limit: Math.max(picked.length,1),
+               onePerPost: false, hide: [], order: picked };
     }
     return {
       mode:"auto",
       limit: 12,
+      onePerPost: document.getElementById("one").checked,
       hide: ALL.map(function(p){ return p.code; }).filter(function(c){ return !on[c]; }),
       order: []
     };
@@ -177,7 +186,9 @@ pre{background:#1D1D1F;color:#EDEDEF;padding:16px;border-radius:12px;overflow-x:
       b.title = (p.caption || "") + "  " + p.date;
       b.innerHTML =
         '<span class="wrap"><img loading="lazy" decoding="async" src="' + p.thumb + '" alt="' + (p.caption||"photo").replace(/"/g,"") + '">' +
-        '<span class="tick">' + (on[p.code] ? "✓" : "") + "</span></span>" +
+        '<span class="tick">' + (on[p.code] ? "✓" : "") + "</span>" +
+        (p.code.indexOf("_") > -1
+           ? '<span class="slide">' + p.code.split("_")[1] + "</span>" : "") + "</span>" +
         '<span class="meta"><b>' + (p.caption || "No caption") + "</b> " + p.date + "</span>";
       b.addEventListener("click", function(){ on[p.code] = !on[p.code]; draw(); });
       grid.appendChild(b);
@@ -220,6 +231,7 @@ pre{background:#1D1D1F;color:#EDEDEF;padding:16px;border-radius:12px;overflow-x:
   }
 
   document.getElementById("q").addEventListener("input", draw);
+  document.getElementById("one").addEventListener("change", draw);
   document.getElementById("all").addEventListener("click", function(){
     ALL.forEach(function(p){ on[p.code] = true; }); draw();
   });

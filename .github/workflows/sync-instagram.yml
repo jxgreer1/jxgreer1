@@ -24,11 +24,13 @@ jobs:
 
       - run: pip install --quiet Pillow
 
-      - name: Pull latest posts
+      - name: Pull latest posts into the archive
         env:
           BEHOLD_FEED_URL: ${{ vars.BEHOLD_FEED_URL }}
-          POST_LIMIT: "12"
         run: python tools/sync_instagram.py
+
+      - name: Apply photos.config.json to the site
+        run: python tools/build_gallery.py
 
       - name: Commit any changes
         run: |

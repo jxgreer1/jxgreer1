@@ -1,121 +1,101 @@
 #!/usr/bin/env python3
-"""Pull @jgreerfilm posts into this repo, honouring photos.config.json.
+"""Fetch the latest @jgreerfilm posts into the local archive.
 
-Reads a Behold.so JSON feed (env BEHOLD_FEED_URL), decides which posts to show,
-downloads those stills into ig/, rewrites the POSTS array inside index.html
-between the POSTS:START and POSTS:END markers, and writes FEED.md listing
-everything the feed offered so you can pick from it.
+Reads a Behold.so JSON feed (env BEHOLD_FEED_URL). Carousels are split so each
+slide can be chosen on its own. Everything lands in ig/originals/ and
+ig/thumbs/, and photos.manifest.js is MERGED rather than replaced, so posts
+that have aged out of the feed window stay available to pick from.
 
-photos.config.json
-    mode    "auto"   newest first, minus anything in "hide", capped at "limit"
-            "manual" exactly the posts in "order", in that order
-    limit   how many to show in auto mode
-    hide    post codes to skip in auto mode
-    order   post codes, in the order you want them, for manual mode
+Selecting what actually appears on the site is a separate step:
 
-A post code is the bit after /p/ in its URL:
-    https://www.instagram.com/p/DceQvfAmdCo/  ->  DceQvfAmdCo
+    python3 tools/sync_instagram.py     # fetch and archive
+    python3 tools/build_gallery.py      # apply photos.config.json
 """
-import datetime
 import json
 import os
-import re
+import shutil
+import ssl
+import subprocess
 import sys
 import urllib.request
 
 from PIL import Image, ImageOps
 
 FEED = os.environ.get("BEHOLD_FEED_URL", "").strip()
-MAXPX = 2000
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-IGDIR = os.path.join(ROOT, "ig")
-PAGE = os.path.join(ROOT, "index.html")
-CONFIG = os.path.join(ROOT, "photos.config.json")
-CATALOGUE = os.path.join(ROOT, "FEED.md")
-THUMBS = os.path.join(IGDIR, "thumbs")
+THUMBS = os.path.join(ROOT, "ig", "thumbs")
+ORIGINALS = os.path.join(ROOT, "ig", "originals")
 MANIFEST = os.path.join(ROOT, "photos.manifest.js")
-THUMBPX = 440
+CATALOGUE = os.path.join(ROOT, "FEED.md")
+THUMBPX, FULLPX = 440, 2000
 UA = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
                     "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0 Safari/537.36"}
 
 
+try:
+    import certifi
+    SSLCTX = ssl.create_default_context(cafile=certifi.where())
+except ImportError:
+    SSLCTX = ssl.create_default_context()
+
+
 def fetch(url, binary=False):
-    req = urllib.request.Request(url, headers=UA)
-    with urllib.request.urlopen(req, timeout=90) as r:
-        raw = r.read()
+    """urllib first; fall back to curl where Python has no CA bundle, which is
+    the default state of a python.org install on macOS."""
+    try:
+        req = urllib.request.Request(url, headers=UA)
+        with urllib.request.urlopen(req, timeout=90, context=SSLCTX) as r:
+            raw = r.read()
+    except (ssl.SSLError, urllib.error.URLError) as e:
+        if not shutil.which("curl"):
+            raise
+        reason = getattr(e, "reason", e)
+        if not isinstance(reason, ssl.SSLError) and "CERTIFICATE" not in str(reason).upper():
+            raise
+        raw = subprocess.run(
+            ["curl", "-sSL", "--fail", "--max-time", "90",
+             "-H", "User-Agent: " + UA["User-Agent"], url],
+            check=True, capture_output=True).stdout
     return raw if binary else raw.decode("utf-8", "replace")
 
 
-def load_config():
-    cfg = {"mode": "auto", "limit": 12, "hide": [], "order": []}
-    if os.path.exists(CONFIG):
-        try:
-            with open(CONFIG, encoding="utf-8") as fh:
-                cfg.update({k: v for k, v in json.load(fh).items()
-                            if not k.startswith("_")})
-        except Exception as e:
-            print("photos.config.json could not be read (%s); using defaults." % e)
-    cfg["hide"] = [str(x).strip() for x in cfg.get("hide") or []]
-    cfg["order"] = [str(x).strip() for x in cfg.get("order") or []]
-    try:
-        cfg["limit"] = max(1, int(cfg.get("limit") or 12))
-    except (TypeError, ValueError):
-        cfg["limit"] = 12
-    return cfg
+def best_url(obj):
+    sizes = obj.get("sizes") or {}
+    for k in ("full", "large", "medium", "small"):
+        if sizes.get(k, {}).get("mediaUrl"):
+            return sizes[k]["mediaUrl"]
+    return obj.get("mediaUrl") or ""
 
 
-def normalise(doc):
-    """Behold returns {posts:[...]}; some feeds return a bare list."""
-    items = doc if isinstance(doc, list) else (
-        doc.get("posts") or doc.get("media") or doc.get("data") or [])
-    out = []
-    for m in items:
-        if str(m.get("mediaType", "")).upper() == "VIDEO":
-            continue
-        sizes = m.get("sizes") or {}
-        best = sizes.get("full") or sizes.get("large") or sizes.get("medium") or {}
-        url = best.get("mediaUrl") or m.get("mediaUrl") or m.get("media_url")
-        if not url:
-            continue
-        link = m.get("permalink", "")
-        code = re.search(r"/p/([^/?]+)", link)
-        caption = (m.get("caption") or "").strip().replace("\r", "")
-        out.append({
-            "url": url,
-            "permalink": link,
-            "code": code.group(1) if code else "",
-            "caption": caption.split("\n")[0][:70],
-            "ts": m.get("timestamp") or "",
-        })
-    return out
+def shortcode(permalink):
+    parts = [p for p in (permalink or "").split("/") if p]
+    return parts[-1] if parts else ""
 
 
-def choose(found, cfg):
-    """Apply photos.config.json to the posts the feed gave us."""
-    by_code = {p["code"]: p for p in found if p["code"]}
-    if cfg["mode"] == "manual":
-        picked, missing = [], []
-        for code in cfg["order"]:
-            if code in by_code:
-                picked.append(by_code[code])
-            else:
-                missing.append(code)
-        if missing:
-            print("  not in the feed, skipped: %s" % ", ".join(missing))
-        if not picked:
-            print("  manual mode but nothing in \"order\" matched; falling back to auto.")
-        else:
-            return picked
-    hidden = set(cfg["hide"])
-    kept = [p for p in found if p["code"] not in hidden]
-    if hidden:
-        print("  hidden by config: %d" % (len(found) - len(kept)))
-    return kept[:cfg["limit"]]
+def expand(doc):
+    """One entry per image. A six slide carousel is six things to choose from."""
+    posts = doc.get("posts") if isinstance(doc, dict) else doc
+    items = []
+    for p in posts or []:
+        code0 = shortcode(p.get("permalink"))
+        cap = (p.get("prunedCaption") or p.get("caption") or "").replace("\r", "")
+        cap = cap.split("\n")[0][:70]
+        common = {"permalink": p.get("permalink") or "", "caption": cap,
+                  "ts": p.get("timestamp") or ""}
+        kids = [c for c in (p.get("children") or [])
+                if str(c.get("mediaType", "IMAGE")).upper() != "VIDEO"]
+        if kids:
+            for i, c in enumerate(kids, start=1):
+                items.append(dict(common, code="%s_%d" % (code0, i), url=best_url(c)))
+        elif str(p.get("mediaType", "")).upper() != "VIDEO":
+            items.append(dict(common, code=code0, url=best_url(p)))
+    return [i for i in items if i["code"] and i["url"]]
 
 
 def pretty_date(ts):
-    if not ts:
+    if not ts or len(ts) < 10:
         return ""
+    import datetime
     try:
         d = datetime.datetime.fromisoformat(ts.replace("Z", "+00:00"))
     except ValueError:
@@ -123,144 +103,106 @@ def pretty_date(ts):
     return "%s %d, %d" % (d.strftime("%b"), d.day, d.year)
 
 
-def write_thumbs_and_manifest(found):
-    """A small thumbnail for every post the feed offered, shown or not, so
-    picker.html can display the whole set to choose from."""
-    os.makedirs(THUMBS, exist_ok=True)
-    manifest, keep = [], set()
-    for p in found:
-        if not p["code"]:
-            continue
-        name = "%s.jpg" % p["code"]
-        path = os.path.join(THUMBS, name)
-        if not os.path.exists(path):
-            try:
-                with open(path, "wb") as fh:
-                    fh.write(fetch(p["url"], binary=True))
-                im = ImageOps.exif_transpose(Image.open(path)).convert("RGB")
-                im.thumbnail((THUMBPX, THUMBPX), Image.LANCZOS)
-                im.save(path, quality=78, optimize=True, progressive=True)
-            except Exception as e:
-                print("  no thumb for %s (%s)" % (p["code"], e))
-                continue
-        keep.add(name)
-        manifest.append({
-            "code": p["code"],
-            "caption": p["caption"] or "",
-            "date": pretty_date(p["ts"]),
-            "permalink": p["permalink"],
-            "thumb": "ig/thumbs/" + name,
-        })
-    for stale in os.listdir(THUMBS):
-        if stale.endswith(".jpg") and stale not in keep:
-            os.remove(os.path.join(THUMBS, stale))
+def load_manifest():
+    if not os.path.exists(MANIFEST):
+        return []
+    s = open(MANIFEST, encoding="utf-8").read()
+    try:
+        return json.loads(s[s.index("["):s.rindex("]") + 1])
+    except ValueError:
+        return []
+
+
+def save_manifest(man):
+    man.sort(key=lambda p: p.get("ts") or "", reverse=True)
     with open(MANIFEST, "w", encoding="utf-8") as fh:
-        fh.write("/* Written by tools/sync_instagram.py. Every post the feed offered.\n"
-                 "   Loaded by picker.html, which works straight off the filesystem. */\n")
+        fh.write("/* Written by tools/sync_instagram.py and tools/import_export.py.\n"
+                 "   Every photo available to pick from. Loaded by picker.html. */\n")
         fh.write("window.PHOTO_MANIFEST = " +
-                 json.dumps(manifest, ensure_ascii=False, indent=2) + ";\n")
-    print("  manifest: %d posts available to pick from" % len(manifest))
+                 json.dumps(man, ensure_ascii=False, indent=2) + ";\n")
 
 
-def write_catalogue(found, shown_codes, cfg):
-    lines = [
-        "# Every post in the feed",
-        "",
-        "Generated by `tools/sync_instagram.py`. Edit **photos.config.json** to change",
-        "what appears on the site, then run the Sync Instagram action.",
-        "",
-        "- `mode` is currently **%s**, `limit` **%d**" % (cfg["mode"], cfg["limit"]),
-        "- To drop one photo: add its code to `hide`",
-        "- To choose exactly which photos and in what order: set `mode` to `manual`",
-        "  and list codes in `order`",
-        "",
-        "| On the site | Code | Date | Caption |",
-        "|---|---|---|---|",
-    ]
-    for p in found:
-        lines.append("| %s | `%s` | %s | %s |" % (
-            "yes" if p["code"] in shown_codes else "no",
-            p["code"], pretty_date(p["ts"]) or "?",
-            (p["caption"] or "").replace("|", "\\|") or "_no caption_"))
-    lines.append("")
-    with open(CATALOGUE, "w", encoding="utf-8") as fh:
-        fh.write("\n".join(lines))
+def save_catalogue(man):
+    lines = ["# Everything available to pick from", "",
+             "Generated by the sync. Open `picker.html` to choose; it writes",
+             "`photos.config.json`, which `tools/build_gallery.py` applies.", "",
+             "| Code | Date | Caption |", "|---|---|---|"]
+    for p in man:
+        lines.append("| `%s` | %s | %s |" % (
+            p["code"], p.get("date") or "?",
+            (p.get("caption") or "").replace("|", "\\|") or "_no caption_"))
+    open(CATALOGUE, "w", encoding="utf-8").write("\n".join(lines) + "\n")
 
 
-def js(s):
-    return json.dumps(s, ensure_ascii=False)
+def grab(item):
+    """Download once; later runs reuse what is already on disk."""
+    o = os.path.join(ORIGINALS, item["code"] + ".jpg")
+    t = os.path.join(THUMBS, item["code"] + ".jpg")
+    if os.path.exists(o) and os.path.exists(t):
+        return True
+    try:
+        raw = fetch(item["url"], binary=True)
+    except Exception as e:
+        print("  could not fetch %s (%s)" % (item["code"], e))
+        return False
+    open(o, "wb").write(raw)
+    im = ImageOps.exif_transpose(Image.open(o)).convert("RGB")
+    full = im.copy()
+    full.thumbnail((FULLPX, FULLPX), Image.LANCZOS)
+    full.save(o, quality=86, optimize=True, progressive=True)
+    th = im.copy()
+    th.thumbnail((THUMBPX, THUMBPX), Image.LANCZOS)
+    th.save(t, quality=78, optimize=True, progressive=True)
+    return True
 
 
 def main():
-    cfg = load_config()
     if not FEED:
         print("BEHOLD_FEED_URL is not set. Nothing to do.")
-        print("Create a free feed at behold.so, then add the URL as a repo "
-              "variable named BEHOLD_FEED_URL.")
+        print("Add the feed URL as a repo variable named BEHOLD_FEED_URL.")
         return 0
 
-    found = normalise(json.loads(fetch(FEED)))
-    if not found:
-        print("Feed returned no still images; leaving the site untouched.")
+    items = expand(json.loads(fetch(FEED)))
+    if not items:
+        print("Feed held no still images; archive left alone.")
         return 0
-    print("Feed offered %d posts. Mode: %s." % (len(found), cfg["mode"]))
+    print("Feed offered %d images." % len(items))
 
-    write_thumbs_and_manifest(found)
+    os.makedirs(THUMBS, exist_ok=True)
+    os.makedirs(ORIGINALS, exist_ok=True)
 
-    posts = choose(found, cfg)
-    if not posts:
-        print("Config selected nothing; leaving the site untouched.")
-        return 0
+    man = load_manifest()
+    by_code = {p["code"]: p for p in man}
 
-    os.makedirs(IGDIR, exist_ok=True)
-    rows, keep, shown = [], set(), set()
-    for n, p in enumerate(posts, start=1):
-        name = "%02d.jpg" % n
-        path = os.path.join(IGDIR, name)
-        try:
-            raw = fetch(p["url"], binary=True)
-        except Exception as e:                      # one bad URL must not kill the run
-            print("  skip %s (%s)" % (name, e))
+    # a carousel that used to be archived under its bare shortcode is now
+    # superseded by its numbered slides
+    feed_codes = {i["code"] for i in items}
+    bases = {c.split("_")[0] for c in feed_codes if "_" in c}
+    for stale in [c for c in list(by_code) if c in bases]:
+        del by_code[stale]
+        print("  %s replaced by its carousel slides" % stale)
+
+    added = 0
+    for it in items:
+        if not grab(it):
             continue
-        with open(path, "wb") as fh:
-            fh.write(raw)
-        im = ImageOps.exif_transpose(Image.open(path)).convert("RGB")
-        im.thumbnail((MAXPX, MAXPX), Image.LANCZOS)
-        im.save(path, quality=85, optimize=True, progressive=True)
-        keep.add(name)
-        shown.add(p["code"])
-        rows.append('    {f:%s, w:%d,h:%d, t:%s, d:%s, p:%s, u:%s}' % (
-            js(name), im.width, im.height,
-            js(p["caption"] or "Untitled"), js(pretty_date(p["ts"])),
-            js(p["code"]), js(p["permalink"] or "")))
-        print("  %s  %dx%d  %s" % (name, im.width, im.height, p["caption"][:40]))
+        if it["code"] not in by_code:
+            added += 1
+        by_code[it["code"]] = {
+            "code": it["code"],
+            "caption": it["caption"],
+            "date": pretty_date(it["ts"]),
+            "permalink": it["permalink"],
+            "thumb": "ig/thumbs/%s.jpg" % it["code"],
+            "full": "ig/originals/%s.jpg" % it["code"],
+            "ts": it["ts"],
+        }
 
-    write_catalogue(found, shown, cfg)
-
-    if not rows:
-        print("Nothing downloaded; leaving the site untouched.")
-        return 0
-
-    for stale in os.listdir(IGDIR):
-        if stale.endswith(".jpg") and stale not in keep:
-            os.remove(os.path.join(IGDIR, stale))
-            print("  removed stale %s" % stale)
-
-    page = open(PAGE, encoding="utf-8").read()
-    block = ("  /* POSTS:START -- rewritten by tools/sync_instagram.py, do not hand edit */\n"
-             "  var POSTS = [\n" + ",\n".join(rows) + "\n  ];\n"
-             "  /* POSTS:END */")
-    new, count = re.subn(
-        r"  /\* POSTS:START.*?/\* POSTS:END \*/", block, page,
-        count=1, flags=re.S)
-    if not count:
-        print("ERROR: POSTS markers not found in index.html", file=sys.stderr)
-        return 1
-    if new != page:
-        open(PAGE, "w", encoding="utf-8").write(new)
-        print("index.html updated with %d posts." % len(rows))
-    else:
-        print("Already up to date.")
+    man = list(by_code.values())
+    save_manifest(man)
+    save_catalogue(man)
+    print("\n%d new, %d total available to pick from." % (added, len(man)))
+    print("Run tools/build_gallery.py to apply photos.config.json.")
     return 0
 
 

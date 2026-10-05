@@ -1,9 +1,11 @@
 {
-  "_comment": "Which Instagram posts appear on the site. Edit this file, commit, done. Run the Sync Instagram action (or wait for the nightly run) to apply. FEED.md lists every post found, with its code.",
+  "_comment": "Which Instagram photos appear on the site. Open picker.html to set this visually, or edit it here. Then run: python3 tools/build_gallery.py",
 
   "mode": "auto",
 
   "limit": 12,
+
+  "onePerPost": true,
 
   "hide": [],
 

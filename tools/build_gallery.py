@@ -46,8 +46,15 @@ def choose(items, cfg):
         if picked:
             return picked
         print("  manual mode matched nothing; using auto.")
+    pool = items
+    if cfg.get("onePerPost", True):
+        # a six slide carousel would otherwise eat the whole page
+        pool = [p for p in items
+                if "_" not in p["code"] or p["code"].endswith("_1")]
+        if len(pool) != len(items):
+            print("  one slide per post: %d of %d" % (len(pool), len(items)))
     hide = set(cfg.get("hide") or [])
-    return [p for p in items if p["code"] not in hide][:int(cfg.get("limit") or 12)]
+    return [p for p in pool if p["code"] not in hide][:int(cfg.get("limit") or 12)]
 
 
 def js(s):

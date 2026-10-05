@@ -1,29 +1,113 @@
-/* Written by tools/import_export.py or tools/sync_instagram.py.
+/* Written by tools/sync_instagram.py and tools/import_export.py.
    Every photo available to pick from. Loaded by picker.html. */
 window.PHOTO_MANIFEST = [
   {
-    "code": "DceQvfAmdCo",
-    "caption": "Laguna Seca, Car Week 26",
+    "code": "DceQvfAmdCo_1",
+    "caption": "Laguna Seca - Car week 26",
     "date": "Aug 25, 2026",
     "permalink": "https://www.instagram.com/p/DceQvfAmdCo/",
-    "thumb": "ig/thumbs/DceQvfAmdCo.jpg",
-    "full": "ig/originals/DceQvfAmdCo.jpg"
+    "thumb": "ig/thumbs/DceQvfAmdCo_1.jpg",
+    "full": "ig/originals/DceQvfAmdCo_1.jpg",
+    "ts": "2026-08-25T18:17:14+0000"
   },
   {
-    "code": "DbR-vGJlBqL",
+    "code": "DceQvfAmdCo_2",
+    "caption": "Laguna Seca - Car week 26",
+    "date": "Aug 25, 2026",
+    "permalink": "https://www.instagram.com/p/DceQvfAmdCo/",
+    "thumb": "ig/thumbs/DceQvfAmdCo_2.jpg",
+    "full": "ig/originals/DceQvfAmdCo_2.jpg",
+    "ts": "2026-08-25T18:17:14+0000"
+  },
+  {
+    "code": "DceQvfAmdCo_3",
+    "caption": "Laguna Seca - Car week 26",
+    "date": "Aug 25, 2026",
+    "permalink": "https://www.instagram.com/p/DceQvfAmdCo/",
+    "thumb": "ig/thumbs/DceQvfAmdCo_3.jpg",
+    "full": "ig/originals/DceQvfAmdCo_3.jpg",
+    "ts": "2026-08-25T18:17:14+0000"
+  },
+  {
+    "code": "DceQvfAmdCo_4",
+    "caption": "Laguna Seca - Car week 26",
+    "date": "Aug 25, 2026",
+    "permalink": "https://www.instagram.com/p/DceQvfAmdCo/",
+    "thumb": "ig/thumbs/DceQvfAmdCo_4.jpg",
+    "full": "ig/originals/DceQvfAmdCo_4.jpg",
+    "ts": "2026-08-25T18:17:14+0000"
+  },
+  {
+    "code": "DbR-vGJlBqL_1",
     "caption": "H A S S E L B L A D",
-    "date": "Jul 26, 2026",
+    "date": "Jul 27, 2026",
     "permalink": "https://www.instagram.com/p/DbR-vGJlBqL/",
-    "thumb": "ig/thumbs/DbR-vGJlBqL.jpg",
-    "full": "ig/originals/DbR-vGJlBqL.jpg"
+    "thumb": "ig/thumbs/DbR-vGJlBqL_1.jpg",
+    "full": "ig/originals/DbR-vGJlBqL_1.jpg",
+    "ts": "2026-07-27T03:17:37+0000"
   },
   {
-    "code": "Da0v8lGGfxb",
-    "caption": "W O R K  S A T U R D A Y",
+    "code": "DbR-vGJlBqL_2",
+    "caption": "H A S S E L B L A D",
+    "date": "Jul 27, 2026",
+    "permalink": "https://www.instagram.com/p/DbR-vGJlBqL/",
+    "thumb": "ig/thumbs/DbR-vGJlBqL_2.jpg",
+    "full": "ig/originals/DbR-vGJlBqL_2.jpg",
+    "ts": "2026-07-27T03:17:37+0000"
+  },
+  {
+    "code": "DbR-vGJlBqL_3",
+    "caption": "H A S S E L B L A D",
+    "date": "Jul 27, 2026",
+    "permalink": "https://www.instagram.com/p/DbR-vGJlBqL/",
+    "thumb": "ig/thumbs/DbR-vGJlBqL_3.jpg",
+    "full": "ig/originals/DbR-vGJlBqL_3.jpg",
+    "ts": "2026-07-27T03:17:37+0000"
+  },
+  {
+    "code": "DbR-vGJlBqL_4",
+    "caption": "H A S S E L B L A D",
+    "date": "Jul 27, 2026",
+    "permalink": "https://www.instagram.com/p/DbR-vGJlBqL/",
+    "thumb": "ig/thumbs/DbR-vGJlBqL_4.jpg",
+    "full": "ig/originals/DbR-vGJlBqL_4.jpg",
+    "ts": "2026-07-27T03:17:37+0000"
+  },
+  {
+    "code": "DbR-vGJlBqL_5",
+    "caption": "H A S S E L B L A D",
+    "date": "Jul 27, 2026",
+    "permalink": "https://www.instagram.com/p/DbR-vGJlBqL/",
+    "thumb": "ig/thumbs/DbR-vGJlBqL_5.jpg",
+    "full": "ig/originals/DbR-vGJlBqL_5.jpg",
+    "ts": "2026-07-27T03:17:37+0000"
+  },
+  {
+    "code": "DbR-vGJlBqL_6",
+    "caption": "H A S S E L B L A D",
+    "date": "Jul 27, 2026",
+    "permalink": "https://www.instagram.com/p/DbR-vGJlBqL/",
+    "thumb": "ig/thumbs/DbR-vGJlBqL_6.jpg",
+    "full": "ig/originals/DbR-vGJlBqL_6.jpg",
+    "ts": "2026-07-27T03:17:37+0000"
+  },
+  {
+    "code": "Da0v8lGGfxb_1",
+    "caption": "W O R K S A T U R D A Y",
     "date": "Jul 15, 2026",
     "permalink": "https://www.instagram.com/p/Da0v8lGGfxb/",
-    "thumb": "ig/thumbs/Da0v8lGGfxb.jpg",
-    "full": "ig/originals/Da0v8lGGfxb.jpg"
+    "thumb": "ig/thumbs/Da0v8lGGfxb_1.jpg",
+    "full": "ig/originals/Da0v8lGGfxb_1.jpg",
+    "ts": "2026-07-15T18:50:25+0000"
+  },
+  {
+    "code": "Da0v8lGGfxb_2",
+    "caption": "W O R K S A T U R D A Y",
+    "date": "Jul 15, 2026",
+    "permalink": "https://www.instagram.com/p/Da0v8lGGfxb/",
+    "thumb": "ig/thumbs/Da0v8lGGfxb_2.jpg",
+    "full": "ig/originals/Da0v8lGGfxb_2.jpg",
+    "ts": "2026-07-15T18:50:25+0000"
   },
   {
     "code": "DaZ9KpkBkBN",
@@ -31,23 +115,62 @@ window.PHOTO_MANIFEST = [
     "date": "Jul 5, 2026",
     "permalink": "https://www.instagram.com/p/DaZ9KpkBkBN/",
     "thumb": "ig/thumbs/DaZ9KpkBkBN.jpg",
-    "full": "ig/originals/DaZ9KpkBkBN.jpg"
+    "full": "ig/originals/DaZ9KpkBkBN.jpg",
+    "ts": "2026-07-05T09:06:38+0000"
   },
   {
-    "code": "DZ7a0n2lTbc",
+    "code": "DZ7a0n2lTbc_1",
     "caption": "🇺🇸",
     "date": "Jun 23, 2026",
     "permalink": "https://www.instagram.com/p/DZ7a0n2lTbc/",
-    "thumb": "ig/thumbs/DZ7a0n2lTbc.jpg",
-    "full": "ig/originals/DZ7a0n2lTbc.jpg"
+    "thumb": "ig/thumbs/DZ7a0n2lTbc_1.jpg",
+    "full": "ig/originals/DZ7a0n2lTbc_1.jpg",
+    "ts": "2026-06-23T12:29:07+0000"
   },
   {
-    "code": "DZstNhlGQGh",
+    "code": "DZ7a0n2lTbc_2",
+    "caption": "🇺🇸",
+    "date": "Jun 23, 2026",
+    "permalink": "https://www.instagram.com/p/DZ7a0n2lTbc/",
+    "thumb": "ig/thumbs/DZ7a0n2lTbc_2.jpg",
+    "full": "ig/originals/DZ7a0n2lTbc_2.jpg",
+    "ts": "2026-06-23T12:29:07+0000"
+  },
+  {
+    "code": "DZ7a0n2lTbc_3",
+    "caption": "🇺🇸",
+    "date": "Jun 23, 2026",
+    "permalink": "https://www.instagram.com/p/DZ7a0n2lTbc/",
+    "thumb": "ig/thumbs/DZ7a0n2lTbc_3.jpg",
+    "full": "ig/originals/DZ7a0n2lTbc_3.jpg",
+    "ts": "2026-06-23T12:29:07+0000"
+  },
+  {
+    "code": "DZ7a0n2lTbc_4",
+    "caption": "🇺🇸",
+    "date": "Jun 23, 2026",
+    "permalink": "https://www.instagram.com/p/DZ7a0n2lTbc/",
+    "thumb": "ig/thumbs/DZ7a0n2lTbc_4.jpg",
+    "full": "ig/originals/DZ7a0n2lTbc_4.jpg",
+    "ts": "2026-06-23T12:29:07+0000"
+  },
+  {
+    "code": "DZstNhlGQGh_1",
     "caption": "🌚",
     "date": "Jun 17, 2026",
     "permalink": "https://www.instagram.com/p/DZstNhlGQGh/",
-    "thumb": "ig/thumbs/DZstNhlGQGh.jpg",
-    "full": "ig/originals/DZstNhlGQGh.jpg"
+    "thumb": "ig/thumbs/DZstNhlGQGh_1.jpg",
+    "full": "ig/originals/DZstNhlGQGh_1.jpg",
+    "ts": "2026-06-17T19:21:12+0000"
+  },
+  {
+    "code": "DZstNhlGQGh_2",
+    "caption": "🌚",
+    "date": "Jun 17, 2026",
+    "permalink": "https://www.instagram.com/p/DZstNhlGQGh/",
+    "thumb": "ig/thumbs/DZstNhlGQGh_2.jpg",
+    "full": "ig/originals/DZstNhlGQGh_2.jpg",
+    "ts": "2026-06-17T19:21:12+0000"
   },
   {
     "code": "DZB1DO6MZeS",
