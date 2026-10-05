@@ -58,6 +58,19 @@ pointed the same direction.
 </details>
 
 <details>
+<summary><b>Education</b> &nbsp;<sub>click to expand</sub></summary>
+<br>
+
+**Kettering University** &nbsp;·&nbsp; BS, Industrial Engineering &nbsp;·&nbsp; Flint, MI &nbsp;·&nbsp; Oct 2024 to now
+
+Junior, B-Section. Kettering alternates academic and work terms, so the degree runs
+alongside the co-op rather than after it.
+
+**Milken Community School** &nbsp;·&nbsp; Los Angeles, CA &nbsp;·&nbsp; Aug 2020 to Jun 2024
+
+</details>
+
+<details>
 <summary><b>Tools</b> &nbsp;<sub>click to expand</sub></summary>
 <br>
 

@@ -193,6 +193,7 @@ footer{background:var(--bg-alt);border-top:1px solid var(--rule);padding-block:3
   <div class="nav-in">
     <a class="logo" href="#top">Jack Greer</a>
     <a class="sm" href="#currently">Right now</a>
+    <a class="sm" href="#education">Education</a>
     <a class="sm" href="#experience">Experience</a>
     <a href="#photographs">Photographs</a>
     <a href="#contact">Contact</a>
@@ -218,9 +219,28 @@ footer{background:var(--bg-alt);border-top:1px solid var(--rule);padding-block:3
     </div>
   </section>
 
-  <section class="band" id="experience">
+  <section class="band" id="education">
     <div class="inner">
-      <h2>Experience</h2>
+      <h2>Education.</h2>
+      <ol class="cv">
+        <li>
+          <span class="org">Kettering University</span>
+          <span class="when">Oct 2024 &rsaquo; Now &middot; Flint, MI</span>
+          <p class="role">BS, Industrial Engineering</p>
+          <p class="what">Junior, B-Section. Kettering alternates academic and work terms, so the degree runs alongside the co-op rather than after it.</p>
+        </li>
+        <li>
+          <span class="org">Milken Community School</span>
+          <span class="when">Aug 2020 &rsaquo; Jun 2024 &middot; Los Angeles, CA</span>
+          <p class="role">High school diploma</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="band alt" id="experience">
+    <div class="inner">
+      <h2>Experience.</h2>
       <ol class="cv">
         <li>
           <span class="org">Tesla</span>
@@ -246,12 +266,6 @@ footer{background:var(--bg-alt);border-top:1px solid var(--rule);padding-block:3
           <p class="role">Captain</p>
           <p class="what">Ran the school robotics team. Design instruction, tournament logistics, and keeping everyone pointed the same direction.</p>
         </li>
-        <li>
-          <span class="org">Kettering University</span>
-          <span class="when">Oct 2024 &rsaquo; Now &middot; Flint, MI</span>
-          <p class="role">BS, Industrial Engineering</p>
-          <p class="what">Junior, B-Section. Kettering alternates academic and work terms, so the degree runs alongside the co-op rather than after it.</p>
-        </li>
       </ol>
 
       <dl class="tools">
@@ -263,7 +277,7 @@ footer{background:var(--bg-alt);border-top:1px solid var(--rule);padding-block:3
     </div>
   </section>
 
-  <section class="band alt" id="photographs">
+  <section class="band" id="photographs">
     <div class="inner center">
       <h2>Photographs.</h2>
       <p class="sub"><a href="https://www.instagram.com/jgreerfilm/" target="_blank" rel="noopener">@jgreerfilm</a></p>
@@ -410,7 +424,7 @@ footer{background:var(--bg-alt);border-top:1px solid var(--rule);padding-block:3
       if (links[e.target.id]) links[e.target.id].setAttribute("aria-current","true");
     });
   }, { rootMargin: "-45% 0px -50% 0px" });
-  ["currently","experience","photographs","contact"].forEach(function(id){
+  ["currently","education","experience","photographs","contact"].forEach(function(id){
     var el = document.getElementById(id); if (el) spy.observe(el);
   });
 })();
