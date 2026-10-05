@@ -3,11 +3,23 @@
 
   "mode": "auto",
 
-  "limit": 12,
+  "limit": 13,
 
-  "onePerPost": true,
+  "onePerPost": false,
 
-  "hide": [],
+  "hide": [
+    "DceQvfAmdCo_2",
+    "DceQvfAmdCo_3",
+    "DceQvfAmdCo_4",
+    "DbR-vGJlBqL_3",
+    "DbR-vGJlBqL_4",
+    "DbR-vGJlBqL_5",
+    "DbR-vGJlBqL_6",
+    "Da0v8lGGfxb_2",
+    "DZ7a0n2lTbc_3",
+    "DZ7a0n2lTbc_4",
+    "DUPmwRylE3d"
+  ],
 
   "order": []
 }
