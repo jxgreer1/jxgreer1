@@ -1,0 +1,11 @@
+{
+  "_comment": "Which Instagram posts appear on the site. Edit this file, commit, done. Run the Sync Instagram action (or wait for the nightly run) to apply. FEED.md lists every post found, with its code.",
+
+  "mode": "auto",
+
+  "limit": 12,
+
+  "hide": [],
+
+  "order": []
+}

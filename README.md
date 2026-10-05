@@ -123,6 +123,21 @@ DOMAIN.md                          how to point a domain here
 
 **Hosting.** Settings &rsaquo; Pages &rsaquo; Deploy from a branch &rsaquo; `main` / root.
 
+**Choosing which photos show.** Edit `photos.config.json`:
+
+```jsonc
+{
+  "mode": "auto",   // newest first, minus "hide", capped at "limit"
+  "limit": 12,
+  "hide":  ["DTgZ4mzkqg6"],            // drop individual posts
+  "order": []                          // mode "manual": exactly these, in this order
+}
+```
+
+A post code is the part after `/p/` in its URL. `FEED.md` is regenerated on every
+sync and lists every post the feed offered, with its code and whether it is on the
+site, so you can pick from it.
+
 **Keeping the photos current.** A scheduled Action reads a JSON feed of my Instagram,
 downloads anything new at full resolution, rewrites the `POSTS` array in `index.html`,
 and commits. To switch it on, create a free feed at [behold.so](https://behold.so) and add
