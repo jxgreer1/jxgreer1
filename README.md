@@ -1,31 +1,32 @@
-How to make a Read Me
+# Jack Greer
 
-```
-# Your Name
+Industrial engineering student at Kettering University. Co-op at Tesla in the Bay Area.
 
-A short bio about yourself.
+I'm a PCBA SIE working on creating apps to help manage our team's internal structure,
+as well as measuring capacity across all our suppliers. I go on site as well and solve
+problems daily to help keep lines running.
 
-## Skills
+## Experience
 
-- List your skills here
-- You can also include links to your portfolio or projects that showcase your skills
+| | | |
+|---|---|---|
+| **Tesla** | Supplier Industrialization Engineer, PCBA | Jan 2026 to now |
+| **Brembo North America** | Industrial Engineering Intern | Jan to Mar 2025 |
+| **Advanced 3D Printing** | PCB Designer | Jan 2023 to Dec 2024 |
+| **FRC 1836** | Captain | Jun 2023 to Jun 2024 |
 
-## Contact
+## Tools
 
-- Email: your.email@example.com
-- LinkedIn: [Your Name](https://www.linkedin.com/in/your-name)
-- Twitter: [@yourhandle](https://twitter.com/yourhandle)
+Altium, KiCad, Fusion 360, SolidWorks, Onshape, PolyWorks, Jira, Enovia, Git
+Lean, 8D, A3, DFM for PCBA, PCB and Flex
 
-## Projects
+## Elsewhere
 
-Here are a few of my notable projects:
+- [jackgreer.com](https://jackgreer.com)
+- [@jgreerfilm](https://www.instagram.com/jgreerfilm/) for photographs
+- [LinkedIn](https://www.linkedin.com/in/jack-greer-14b435104/)
 
-- Project 1: [Project Title](https://github.com/your-username/project-title) - A brief description of the project and what it does.
-- Project 2: [Project Title](https://github.com/your-username/project-title) - A brief description of the project and what it does.
-- Project 3: [Project Title](https://github.com/your-username/project-title) - A brief description of the project and what it does.
+---
 
-## Education
-
-- Degree and field of study, school name and year of graduation (e.g. B.S. in Computer Science, University of Example, 2023)
-
-```
+<sub>This repo also serves jackgreer.com through GitHub Pages. `index.html` is the whole
+site, `ig/` holds the photographs, `CNAME` points at the domain.</sub>
