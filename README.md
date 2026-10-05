@@ -12,6 +12,7 @@
   <a href="https://jxgreer1.github.io/jxgreer1/"><img alt="Website" src="https://img.shields.io/badge/Website-0A7D82?style=for-the-badge&logo=safari&logoColor=white"></a>
   <a href="https://www.instagram.com/jgreerfilm/"><img alt="Instagram" src="https://img.shields.io/badge/@jgreerfilm-1D1D1F?style=for-the-badge&logo=instagram&logoColor=white"></a>
   <a href="https://www.linkedin.com/in/jack-greer-14b435104/"><img alt="LinkedIn" src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white"></a>
+  <a href="https://github.com/jxgreer1"><img alt="GitHub" src="https://img.shields.io/badge/GitHub-1D1D1F?style=for-the-badge&logo=github&logoColor=white"></a>
   <a href="mailto:gree7626@kettering.edu"><img alt="Email" src="https://img.shields.io/badge/Email-6E6E73?style=for-the-badge&logo=maildotru&logoColor=white"></a>
 </p>
 
