@@ -149,7 +149,7 @@ a{color:inherit}
   display:flex;flex-direction:column;gap:clamp(16px,2.4vw,30px)}
 .grow{display:grid;grid-template-columns:1fr 1fr;gap:clamp(16px,2.4vw,30px)}
 @media (max-width:720px){.grow{grid-template-columns:1fr}}
-.shot{margin:0;display:flex;flex-direction:column;gap:12px}
+.shot{margin:0;display:block}
 .shot .plate{
   overflow:hidden;border-radius:clamp(12px,1.4vw,18px);background:#E8E8ED;
   border:0;padding:0;cursor:zoom-in;display:block;width:100%;line-height:0;
@@ -159,10 +159,6 @@ a{color:inherit}
   transition:transform .9s cubic-bezier(.22,.61,.36,1),filter .4s ease;
 }
 .shot .plate:hover img{transform:scale(1.02)}
-.shot figcaption{display:flex;justify-content:space-between;gap:14px;align-items:baseline;font-size:13px;color:var(--ink-2)}
-.shot figcaption .t{color:var(--ink);font-weight:500;letter-spacing:-.004em}
-.shot figcaption a{text-decoration:none;white-space:nowrap;transition:color .2s ease}
-.shot figcaption a:hover{color:var(--accent)}
 
 /* ---------- contact ---------- */
 .cta{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:clamp(28px,4vw,40px)}
@@ -398,10 +394,7 @@ footer{background:var(--bg-alt);border-top:1px solid var(--rule);padding-block:3
     im.loading = i < 3 ? "eager" : "lazy"; im.decoding = "async";
     btn.appendChild(im);
     btn.addEventListener("click", function(){ show(POSTS.indexOf(p)); });
-    var cap = document.createElement("figcaption");
-    cap.innerHTML = '<span class="t">' + p.t + "</span>" +
-      '<a href="' + url(p) + '" target="_blank" rel="noopener">' + p.d + " &nearr;</a>";
-    fig.appendChild(btn); fig.appendChild(cap);
+    fig.appendChild(btn);
     return fig;
   }
 
