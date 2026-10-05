@@ -229,9 +229,10 @@ def main():
         im.save(path, quality=85, optimize=True, progressive=True)
         keep.add(name)
         shown.add(p["code"])
-        rows.append('    {f:%s, w:%d,h:%d, t:%s, d:%s, p:%s}' % (
+        rows.append('    {f:%s, w:%d,h:%d, t:%s, d:%s, p:%s, u:%s}' % (
             js(name), im.width, im.height,
-            js(p["caption"] or "Untitled"), js(pretty_date(p["ts"])), js(p["code"])))
+            js(p["caption"] or "Untitled"), js(pretty_date(p["ts"])),
+            js(p["code"]), js(p["permalink"] or "")))
         print("  %s  %dx%d  %s" % (name, im.width, im.height, p["caption"][:40]))
 
     write_catalogue(found, shown, cfg)

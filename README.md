@@ -123,6 +123,20 @@ DOMAIN.md                          how to point a domain here
 
 **Hosting.** Settings &rsaquo; Pages &rsaquo; Deploy from a branch &rsaquo; `main` / root.
 
+**Getting every photo into the picker.** Instagram only shows a logged out
+visitor the newest dozen posts, so the back catalogue has to come from the export:
+Instagram &rsaquo; Settings &rsaquo; Accounts Centre &rsaquo; Your information and
+permissions &rsaquo; Download your information &rsaquo; **JSON**, all time. Then:
+
+```sh
+python3 tools/import_export.py ~/Downloads/instagram-jgreerfilm.zip
+python3 tools/build_gallery.py        # after picking, applies photos.config.json
+```
+
+The importer splits carousels, so every slide is selectable on its own, and keeps
+full size copies in `ig/originals/`. These are the files as you uploaded them, which
+beats anything the public CDN serves.
+
 **Choosing which photos show.** Open **`picker.html`** (double click it, or visit
 [the hosted copy](https://jxgreer1.github.io/jxgreer1/picker.html)). Every post is
 laid out as a grid: click to show or hide, switch to Manual order to arrange them,

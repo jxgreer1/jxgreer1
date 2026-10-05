@@ -363,23 +363,29 @@ footer{background:var(--bg-alt);border-top:1px solid var(--rule);padding-block:3
 
   /* Posts from @jgreerfilm, newest first. Captions and dates are the real ones
      off each post. Index 0 is the hero; the rest fill the gallery. */
-  /* POSTS:START -- rewritten by tools/sync_instagram.py, do not hand edit */
+  /* POSTS:START -- rewritten by the tools in tools/, do not hand edit */
   var POSTS = [
-    {f:"01.jpg", w:2000,h:2000, t:"Laguna Seca, Car Week 26",     d:"Aug 25, 2026", p:"DceQvfAmdCo"},
-    {f:"02.jpg", w:2000,h:2000, t:"H A S S E L B L A D",          d:"Jul 26, 2026", p:"DbR-vGJlBqL"},
-    {f:"03.jpg", w:2000,h:1325, t:"W O R K  S A T U R D A Y",     d:"Jul 15, 2026", p:"Da0v8lGGfxb"},
-    {f:"04.jpg", w:1500,h:1349, t:"Overt political distraction",  d:"Jul 5, 2026",  p:"DaZ9KpkBkBN"},
-    {f:"05.jpg", w:2000,h:1330, t:"🇺🇸",     d:"Jun 23, 2026", p:"DZ7a0n2lTbc"},
-    {f:"06.jpg", w:2000,h:2000, t:"🌚",                 d:"Jun 17, 2026", p:"DZstNhlGQGh"},
-    {f:"07.jpg", w:1500,h:2000, t:"Mr. Arnold",                   d:"May 31, 2026", p:"DZB1DO6MZeS"},
-    {f:"08.jpg", w:1440,h:1440, t:"Marin. 03/26",                 d:"Mar 17, 2026", p:"DWA5L4llYVE"},
-    {f:"09.jpg", w:1242,h:1656, t:"Mural printing @theschooloflight", d:"Feb 1, 2026", p:"DUPmwRylE3d"},
-    {f:"11.jpg", w:1440,h:987,  t:"Flint",                        d:"Jan 14, 2026", p:"DTgZ73eEmLV"},
-    {f:"12.jpg", w:1440,h:964,  t:"🔴",                 d:"Jan 14, 2026", p:"DTgZ4mzkqg6"}
+    {f:"01.jpg", w:2000,h:2000, t:"Laguna Seca, Car Week 26", d:"Aug 25, 2026", p:"DceQvfAmdCo", u:"https://www.instagram.com/p/DceQvfAmdCo/"},
+    {f:"02.jpg", w:2000,h:2000, t:"H A S S E L B L A D", d:"Jul 26, 2026", p:"DbR-vGJlBqL", u:"https://www.instagram.com/p/DbR-vGJlBqL/"},
+    {f:"03.jpg", w:2000,h:1325, t:"W O R K  S A T U R D A Y", d:"Jul 15, 2026", p:"Da0v8lGGfxb", u:"https://www.instagram.com/p/Da0v8lGGfxb/"},
+    {f:"04.jpg", w:1500,h:1349, t:"Overt political distraction", d:"Jul 5, 2026", p:"DaZ9KpkBkBN", u:"https://www.instagram.com/p/DaZ9KpkBkBN/"},
+    {f:"05.jpg", w:2000,h:1330, t:"🇺🇸", d:"Jun 23, 2026", p:"DZ7a0n2lTbc", u:"https://www.instagram.com/p/DZ7a0n2lTbc/"},
+    {f:"06.jpg", w:2000,h:2000, t:"🌚", d:"Jun 17, 2026", p:"DZstNhlGQGh", u:"https://www.instagram.com/p/DZstNhlGQGh/"},
+    {f:"07.jpg", w:1500,h:2000, t:"Mr. Arnold", d:"May 31, 2026", p:"DZB1DO6MZeS", u:"https://www.instagram.com/p/DZB1DO6MZeS/"},
+    {f:"08.jpg", w:1440,h:1440, t:"Marin. 03/26", d:"Mar 17, 2026", p:"DWA5L4llYVE", u:"https://www.instagram.com/p/DWA5L4llYVE/"},
+    {f:"09.jpg", w:1242,h:1656, t:"Mural printing @theschooloflight", d:"Feb 1, 2026", p:"DUPmwRylE3d", u:"https://www.instagram.com/p/DUPmwRylE3d/"},
+    {f:"10.jpg", w:1440,h:987, t:"Flint", d:"Jan 14, 2026", p:"DTgZ73eEmLV", u:"https://www.instagram.com/p/DTgZ73eEmLV/"},
+    {f:"11.jpg", w:1440,h:964, t:"🔴", d:"Jan 14, 2026", p:"DTgZ4mzkqg6", u:"https://www.instagram.com/p/DTgZ4mzkqg6/"}
   ];
   /* POSTS:END */
 
-  function url(p){ return "https://www.instagram.com/p/" + p.p + "/"; }
+  /* Feed posts carry a shortcode; photos from a data export do not, so the
+     link is only offered when there is somewhere to go. */
+  function url(p){
+    if (p.u) return p.u;
+    var c = p.p || "";
+    return (c && c.charAt(0) !== "x") ? "https://www.instagram.com/p/" + c + "/" : "";
+  }
   function src(p){ return "ig/" + p.f; }
 
   /* gallery: alternating one-up and two-up, Apple-ish rhythm */
@@ -421,8 +427,9 @@ footer{background:var(--bg-alt);border-top:1px solid var(--rule);padding-block:3
     at = (i + POSTS.length) % POSTS.length;
     var p = POSTS[at];
     bimg.src = src(p); bimg.alt = p.t;
+    var href = url(p);
     bcap.innerHTML = '<span class="t">' + p.t + "</span> &middot; " + p.d +
-      ' &middot; <a href="' + url(p) + '" target="_blank" rel="noopener">View on Instagram</a>';
+      (href ? ' &middot; <a href="' + href + '" target="_blank" rel="noopener">View on Instagram</a>' : "");
     if (!box.open){ box.showModal ? box.showModal() : box.setAttribute("open",""); }
   }
   function hide(){ box.close ? box.close() : box.removeAttribute("open"); }

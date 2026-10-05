@@ -34,6 +34,10 @@ section{margin-bottom:34px}
 .mini{border:1px solid var(--rule);background:none;border-radius:980px;padding:7px 15px;cursor:pointer;color:var(--ink)}
 .mini:hover{background:var(--alt)}
 .count{color:var(--ink2);margin-left:auto;font-variant-numeric:tabular-nums}
+#q{border:1px solid var(--rule);border-radius:980px;padding:7px 14px;min-width:200px;
+   background:#fff;color:var(--ink)}
+#q::placeholder{color:var(--ink2)}
+.none{color:var(--ink2);padding:22px 2px}
 
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px}
 .card{position:relative;border:0;padding:0;background:none;cursor:pointer;text-align:left;
@@ -90,6 +94,7 @@ pre{background:#1D1D1F;color:#EDEDEF;padding:16px;border-radius:12px;overflow-x:
       </span>
       <button class="mini" id="all">Select all</button>
       <button class="mini" id="none">Select none</button>
+      <input id="q" type="search" placeholder="Search captions or dates" aria-label="Search photos">
       <span class="count" id="count"></span>
     </div>
     <div class="grid" id="grid"></div>
@@ -152,14 +157,26 @@ pre{background:#1D1D1F;color:#EDEDEF;padding:16px;border-radius:12px;overflow-x:
 
   function draw(){
     grid.textContent = "";
-    ALL.forEach(function(p){
+    var q = (document.getElementById("q").value || "").trim().toLowerCase();
+    var visible = q ? ALL.filter(function(p){
+      return ((p.caption || "") + " " + (p.date || "")).toLowerCase().indexOf(q) > -1;
+    }) : ALL;
+
+    if (!visible.length){
+      var nil = document.createElement("p");
+      nil.className = "none";
+      nil.textContent = "Nothing matches \u201c" + q + "\u201d.";
+      grid.appendChild(nil);
+    }
+
+    visible.forEach(function(p){
       var b = document.createElement("button");
       b.type = "button";
       b.className = "card";
       b.setAttribute("aria-pressed", on[p.code] ? "true" : "false");
       b.title = (p.caption || "") + "  " + p.date;
       b.innerHTML =
-        '<span class="wrap"><img src="' + p.thumb + '" alt="' + (p.caption||"photo").replace(/"/g,"") + '">' +
+        '<span class="wrap"><img loading="lazy" decoding="async" src="' + p.thumb + '" alt="' + (p.caption||"photo").replace(/"/g,"") + '">' +
         '<span class="tick">' + (on[p.code] ? "✓" : "") + "</span></span>" +
         '<span class="meta"><b>' + (p.caption || "No caption") + "</b> " + p.date + "</span>";
       b.addEventListener("click", function(){ on[p.code] = !on[p.code]; draw(); });
@@ -167,7 +184,8 @@ pre{background:#1D1D1F;color:#EDEDEF;padding:16px;border-radius:12px;overflow-x:
     });
 
     var picked = shown();
-    count.textContent = picked.length + " of " + ALL.length + " shown";
+    count.textContent = picked.length + " of " + ALL.length + " on the site" +
+      (q ? "  \u00b7  " + visible.length + " matching" : "");
     orderSec.hidden = (mode !== "manual");
 
     chosen.textContent = "";
@@ -201,6 +219,7 @@ pre{background:#1D1D1F;color:#EDEDEF;padding:16px;border-radius:12px;overflow-x:
     out.textContent = JSON.stringify(config(), null, 2);
   }
 
+  document.getElementById("q").addEventListener("input", draw);
   document.getElementById("all").addEventListener("click", function(){
     ALL.forEach(function(p){ on[p.code] = true; }); draw();
   });
