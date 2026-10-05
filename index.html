@@ -3,280 +3,310 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Jack Greer. Industrial engineering student at Kettering University, co-op at Tesla. Film photographs.">
-<link rel="canonical" href="https://jackgreer.co/">
+<meta name="description" content="Jack Greer. Industrial engineering at Kettering University, co-op at Tesla. Film photographs.">
+<link rel="canonical" href="https://jxgreer1.github.io/jxgreer1/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Jack Greer">
 <meta property="og:title" content="Jack Greer">
-<meta property="og:description" content="Industrial engineering at Kettering. Co-op at Tesla. Film photographs.">
-<meta property="og:url" content="https://jackgreer.co/">
-<meta property="og:image" content="https://jackgreer.co/ig/01.jpg">
+<meta property="og:description" content="Industrial engineering at Kettering. Co-op at Tesla. I shoot film.">
+<meta property="og:url" content="https://jxgreer1.github.io/jxgreer1/">
+<meta property="og:image" content="https://jxgreer1.github.io/jxgreer1/ig/01.jpg">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="theme-color" content="#FAF9F6" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#171A1A" media="(prefers-color-scheme: dark)">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23397A7D'/><text x='50' y='71' text-anchor='middle' font-family='Helvetica,Arial,sans-serif' font-weight='bold' font-size='54' fill='%23FAF9F6'>JG</text></svg>">
-<style>:root{color-scheme:light dark}html{-webkit-text-size-adjust:100%}[hidden]{display:none!important}</style>
+<meta name="theme-color" content="#FFFFFF">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%230A7D82'/><text x='50' y='70' text-anchor='middle' font-family='-apple-system,Helvetica,Arial' font-weight='600' font-size='52' fill='%23ffffff'>JG</text></svg>">
 <title>Jack Greer</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..600&family=DM+Mono:wght@300;400&display=swap">
 <style>
 :root{
-  --paper:#FAF9F6;
-  --ink:#2C3130;
-  --ink-2:#5C6361;
-  --ink-3:#6B7370;
-  --rule:#E8E6DF;
-  --accent:#397A7D;
-  --sans:"Archivo","Helvetica Neue",Helvetica,Arial,sans-serif;
-  --mono:"DM Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
-  --gut:clamp(20px,5vw,56px);
-  --maxw:1180px;
-}
-@media (prefers-color-scheme:dark){
-  :root:not([data-theme="light"]){
-    --paper:#171A1A;--ink:#E8EAE6;--ink-2:#A8AFAC;--ink-3:#848D89;
-    --rule:#2E3332;--accent:#7FCDD2;
-  }
-}
-:root[data-theme="dark"]{
-  --paper:#171A1A;--ink:#E8EAE6;--ink-2:#A8AFAC;--ink-3:#848D89;
-  --rule:#2E3332;--accent:#7FCDD2;
+  color-scheme: light;
+  --bg:#FFFFFF;
+  --bg-alt:#F5F5F7;
+  --ink:#1D1D1F;
+  --ink-2:#6E6E73;
+  --rule:#D2D2D7;
+  --accent:#0A7D82;
+  --sans:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --gut:clamp(22px,5vw,48px);
+  --page:1060px;
+  --wide:1400px;
 }
 
 *{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
 body{
-  margin:0;background:var(--paper);color:var(--ink);
-  font-family:var(--sans);font-size:clamp(15px,1.02vw,16px);line-height:1.6;
-  -webkit-font-smoothing:antialiased;
+  margin:0;background:var(--bg);color:var(--ink);
+  font-family:var(--sans);
+  font-size:clamp(16px,1.1vw,17px);line-height:1.5;letter-spacing:-.003em;
+  -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
 }
-img{max-width:100%;display:block}
+img{display:block;max-width:100%}
 a{color:inherit}
-:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
-@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+:focus-visible{outline:2px solid var(--accent);outline-offset:4px;border-radius:4px}
 
-.wrap{max-width:var(--maxw);margin:0 auto;padding-inline:var(--gut)}
-.mono{
-  font-family:var(--mono);font-size:clamp(.64rem,1vw,.72rem);
-  letter-spacing:.1em;text-transform:uppercase;font-variant-numeric:tabular-nums;
-}
+.inner{max-width:var(--page);margin:0 auto;padding-inline:var(--gut)}
+.inner.wide{max-width:var(--wide)}
 
-/* ---- top bar ---- */
-.bar{position:sticky;top:0;z-index:30;background:var(--paper);border-bottom:1px solid var(--rule)}
-.bar-in{
-  max-width:var(--maxw);margin:0 auto;padding-inline:var(--gut);padding-block:13px;
-  display:flex;gap:10px 26px;flex-wrap:wrap;align-items:baseline;
+/* ---------- nav ---------- */
+.nav{
+  position:sticky;top:0;z-index:50;height:48px;
+  background:rgba(255,255,255,.72);
+  backdrop-filter:saturate(180%) blur(20px);
+  -webkit-backdrop-filter:saturate(180%) blur(20px);
+  border-bottom:1px solid rgba(0,0,0,.08);
 }
-.bar-in .me{font-stretch:125%;font-weight:600;font-size:.95rem;text-decoration:none;margin-right:auto}
-.bar-in nav{display:flex;gap:clamp(16px,2.6vw,28px)}
-.bar-in nav a{color:var(--ink-3);text-decoration:none;transition:color .18s ease}
-.bar-in nav a:hover,.bar-in nav a[aria-current="true"]{color:var(--ink)}
+.nav-in{
+  max-width:var(--wide);margin:0 auto;padding-inline:var(--gut);height:100%;
+  display:flex;align-items:center;gap:clamp(16px,3vw,34px);
+}
+.nav a{text-decoration:none;font-size:13px;color:var(--ink-2);transition:color .2s ease;white-space:nowrap}
+.nav a:hover{color:var(--ink)}
+.nav .logo{font-size:15px;font-weight:600;color:var(--ink);margin-right:auto;letter-spacing:-.012em}
+.nav a[aria-current="true"]{color:var(--ink)}
+@media (max-width:560px){.nav .sm{display:none}}
 
-/* ---- masthead ---- */
-.mast{padding-block:clamp(52px,8vw,104px) clamp(40px,5vw,60px)}
-.mast h1{
-  margin:0;font-stretch:125%;font-weight:600;
-  font-size:clamp(2.3rem,7vw,4.4rem);line-height:.95;letter-spacing:-.025em;
+/* ---------- hero ---------- */
+.hero{
+  text-align:center;
+  padding-block:clamp(72px,12vw,132px) clamp(44px,7vw,72px);
 }
-.mast .role{
-  margin:clamp(14px,2vw,20px) 0 0;font-size:clamp(1.05rem,1.8vw,1.3rem);
-  line-height:1.45;max-width:40ch;color:var(--ink-2);text-wrap:pretty;
+.eyebrow{
+  margin:0 0 clamp(14px,2vw,20px);font-size:clamp(15px,1.8vw,19px);
+  font-weight:600;color:var(--accent);letter-spacing:-.008em;
 }
-.status{
-  margin:clamp(18px,2.4vw,26px) 0 0;display:flex;align-items:baseline;gap:9px;
-  color:var(--ink-3);
+.hero h1{
+  margin:0;font-size:clamp(46px,10vw,104px);font-weight:600;
+  line-height:1.03;letter-spacing:-.022em;text-wrap:balance;
 }
-.status::before{
-  content:"";width:6px;height:6px;border-radius:50%;background:var(--accent);
-  flex:none;transform:translateY(-1px);
+.lede{
+  margin:clamp(18px,2.6vw,26px) auto 0;max-width:22ch;
+  font-size:clamp(20px,2.9vw,30px);line-height:1.25;font-weight:500;
+  letter-spacing:-.012em;color:var(--ink);text-wrap:balance;
 }
+.where{
+  margin:clamp(22px,3vw,30px) 0 0;display:inline-flex;align-items:center;gap:8px;
+  font-size:14px;color:var(--ink-2);
+}
+.where .dot{width:7px;height:7px;border-radius:50%;background:var(--accent);flex:none}
 
-/* ---- generic section ---- */
-.sec{padding-block:clamp(40px,5.5vw,70px) 0}
-.sec > h2{
-  margin:0 0 clamp(20px,2.6vw,30px);padding-bottom:12px;border-bottom:1px solid var(--rule);
-  color:var(--ink-3);font-family:var(--mono);font-size:clamp(.64rem,1vw,.72rem);
-  letter-spacing:.14em;text-transform:uppercase;font-weight:400;
-  display:flex;justify-content:space-between;align-items:baseline;gap:16px;
+/* ---------- full bleed figure ---------- */
+.bleed{margin:0;position:relative}
+.bleed img{
+  width:100%;height:clamp(300px,54vh,580px);
+  object-fit:cover;object-position:center 73%;
 }
-.sec > h2 .note{letter-spacing:.08em;text-transform:none;text-decoration:none;transition:color .18s ease}
-.sec > h2 a.note:hover{color:var(--accent)}
-.neg figcaption a{text-decoration:none;transition:color .18s ease}
-.neg figcaption a:hover{color:var(--accent)}
-.box figcaption a{color:inherit;text-decoration:none;border-bottom:1px solid rgba(235,237,233,.3)}
-.box figcaption a:hover{color:#fff}
+.bleed figcaption{
+  max-width:var(--wide);margin:0 auto;padding:14px var(--gut) 0;
+  display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
+  font-size:13px;color:var(--ink-2);
+}
+.bleed figcaption a{text-decoration:none;transition:color .2s ease}
+.bleed figcaption a:hover{color:var(--accent)}
+.bleed figcaption .t{color:var(--ink);font-weight:500}
 
-/* ---- bio ---- */
-.bio p{margin:0 0 1.05em;max-width:64ch;color:var(--ink-2);font-size:clamp(1rem,1.4vw,1.08rem);text-wrap:pretty}
-.bio p:first-of-type{color:var(--ink)}
-.bio p:last-child{margin-bottom:0}
+/* ---------- bands ---------- */
+.band{padding-block:clamp(72px,11vw,128px)}
+.band.alt{background:var(--bg-alt)}
+.band h2{
+  margin:0;font-size:clamp(30px,5.4vw,56px);font-weight:600;
+  line-height:1.07;letter-spacing:-.017em;text-wrap:balance;
+}
+.band .sub{
+  margin:clamp(14px,2vw,20px) 0 0;font-size:clamp(17px,2.1vw,21px);
+  line-height:1.45;color:var(--ink-2);max-width:60ch;
+}
+.band .prose{margin:clamp(24px,3.4vw,40px) 0 0;max-width:62ch}
+.band .prose p{margin:0 0 1em;font-size:clamp(17px,2vw,20px);line-height:1.52;color:var(--ink-2)}
+.band .prose p:last-child{margin-bottom:0}
+.center{text-align:center}
+.center .sub{margin-inline:auto}
 
-/* ---- experience ---- */
-.cv{display:flex;flex-direction:column}
-.cv .row{
-  display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 24px;
-  padding-block:clamp(16px,2vw,22px);border-top:1px solid var(--rule);
+/* ---------- experience ---------- */
+.cv{list-style:none;margin:clamp(30px,4vw,48px) 0 0;padding:0;display:flex;flex-direction:column}
+.cv li{
+  padding-block:clamp(22px,3vw,30px);border-top:1px solid var(--rule);
+  display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px 28px;
 }
-.cv .row:first-child{border-top:0;padding-top:0}
-.cv .org{font-weight:500;font-size:clamp(1rem,1.5vw,1.1rem);letter-spacing:-.005em}
-.cv .when{color:var(--ink-3);text-align:right;white-space:nowrap}
-.cv .what{grid-column:1/-1;margin:2px 0 0;color:var(--ink-2);max-width:62ch}
-.cv .what .ttl{color:var(--ink);font-weight:500}
-@media (max-width:560px){
-  .cv .row{grid-template-columns:1fr}
-  .cv .when{text-align:left}
-}
-
-/* ---- tools ---- */
-.skills{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:clamp(18px,2.6vw,32px)}
-.skills div{display:flex;flex-direction:column;gap:7px}
-.skills .k{color:var(--ink-3)}
-.skills .v{font-family:var(--mono);font-size:.78rem;line-height:1.7;color:var(--ink-2);letter-spacing:.01em}
-
-/* ---- photographs ---- */
-.sheet{columns:3;column-gap:clamp(10px,1.4vw,16px)}
-@media (max-width:900px){.sheet{columns:2}}
-@media (max-width:420px){.sheet{columns:2;column-gap:8px}}
-.neg{
-  break-inside:avoid;margin:0 0 clamp(10px,1.4vw,16px);
-  display:flex;flex-direction:column;gap:6px;
-}
-.neg button{
-  display:block;padding:0;border:0;background:none;cursor:zoom-in;width:100%;line-height:0;
-}
-.neg img{width:100%;height:auto;transition:opacity .3s ease}
-.neg button:hover img{opacity:.82}
-.neg figcaption{
-  font-family:var(--mono);font-size:clamp(.54rem,.86vw,.63rem);letter-spacing:.055em;
-  color:var(--ink-3);font-variant-numeric:tabular-nums;
+.cv li:last-child{border-bottom:1px solid var(--rule)}
+.cv .org{font-size:clamp(20px,2.6vw,27px);font-weight:600;letter-spacing:-.014em;line-height:1.2}
+.cv .when{font-size:14px;color:var(--ink-2);text-align:right;white-space:nowrap;padding-top:6px}
+.cv .role{grid-column:1/-1;margin:0;font-size:15px;font-weight:600;color:var(--accent)}
+.cv .what{grid-column:1/-1;margin:6px 0 0;color:var(--ink-2);max-width:64ch;font-size:16px;line-height:1.5}
+@media (max-width:620px){
+  .cv li{grid-template-columns:1fr}
+  .cv .when{text-align:left;padding-top:0}
 }
 
-/* ---- lightbox ---- */
+/* ---------- tools ---------- */
+.tools{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));
+  gap:clamp(22px,3vw,40px);margin-top:clamp(30px,4vw,48px);
+}
+.tools div{display:flex;flex-direction:column;gap:10px}
+.tools dt{font-size:13px;font-weight:600;color:var(--accent);margin:0}
+.tools dd{margin:0;font-size:16px;line-height:1.55;color:var(--ink-2)}
+
+/* ---------- gallery ---------- */
+.gallery{max-width:var(--wide);margin:clamp(40px,5vw,64px) auto 0;padding-inline:var(--gut);
+  display:flex;flex-direction:column;gap:clamp(16px,2.4vw,30px)}
+.grow{display:grid;grid-template-columns:1fr 1fr;gap:clamp(16px,2.4vw,30px)}
+@media (max-width:720px){.grow{grid-template-columns:1fr}}
+.shot{margin:0;display:flex;flex-direction:column;gap:12px}
+.shot .plate{
+  overflow:hidden;border-radius:clamp(12px,1.4vw,18px);background:#E8E8ED;
+  border:0;padding:0;cursor:zoom-in;display:block;width:100%;line-height:0;
+}
+.shot .plate img{width:100%;height:auto;transition:transform .9s cubic-bezier(.22,.61,.36,1)}
+.shot .plate:hover img{transform:scale(1.02)}
+.shot figcaption{display:flex;justify-content:space-between;gap:14px;align-items:baseline;font-size:13px;color:var(--ink-2)}
+.shot figcaption .t{color:var(--ink);font-weight:500;letter-spacing:-.004em}
+.shot figcaption a{text-decoration:none;white-space:nowrap;transition:color .2s ease}
+.shot figcaption a:hover{color:var(--accent)}
+
+/* ---------- contact ---------- */
+.cta{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:clamp(28px,4vw,40px)}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;
+  padding:12px 24px;border-radius:980px;text-decoration:none;font-size:16px;font-weight:500;
+  background:var(--accent);color:#fff;transition:opacity .2s ease,transform .2s ease;
+}
+.btn:hover{opacity:.86}
+.btn.ghost{background:transparent;color:var(--accent);border:1px solid var(--accent)}
+.btn.ghost:hover{background:rgba(10,125,130,.07);opacity:1}
+
+/* ---------- footer ---------- */
+footer{background:var(--bg-alt);border-top:1px solid var(--rule);padding-block:30px 40px}
+.foot{
+  max-width:var(--wide);margin:0 auto;padding-inline:var(--gut);
+  display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:13px;color:var(--ink-2);
+}
+
+/* ---------- lightbox ---------- */
 .box{
-  position:fixed;inset:0;z-index:90;border:0;padding:0;margin:0;width:100%;height:100%;
-  background:rgba(20,23,23,.94);display:none;
+  position:fixed;inset:0;z-index:99;border:0;margin:0;padding:0;width:100%;height:100%;
+  background:rgba(245,245,247,.97);
+  backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
+  display:none;
 }
-.box[open]{display:flex;align-items:center;justify-content:center;flex-direction:column;gap:14px;padding:clamp(16px,4vw,44px)}
-.box::backdrop{background:rgba(20,23,23,.94)}
-.box img{max-width:100%;max-height:82vh;width:auto;height:auto;object-fit:contain}
-.box figcaption{
-  font-family:var(--mono);font-size:.68rem;letter-spacing:.09em;text-transform:uppercase;
-  color:rgba(235,237,233,.62);
-}
+.box[open]{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:clamp(18px,4vw,52px)}
+.box::backdrop{background:rgba(245,245,247,.97)}
+.box img{max-width:100%;max-height:78vh;width:auto;height:auto;object-fit:contain;border-radius:10px}
+.box figcaption{font-size:14px;color:var(--ink-2);text-align:center;max-width:60ch}
+.box figcaption .t{color:var(--ink);font-weight:500}
+.box figcaption a{color:var(--accent);text-decoration:none}
 .box .x{
-  position:absolute;top:clamp(12px,2.4vw,24px);right:clamp(12px,2.4vw,24px);
-  background:none;border:0;color:rgba(235,237,233,.72);cursor:pointer;
-  font-family:var(--mono);font-size:.7rem;letter-spacing:.12em;padding:8px;
+  position:absolute;top:clamp(14px,2.4vw,26px);right:clamp(14px,2.4vw,26px);
+  width:34px;height:34px;border-radius:50%;border:0;cursor:pointer;
+  background:rgba(0,0,0,.06);color:var(--ink);font-size:17px;line-height:1;
 }
-.box .x:hover{color:#fff}
+.box .x:hover{background:rgba(0,0,0,.12)}
 
-/* ---- contact ---- */
-.links{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:0 clamp(20px,3vw,40px)}
-.links a{
-  display:flex;justify-content:space-between;align-items:baseline;gap:12px;
-  padding-block:15px;border-top:1px solid var(--rule);text-decoration:none;
-  transition:color .18s ease;
-}
-.links a:hover{color:var(--accent)}
-.links .h{color:var(--ink-3);font-family:var(--mono);font-size:clamp(.6rem,.95vw,.68rem);letter-spacing:.08em}
-.links a:hover .h{color:var(--accent)}
-
-footer{
-  margin-top:clamp(56px,8vw,96px);border-top:1px solid var(--rule);
-  padding-block:22px clamp(32px,5vw,52px);
-  display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;color:var(--ink-3);
-}
+/* ---------- scroll reveal ---------- */
+.rise{opacity:.001;transform:translateY(26px);transition:opacity .7s cubic-bezier(.22,.61,.36,1),transform .7s cubic-bezier(.22,.61,.36,1)}
+.rise.in{opacity:1;transform:none}
 </style>
 </head>
 <body>
-<div class="bar">
-  <div class="bar-in">
-    <a class="me" href="#top">Jack Greer</a>
-    <nav class="mono">
-      <a href="#experience">Experience</a>
-      <a href="#photographs">Photographs</a>
-      <a href="#contact">Contact</a>
-    </nav>
+<nav class="nav">
+  <div class="nav-in">
+    <a class="logo" href="#top">Jack Greer</a>
+    <a class="sm" href="#currently">Currently</a>
+    <a class="sm" href="#experience">Experience</a>
+    <a href="#photographs">Photographs</a>
+    <a href="#contact">Contact</a>
   </div>
-</div>
+</nav>
 
 <main id="top">
-  <header class="wrap mast">
+
+  <header class="hero inner">
+    <p class="eyebrow">Industrial Engineering, Kettering University</p>
     <h1>Jack Greer</h1>
-    <p class="role">Industrial engineering student at Kettering University. Co-op at Tesla in Palo Alto.</p>
-    <p class="status mono" id="status"><span id="statustext">Palo Alto, CA</span></p>
+    <p class="lede">Co-op at Tesla. I shoot film.</p>
+    <p class="where"><span class="dot"></span><span id="city">Flint</span></p>
   </header>
 
-  <section class="wrap sec bio">
-    <h2>About</h2>
-    <p>I study industrial engineering at Kettering. The school runs on alternating terms, so I spend three months in class and three months working, back and forth.</p>
-    <p>Currently I co-op at Tesla in the Bay Area. I'm a PCBA SIE working on creating apps to help manage our team's internal structure, as well as measuring capacity across all our suppliers. I go on site as well and solve problems daily to help keep lines running.</p>
-    <p>I shoot film when I'm not doing that.</p>
-  </section>
+  <figure class="bleed" id="heroshot"></figure>
 
-  <section class="wrap sec" id="experience">
-    <h2>Experience</h2>
-    <div class="cv">
-      <div class="row">
-        <span class="org">Tesla</span>
-        <span class="when mono">Jan 2026 / Now</span>
-        <p class="what"><span class="ttl">Supplier Industrialization Engineer, PCBA. Co-op.</span> Palo Alto, CA. Defined and validated end to end production with contract manufacturers. Brought average PCB cost down 38% and cycle time down 73% across suppliers. Built a capacity planning tool that maps supplier EDI demand to line level PCBAs so utilization risk shows up before it bites. Keep a DFM issue library for solder splatter, flux residue and pick and place errors.</p>
-      </div>
-      <div class="row">
-        <span class="org">Brembo North America</span>
-        <span class="when mono">Jan / Mar 2025</span>
-        <p class="what"><span class="ttl">Industrial Engineering Intern.</span> Jackson, MI. Moved outsourced production back in house and saved $200K a year doing it. Reworked the end of arm tooling so maintenance went from weekly to quarterly. 3D scanned 75+ pattern plates and built color maps to track wear.</p>
-      </div>
-      <div class="row">
-        <span class="org">Advanced 3D Printing</span>
-        <span class="when mono">Jan 2023 / Dec 2024</span>
-        <p class="what"><span class="ttl">PCB Designer. Intern.</span> Los Angeles, CA. Designed small plug and play boards that became standard in high speed custom printer builds. Sold over 500 of them, ran tier 3 support, and spent a lot of tradeshows explaining what they were for.</p>
-      </div>
-      <div class="row">
-        <span class="org">FRC 1836</span>
-        <span class="when mono">Jun 2023 / Jun 2024</span>
-        <p class="what"><span class="ttl">Captain.</span> Los Angeles, CA. Ran the school robotics team. Design instruction, tournament logistics, and keeping everyone pointed the same direction.</p>
-      </div>
-      <div class="row">
-        <span class="org">Kettering University</span>
-        <span class="when mono">Oct 2024 / Now</span>
-        <p class="what"><span class="ttl">BS, Industrial Engineering.</span> Flint, MI. Junior, B-Section.</p>
+  <section class="band alt" id="currently">
+    <div class="inner">
+      <h2>Currently at Tesla.</h2>
+      <div class="prose">
+        <p>I study industrial engineering at Kettering. The school runs on alternating terms, so I spend three months in class and three months working, back and forth.</p>
+        <p>Currently I co-op at Tesla in the Bay Area. I'm a PCBA SIE working on creating apps to help manage our team's internal structure, as well as measuring capacity across all our suppliers. I go on site as well and solve problems daily to help keep lines running.</p>
+        <p>I shoot film when I'm not doing that.</p>
       </div>
     </div>
   </section>
 
-  <section class="wrap sec">
-    <h2>Tools</h2>
-    <div class="skills">
-      <div><span class="k mono">Design</span><span class="v">Altium, KiCad<br>Fusion 360, SolidWorks, Onshape</span></div>
-      <div><span class="k mono">Validation</span><span class="v">Metrology, 3D scanning<br>PolyWorks, data analysis</span></div>
-      <div><span class="k mono">Method</span><span class="v">Lean, 8D, A3<br>DFM for PCBA, PCB, Flex</span></div>
-      <div><span class="k mono">Stack</span><span class="v">Jira, Enovia, Git<br>Excel, LLM tooling</span></div>
+  <section class="band" id="experience">
+    <div class="inner">
+      <h2>Experience</h2>
+      <ol class="cv">
+        <li>
+          <span class="org">Tesla</span>
+          <span class="when">Jan 2026 &rsaquo; Now &middot; Palo Alto, CA</span>
+          <p class="role">Supplier Industrialization Engineer, PCBA</p>
+          <p class="what">Defined and validated end to end production with contract manufacturers. Brought average PCB cost down 38% and cycle time down 73% across suppliers. Built a capacity planning tool that maps supplier EDI demand to line level PCBAs so utilization risk shows up before it bites.</p>
+        </li>
+        <li>
+          <span class="org">Brembo North America</span>
+          <span class="when">Jan &rsaquo; Mar 2025 &middot; Jackson, MI</span>
+          <p class="role">Industrial Engineering Intern</p>
+          <p class="what">Moved outsourced production back in house and saved $200K a year doing it. Reworked the end of arm tooling so maintenance went from weekly to quarterly. 3D scanned 75+ pattern plates and built color maps to track wear.</p>
+        </li>
+        <li>
+          <span class="org">Advanced 3D Printing</span>
+          <span class="when">Jan 2023 &rsaquo; Dec 2024 &middot; Los Angeles, CA</span>
+          <p class="role">PCB Designer</p>
+          <p class="what">Designed small plug and play boards that became standard in high speed custom printer builds. Sold over 500 of them, ran tier 3 support, and spent a lot of tradeshows explaining what they were for.</p>
+        </li>
+        <li>
+          <span class="org">FRC 1836</span>
+          <span class="when">Jun 2023 &rsaquo; Jun 2024 &middot; Los Angeles, CA</span>
+          <p class="role">Captain</p>
+          <p class="what">Ran the school robotics team. Design instruction, tournament logistics, and keeping everyone pointed the same direction.</p>
+        </li>
+      </ol>
+
+      <dl class="tools">
+        <div><dt>Design</dt><dd>Altium, KiCad, Fusion 360, SolidWorks, Onshape</dd></div>
+        <div><dt>Validation</dt><dd>Metrology, 3D scanning, PolyWorks, data analysis</dd></div>
+        <div><dt>Method</dt><dd>Lean, 8D, A3, DFM for PCBA, PCB and Flex</dd></div>
+        <div><dt>Stack</dt><dd>Jira, Enovia, Git, Excel, LLM tooling</dd></div>
+      </dl>
     </div>
   </section>
 
-  <section class="wrap sec" id="photographs">
-    <h2>Photographs <a class="note" href="https://www.instagram.com/jgreerfilm/" target="_blank" rel="noopener">@jgreerfilm &#8599;</a></h2>
-    <div class="sheet" id="sheet"></div>
+  <section class="band alt" id="photographs">
+    <div class="inner center">
+      <h2>Photographs.</h2>
+      <p class="sub">Shot on film, scanned, and posted to <a href="https://www.instagram.com/jgreerfilm/" target="_blank" rel="noopener">@jgreerfilm</a>. Newest first.</p>
+    </div>
+    <div class="gallery" id="gallery"></div>
   </section>
 
-  <section class="wrap sec" id="contact">
-    <h2>Contact</h2>
-    <div class="links">
-      <a href="mailto:gree7626@kettering.edu"><span>Email</span><span class="h">gree7626@kettering.edu</span></a>
-      <a href="https://www.linkedin.com/in/jack-greer-14b435104/" target="_blank" rel="noopener"><span>LinkedIn</span><span class="h">jack-greer</span></a>
-      <a href="https://www.instagram.com/jgreerfilm/" target="_blank" rel="noopener"><span>Instagram</span><span class="h">@jgreerfilm</span></a>
+  <section class="band center" id="contact">
+    <div class="inner">
+      <h2>Get in touch.</h2>
+      <div class="cta">
+        <a class="btn" href="mailto:gree7626@kettering.edu">Email me</a>
+        <a class="btn ghost" href="https://www.linkedin.com/in/jack-greer-14b435104/" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="btn ghost" href="https://www.instagram.com/jgreerfilm/" target="_blank" rel="noopener">Instagram</a>
+      </div>
     </div>
   </section>
 
-  <footer class="wrap mono">
-    <span>Jack Greer, Los Angeles</span>
-    <span>&copy; 2026</span>
-  </footer>
 </main>
 
+<footer>
+  <div class="foot">
+    <span>Jack Greer, Los Angeles</span>
+    <span>&copy; 2026</span>
+  </div>
+</footer>
+
 <dialog class="box" id="box">
-  <button class="x mono" id="boxx" aria-label="Close">Close &times;</button>
+  <button class="x" id="boxx" aria-label="Close">&times;</button>
   <img id="boximg" alt="">
   <figcaption id="boxcap"></figcaption>
 </dialog>
@@ -285,109 +315,126 @@ footer{
 (function(){
   "use strict";
 
-  /* ----------------------------------------------------------------
-     Where I am. Jan to Mar and Jul to Sep are Tesla terms in Palo
-     Alto; the other six months are class at Kettering in Flint. Reads
-     the current month on every load, so it stays right on its own.
-     ---------------------------------------------------------------- */
-  function placeNow(now){
-    var m = now.getMonth() + 1;
-    var onTerm = (m >= 1 && m <= 3) || (m >= 7 && m <= 9);
-    return onTerm ? "Palo Alto" : "Flint";
-  }
-  document.getElementById("statustext").textContent = placeNow(new Date());
+  /* Jan to Mar and Jul to Sep are Tesla terms in the Bay Area; the other six
+     months are class at Kettering in Flint. Reads the month on every load. */
+  document.getElementById("city").textContent =
+    (function(m){ return (m>=1&&m<=3)||(m>=7&&m<=9) ? "Palo Alto" : "Flint"; })(new Date().getMonth()+1);
 
-  /* ----------------------------------------------------------------
-     Photographs, pulled from the @jgreerfilm grid, newest first. These
-     are the 640px renditions Instagram serves publicly; larger ones are
-     signature locked. Each frame links back to its post.
-     ---------------------------------------------------------------- */
-  var PHOTOS = [
-    {f:"01.jpg", w:640, h:640, d:"Aug 25, 2026", p:"DceQvfAmdCo"},
-    {f:"02.jpg", w:640, h:640, d:"Jul 26, 2026", p:"DbR-vGJlBqL"},
-    {f:"03.jpg", w:640, h:424, d:"Jul 15, 2026", p:"Da0v8lGGfxb"},
-    {f:"04.jpg", w:640, h:576, d:"Jul 5, 2026",  p:"DaZ9KpkBkBN"},
-    {f:"05.jpg", w:640, h:426, d:"Jun 23, 2026", p:"DZ7a0n2lTbc"},
-    {f:"06.jpg", w:640, h:640, d:"Jun 17, 2026", p:"DZstNhlGQGh"},
-    {f:"07.jpg", w:480, h:640, d:"May 31, 2026", p:"DZB1DO6MZeS"},
-    {f:"08.jpg", w:640, h:640, d:"Mar 17, 2026", p:"DWA5L4llYVE"},
-    {f:"09.jpg", w:480, h:640, d:"Feb 1, 2026",  p:"DUPmwRylE3d"},
-    {f:"11.jpg", w:640, h:439, d:"Jan 14, 2026", p:"DTgZ73eEmLV"},
-    {f:"12.jpg", w:640, h:428, d:"Jan 14, 2026", p:"DTgZ4mzkqg6"}
+  /* Posts from @jgreerfilm, newest first. Captions and dates are the real ones
+     off each post. Index 0 is the hero; the rest fill the gallery. */
+  /* POSTS:START -- rewritten by tools/sync_instagram.py, do not hand edit */
+  var POSTS = [
+    {f:"01.jpg", w:2000,h:2000, t:"Laguna Seca, Car Week 26",     d:"Aug 25, 2026", p:"DceQvfAmdCo"},
+    {f:"02.jpg", w:2000,h:2000, t:"H A S S E L B L A D",          d:"Jul 26, 2026", p:"DbR-vGJlBqL"},
+    {f:"03.jpg", w:2000,h:1325, t:"W O R K  S A T U R D A Y",     d:"Jul 15, 2026", p:"Da0v8lGGfxb"},
+    {f:"04.jpg", w:1500,h:1349, t:"Overt political distraction",  d:"Jul 5, 2026",  p:"DaZ9KpkBkBN"},
+    {f:"05.jpg", w:2000,h:1330, t:"🇺🇸",     d:"Jun 23, 2026", p:"DZ7a0n2lTbc"},
+    {f:"06.jpg", w:2000,h:2000, t:"🌚",                 d:"Jun 17, 2026", p:"DZstNhlGQGh"},
+    {f:"07.jpg", w:1500,h:2000, t:"Mr. Arnold",                   d:"May 31, 2026", p:"DZB1DO6MZeS"},
+    {f:"08.jpg", w:1440,h:1440, t:"Marin. 03/26",                 d:"Mar 17, 2026", p:"DWA5L4llYVE"},
+    {f:"09.jpg", w:1242,h:1656, t:"Mural printing @theschooloflight", d:"Feb 1, 2026", p:"DUPmwRylE3d"},
+    {f:"11.jpg", w:1440,h:987,  t:"Flint",                        d:"Jan 14, 2026", p:"DTgZ73eEmLV"},
+    {f:"12.jpg", w:1440,h:964,  t:"🔴",                 d:"Jan 14, 2026", p:"DTgZ4mzkqg6"}
   ];
+  /* POSTS:END */
 
-  function postURL(p){ return "https://www.instagram.com/p/" + p.p + "/"; }
+  function url(p){ return "https://www.instagram.com/p/" + p.p + "/"; }
+  function src(p){ return "ig/" + p.f; }
 
-  var sheet = document.getElementById("sheet");
-  PHOTOS.forEach(function(p, i){
+  /* hero = the latest post */
+  var h = POSTS[0], hero = document.getElementById("heroshot");
+  var hi = new Image();
+  hi.src = src(h); hi.alt = h.t; hi.width = h.w; hi.height = h.h; hi.decoding = "async";
+  hero.appendChild(hi);
+  var hc = document.createElement("figcaption");
+  hc.innerHTML = '<span class="t">' + h.t + "</span>" +
+    '<a href="' + url(h) + '" target="_blank" rel="noopener">' + h.d + " &nearr;</a>";
+  hero.appendChild(hc);
+
+  /* gallery: alternating one-up and two-up, Apple-ish rhythm */
+  function shot(p, i){
     var fig = document.createElement("figure");
-    fig.className = "neg";
-
+    fig.className = "shot";
     var btn = document.createElement("button");
-    btn.type = "button";
-    btn.setAttribute("aria-label", "Enlarge photograph " + (i+1) + " of " + PHOTOS.length);
-
-    var img = document.createElement("img");
-    img.src = "ig/" + p.f;
-    img.width = p.w; img.height = p.h;
-    img.loading = i < 6 ? "eager" : "lazy";
-    img.decoding = "async";
-    img.alt = "Photograph by Jack Greer, posted " + p.d;
-    btn.appendChild(img);
-
+    btn.type = "button"; btn.className = "plate";
+    btn.setAttribute("aria-label", "Enlarge: " + p.t);
+    var im = new Image();
+    im.src = src(p); im.alt = p.t; im.width = p.w; im.height = p.h;
+    im.loading = i < 3 ? "eager" : "lazy"; im.decoding = "async";
+    btn.appendChild(im);
+    btn.addEventListener("click", function(){ show(POSTS.indexOf(p)); });
     var cap = document.createElement("figcaption");
-    var link = document.createElement("a");
-    link.href = postURL(p);
-    link.target = "_blank";
-    link.rel = "noopener";
-    link.textContent = p.d;
-    cap.appendChild(link);
+    cap.innerHTML = '<span class="t">' + p.t + "</span>" +
+      '<a href="' + url(p) + '" target="_blank" rel="noopener">' + p.d + " &nearr;</a>";
+    fig.appendChild(btn); fig.appendChild(cap);
+    return fig;
+  }
 
-    btn.addEventListener("click", function(){ open(i); });
-    fig.appendChild(btn);
-    fig.appendChild(cap);
-    sheet.appendChild(fig);
-  });
+  var g = document.getElementById("gallery"), rest = POSTS.slice(1), n = 0, k = 0;
+  while (n < rest.length){
+    if (k % 3 === 0){
+      g.appendChild(shot(rest[n], n)); n += 1;
+    } else {
+      var row = document.createElement("div");
+      row.className = "grow";
+      row.appendChild(shot(rest[n], n));
+      if (rest[n+1]) row.appendChild(shot(rest[n+1], n+1));
+      g.appendChild(row); n += 2;
+    }
+    k += 1;
+  }
 
   /* ---- lightbox ---- */
   var box = document.getElementById("box"),
-      boximg = document.getElementById("boximg"),
-      boxcap = document.getElementById("boxcap"),
-      at = 0;
+      bimg = document.getElementById("boximg"),
+      bcap = document.getElementById("boxcap"), at = 0;
 
-  function open(i){
-    at = (i + PHOTOS.length) % PHOTOS.length;
-    var p = PHOTOS[at];
-    boximg.src = "ig/" + p.f;
-    boximg.alt = "Photograph by Jack Greer, posted " + p.d;
-    boxcap.innerHTML = p.d + " &middot; " + (at+1) + "/" + PHOTOS.length +
-      ' &middot; <a href="' + postURL(p) + '" target="_blank" rel="noopener">View post</a>';
-    if (!box.open) { if (box.showModal) box.showModal(); else box.setAttribute("open",""); }
+  function show(i){
+    at = (i + POSTS.length) % POSTS.length;
+    var p = POSTS[at];
+    bimg.src = src(p); bimg.alt = p.t;
+    bcap.innerHTML = '<span class="t">' + p.t + "</span> &middot; " + p.d +
+      ' &middot; <a href="' + url(p) + '" target="_blank" rel="noopener">View on Instagram</a>';
+    if (!box.open){ box.showModal ? box.showModal() : box.setAttribute("open",""); }
   }
-  function close(){ if (box.close) box.close(); else box.removeAttribute("open"); }
-
-  document.getElementById("boxx").addEventListener("click", close);
-  box.addEventListener("click", function(e){ if (e.target === box || e.target === boxcap) close(); });
+  function hide(){ box.close ? box.close() : box.removeAttribute("open"); }
+  document.getElementById("boxx").addEventListener("click", hide);
+  box.addEventListener("click", function(e){ if (e.target === box) hide(); });
   box.addEventListener("keydown", function(e){
-    if (e.key === "ArrowRight"){ open(at + 1); e.preventDefault(); }
-    if (e.key === "ArrowLeft"){ open(at - 1); e.preventDefault(); }
+    if (e.key === "ArrowRight"){ show(at+1); e.preventDefault(); }
+    if (e.key === "ArrowLeft"){ show(at-1); e.preventDefault(); }
   });
 
-  /* ---- scroll spy ---- */
+  /* ---- scroll reveal, below the fold only, with a hard safety net ---- */
+  var still = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (!still && "IntersectionObserver" in window){
+    var targets = [];
+    Array.prototype.forEach.call(
+      document.querySelectorAll(".band .inner, .shot, .bleed"),
+      function(el){ if (el.getBoundingClientRect().top > window.innerHeight){ el.classList.add("rise"); targets.push(el); } }
+    );
+    var io = new IntersectionObserver(function(es){
+      es.forEach(function(e){ if (e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target); } });
+    }, { rootMargin: "0px 0px -8% 0px" });
+    targets.forEach(function(el){ io.observe(el); });
+    /* nothing stays hidden, whatever happens */
+    setTimeout(function(){ targets.forEach(function(el){ el.classList.add("in"); }); }, 2500);
+  }
+
+  /* ---- nav highlight ---- */
   var links = {};
-  Array.prototype.forEach.call(document.querySelectorAll(".bar-in nav a"), function(a){
+  Array.prototype.forEach.call(document.querySelectorAll('.nav a[href^="#"]'), function(a){
     links[a.getAttribute("href").slice(1)] = a;
   });
-  var spy = new IntersectionObserver(function(entries){
-    entries.forEach(function(en){
-      if (!en.isIntersecting) return;
+  var spy = new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      if (!e.isIntersecting) return;
       Object.keys(links).forEach(function(k){ links[k].removeAttribute("aria-current"); });
-      if (links[en.target.id]) links[en.target.id].setAttribute("aria-current","true");
+      if (links[e.target.id]) links[e.target.id].setAttribute("aria-current","true");
     });
-  }, { rootMargin: "-40% 0px -55% 0px" });
-  ["experience","photographs","contact"].forEach(function(id){
-    var el = document.getElementById(id);
-    if (el) spy.observe(el);
+  }, { rootMargin: "-45% 0px -50% 0px" });
+  ["currently","experience","photographs","contact"].forEach(function(id){
+    var el = document.getElementById(id); if (el) spy.observe(el);
   });
 })();
 </script>
