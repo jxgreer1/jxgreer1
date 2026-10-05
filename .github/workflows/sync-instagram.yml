@@ -2,7 +2,11 @@ name: Sync Instagram
 
 on:
   schedule:
-    - cron: "17 7 * * *"   # daily, 07:17 UTC
+    # GitHub cron is UTC only, so this is midnight Eastern while daylight
+    # saving is on and 11pm Eastern once the clocks go back. A few minutes
+    # past the hour on purpose: scheduled jobs queue behind everyone else's
+    # on the hour itself.
+    - cron: "7 4 * * *"
   workflow_dispatch:        # or run it by hand from the Actions tab
 
 permissions:
