@@ -23,9 +23,10 @@
 I study industrial engineering at Kettering, which runs on alternating terms, so I spend
 three months in class and three months working, back and forth.
 
-Currently I co-op at Tesla in the Bay Area. I'm a PCBA SIE working on creating apps to help
-manage our team's internal structure, as well as measuring capacity across all our suppliers.
-I go on site as well and solve problems daily to help keep lines running.
+Currently I co-op at Tesla in the Bay Area. I'm a PCBA SIE, and I've built two apps for the
+team. One tracks capacity across all of our PCBA suppliers, and the other is a central hub
+where anyone can follow a part's whole process, from the first design all the way to end of
+life. I go on site as well and solve problems daily to help keep lines running.
 
 <br>
 
@@ -36,8 +37,10 @@ I go on site as well and solve problems daily to help keep lines running.
 **Tesla** &nbsp;·&nbsp; Supplier Industrialization Engineer, PCBA &nbsp;·&nbsp; Palo Alto, CA &nbsp;·&nbsp; Jan 2026 to now
 
 Defined and validated end-to-end production with contract manufacturers. Brought average PCB
-cost down **38%** and cycle time down **73%** across suppliers. Built a capacity planning tool
-that maps supplier EDI demand to line level PCBAs so utilization risk shows up before it bites.
+cost down **38%** and cycle time down **73%** across suppliers. I also built two apps for the
+team. One tracks capacity across all our PCBA suppliers by mapping EDI demand to line level
+PCBAs, so we catch utilization problems early. The other is a hub where the team can see a
+part's whole process flow, from first design to end of life.
 
 **Brembo North America** &nbsp;·&nbsp; Industrial Engineering Intern &nbsp;·&nbsp; Jackson, MI &nbsp;·&nbsp; Jan to Mar 2025
 
