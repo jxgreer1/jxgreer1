@@ -1,0 +1,465 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="TireNet: four thermal cameras stream live tire temperatures to a cockpit screen, later matched to GPS laps. A project by Jack Greer.">
+<link rel="canonical" href="https://greerjack.com/projects/tire-temps.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Jack Greer">
+<meta property="og:title" content="Tire Temperature Thermal Cameras">
+<meta property="og:description" content="Four thermal cameras stream live tire temperatures to a cockpit screen, later matched to GPS laps.">
+<meta property="og:url" content="https://greerjack.com/projects/tire-temps.html">
+<meta property="og:image" content="https://greerjack.com/assets/projects/tire-temps/cover.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#FFFFFF">
+<link rel="icon" type="image/png" href="../assets/favicon.png">
+<link rel="apple-touch-icon" href="../assets/favicon.png">
+<title>Tire Temperature Thermal Cameras · Jack Greer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap">
+<style>
+/* same tokens as index.html */
+:root{
+  color-scheme: light;
+  --bg:#FFFFFF;
+  --bg-alt:#F5F5F7;
+  --ink:#1D1D1F;
+  --ink-2:#6E6E73;
+  --rule:#D2D2D7;
+  --accent:#0A7D82;
+  --sans:-apple-system,BlinkMacSystemFont,"SF Pro Text","SF Pro Display","SF Pro",
+         "Inter","Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --gut:clamp(22px,5vw,48px);
+  --page:860px;
+  --mid:1100px;
+  --wide:1400px;
+  --ease:cubic-bezier(.22,.61,.36,1);
+}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+body{
+  margin:0;background:var(--bg);color:var(--ink);
+  font-family:var(--sans);
+  font-size:clamp(16px,1.1vw,17px);line-height:1.5;letter-spacing:-.003em;
+  -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
+}
+img{display:block;max-width:100%}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:4px;border-radius:4px}
+
+.inner{max-width:var(--page);margin:0 auto;padding-inline:var(--gut)}
+.inner.mid{max-width:var(--mid)}
+
+/* ---------- nav ---------- */
+.nav{
+  position:sticky;top:0;z-index:50;height:48px;
+  background:rgba(255,255,255,.86);
+  backdrop-filter:saturate(180%) blur(20px);
+  -webkit-backdrop-filter:saturate(180%) blur(20px);
+  border-bottom:1px solid rgba(0,0,0,.09);
+}
+.nav-in{
+  max-width:var(--wide);margin:0 auto;padding-inline:var(--gut);height:100%;
+  display:flex;align-items:center;gap:clamp(16px,3vw,34px);
+}
+.nav a{text-decoration:none;font-size:13px;color:var(--ink-2);transition:color .2s ease;white-space:nowrap}
+.nav a:hover{color:var(--ink)}
+.nav .logo{font-size:15px;font-weight:600;color:var(--ink);margin-right:auto;letter-spacing:-.012em}
+
+/* ---------- hero ---------- */
+.hero{text-align:center;padding-block:clamp(64px,10vw,120px) clamp(40px,6vw,64px)}
+.status{
+  display:inline-block;padding:3px 12px;border-radius:980px;
+  background:rgba(10,125,130,.1);color:var(--accent);font-weight:600;font-size:13px;
+}
+.eyebrow{display:block;margin-top:18px;font-size:15px;font-weight:600;color:var(--ink-2);letter-spacing:.01em}
+.hero h1{
+  margin:6px 0 0;font-size:clamp(38px,7vw,72px);font-weight:600;
+  line-height:1.05;letter-spacing:-.022em;text-wrap:balance;
+}
+.lede{
+  margin:clamp(16px,2.4vw,22px) auto 0;max-width:36ch;
+  font-size:clamp(19px,2.4vw,24px);line-height:1.35;font-weight:500;
+  letter-spacing:-.012em;color:var(--ink-2);text-wrap:balance;
+}
+@media (prefers-reduced-motion:no-preference){
+  .hero > *, .cover{animation:heroIn .7s var(--ease) backwards}
+  .hero h1{animation-delay:.06s}
+  .lede{animation-delay:.12s}
+  .cover{animation-delay:.2s}
+}
+@keyframes heroIn{from{opacity:0;transform:translateY(16px)}}
+
+.cover-wrap{padding-inline:var(--gut)}
+.cover{
+  max-width:var(--mid);margin:0 auto;aspect-ratio:16/10;
+  border-radius:clamp(14px,1.6vw,22px);overflow:hidden;background:#1B1B1F;
+}
+.cover img{width:100%;height:100%;object-fit:cover}
+
+/* ---------- facts ---------- */
+.facts{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+  gap:clamp(18px,3vw,32px);margin:clamp(48px,7vw,80px) 0 0;padding:0;
+}
+.facts div{border-top:1px solid var(--rule);padding-top:14px}
+.facts dt{font-size:13px;font-weight:600;color:var(--accent);margin:0}
+.facts dd{margin:6px 0 0;font-size:16px;line-height:1.5;color:var(--ink)}
+
+/* ---------- sections ---------- */
+section{margin-top:clamp(64px,9vw,112px)}
+section h2{
+  margin:0;font-size:clamp(28px,4.4vw,44px);font-weight:600;
+  line-height:1.08;letter-spacing:-.017em;text-wrap:balance;
+}
+section p{margin:16px 0 0;font-size:clamp(17px,2vw,19px);line-height:1.65;color:var(--ink-2);max-width:62ch}
+section p strong{color:var(--ink);font-weight:600}
+
+/* labelled list: the bold lead-in carries the point, the rest explains */
+.points{list-style:none;margin:clamp(22px,3vw,30px) 0 0;padding:0;display:flex;flex-direction:column}
+.points li{
+  padding-block:clamp(16px,2.2vw,20px);border-top:1px solid var(--rule);
+  display:grid;grid-template-columns:minmax(150px,13em) minmax(0,1fr);gap:4px 28px;
+  font-size:16px;line-height:1.6;color:var(--ink-2);
+}
+.points li:last-child{border-bottom:1px solid var(--rule)}
+.points b,.points strong{color:var(--ink);font-weight:600}
+@media (max-width:620px){.points li{grid-template-columns:1fr}}
+
+/* ---------- system photos ---------- */
+.parts{
+  display:grid;grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:clamp(16px,2.2vw,26px);margin-top:clamp(28px,4vw,44px);
+}
+@media (max-width:960px){.parts{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:520px){.parts{grid-template-columns:1fr}}
+.part{margin:0;display:flex;flex-direction:column;gap:14px}
+.plate{
+  display:block;width:100%;padding:0;border:0;cursor:zoom-in;line-height:0;
+  border-radius:clamp(12px,1.4vw,18px);overflow:hidden;background:#E8E8ED;
+  transition:transform .5s var(--ease),box-shadow .5s var(--ease);
+}
+.plate img{width:100%;height:auto;aspect-ratio:3/4;object-fit:cover}
+@media (hover:hover) and (prefers-reduced-motion:no-preference){
+  .plate:hover{transform:scale(1.03);box-shadow:0 18px 44px rgba(0,0,0,.16)}
+}
+.part h3{margin:0;font-size:18px;font-weight:600;letter-spacing:-.01em}
+.part p{margin:4px 0 0;font-size:15px;line-height:1.55;color:var(--ink-2)}
+
+/* ---------- architecture ---------- */
+.arch{margin:clamp(28px,4vw,44px) 0 0}
+.arch .scroll{
+  overflow-x:auto;-webkit-overflow-scrolling:touch;
+  background:var(--bg-alt);border-radius:clamp(14px,1.6vw,20px);
+  padding:clamp(14px,2.4vw,28px);
+}
+.arch svg{display:block;width:100%;min-width:680px;height:auto;font-family:var(--sans)}
+.arch figcaption{margin-top:12px;font-size:14px;color:var(--ink-2);text-align:center}
+.arch .zone{fill:#ECECF0;stroke:var(--rule)}
+.arch .zone-t{font-size:12px;font-weight:600;letter-spacing:.06em;fill:var(--ink-2)}
+.arch .box{fill:#fff;stroke:var(--rule)}
+.arch .hub{fill:rgba(10,125,130,.08);stroke:var(--accent);stroke-width:1.6}
+.arch .t{font-size:16px;font-weight:600;fill:var(--ink);text-anchor:middle}
+.arch .s{font-size:13px;fill:var(--ink-2);text-anchor:middle}
+.arch .wire{stroke:#A1A1A6;stroke-width:1.4;fill:none}
+.arch .lbl{font-size:12.5px;fill:var(--ink-2)}
+.arch .head{fill:#A1A1A6}
+
+/* ---------- stack ---------- */
+.stack{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:clamp(22px,3vw,36px);margin:clamp(24px,3.4vw,36px) 0 0;padding:0}
+.stack div{display:flex;flex-direction:column;gap:10px}
+.stack dt{font-size:13px;font-weight:600;color:var(--accent);margin:0}
+.stack dd{margin:0;display:flex;flex-wrap:wrap;gap:6px}
+.chip{padding:4px 11px;border-radius:980px;background:var(--bg-alt);font-size:14px;color:var(--ink)}
+
+.back{
+  display:inline-flex;align-items:center;gap:6px;margin-top:clamp(64px,9vw,112px);
+  color:var(--accent);text-decoration:none;font-size:16px;font-weight:500;
+}
+.back:hover{opacity:.7}
+
+footer{background:var(--bg-alt);border-top:1px solid var(--rule);padding-block:30px 40px;margin-top:clamp(72px,10vw,128px)}
+.foot{
+  max-width:var(--wide);margin:0 auto;padding-inline:var(--gut);
+  display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:13px;color:var(--ink-2);
+}
+
+/* ---------- lightbox (same as the home page) ---------- */
+.box{
+  position:fixed;inset:0;z-index:99;border:0;margin:0;padding:0;width:100%;height:100%;
+  max-width:none;max-height:none;
+  background:rgba(245,245,247,.97);
+  backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
+  display:none;
+}
+.box[open]{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:clamp(18px,4vw,52px)}
+.box::backdrop{background:rgba(245,245,247,.97)}
+.box img{max-width:100%;max-height:82vh;width:auto;height:auto;object-fit:contain;border-radius:10px}
+.box figcaption{font-size:14px;color:var(--ink);font-weight:500;text-align:center}
+.box .x{
+  position:absolute;top:clamp(14px,2.4vw,26px);right:clamp(14px,2.4vw,26px);
+  width:34px;height:34px;border-radius:50%;border:0;cursor:pointer;
+  background:rgba(0,0,0,.06);color:var(--ink);font-size:17px;line-height:1;
+}
+.box .x:hover{background:rgba(0,0,0,.12)}
+</style>
+</head>
+<body>
+<nav class="nav">
+  <div class="nav-in">
+    <a class="logo" href="../index.html">Jack Greer</a>
+    <a href="../index.html#projects">Projects</a>
+    <a href="../index.html#contact">Contact</a>
+  </div>
+</nav>
+
+<main>
+  <header class="hero inner">
+    <span class="status">Active project</span>
+    <span class="eyebrow">TireNet</span>
+    <h1>Tire Temperature Thermal Cameras</h1>
+    <p class="lede">Live tire temperatures on a race car. Four thermal cameras stream to a cockpit screen, and the data is later matched to GPS laps.</p>
+  </header>
+
+  <div class="cover-wrap">
+    <div class="cover">
+      <img src="../assets/projects/tire-temps/cover.jpg" width="1600" height="1000"
+           alt="The TireNet cockpit screen on the dash, showing live front-left and front-right tire temperature cards">
+    </div>
+  </div>
+
+  <div class="inner">
+    <dl class="facts">
+      <div><dt>Status</dt><dd>Active</dd></div>
+      <div><dt>Code</dt><dd>About 6,600 lines</dd></div>
+      <div><dt>Parts</dt><dd>App, firmware, analysis tool</dd></div>
+      <div><dt>Hardware</dt><dd>ESP32-S3, thermal cameras</dd></div>
+    </dl>
+
+    <section>
+      <h2>Overview</h2>
+      <p>TireNet shows live tire temperatures on a race car. Four thermal cameras stream to a cockpit screen, and the data is later matched to GPS laps. I wrote three parts, about 6,600 lines:</p>
+      <ul class="points">
+        <li><b>Provisioning app</b><span>Python. Flashes a camera and its WiFi settings in one click.</span></li>
+        <li><b>Head-unit firmware</b><span>Arduino C++. Runs the WiFi network, the dashboard and session logging.</span></li>
+        <li><b>Track analysis tool</b><span>Python. Merges GPS and temperature logs into per-lap heat maps.</span></li>
+      </ul>
+    </section>
+  </div>
+
+  <div class="inner mid">
+    <section>
+      <h2>The system on the car</h2>
+      <div class="parts">
+        <figure class="part">
+          <button class="plate" type="button" aria-label="Enlarge: Wheel-well camera">
+            <img src="../assets/projects/tire-temps/wheel-well.jpg" width="1080" height="1440" loading="lazy"
+                 alt="Thermal camera mounted in the wheel-well liner, aimed at the tire tread">
+          </button>
+          <figcaption>
+            <h3>Wheel-well camera</h3>
+            <p>One thermal camera is mounted in each wheel well, aimed at the tire tread.</p>
+          </figcaption>
+        </figure>
+        <figure class="part">
+          <button class="plate" type="button" aria-label="Enlarge: Central power hub">
+            <img src="../assets/projects/tire-temps/power-hub.jpg" width="1080" height="1440" loading="lazy"
+                 alt="Black power hub enclosure mounted in the engine bay">
+          </button>
+          <figcaption>
+            <h3>Central power hub</h3>
+            <p>All four cameras plug into one central hub for power.</p>
+          </figcaption>
+        </figure>
+        <figure class="part">
+          <button class="plate" type="button" aria-label="Enlarge: Cockpit screen">
+            <img src="../assets/projects/tire-temps/cockpit.jpg" width="1080" height="1440" loading="lazy"
+                 alt="Cockpit touchscreen with a temperature card per tire and LOG and SETUP buttons">
+          </button>
+          <figcaption>
+            <h3>Cockpit screen</h3>
+            <p>A 480×320 touchscreen with a live temperature card for each tire and a LOG button to record a session.</p>
+          </figcaption>
+        </figure>
+        <figure class="part">
+          <button class="plate" type="button" aria-label="Enlarge: Web UI graphs">
+            <img src="../assets/projects/tire-temps/web-ui.jpg" width="1080" height="1440" loading="lazy"
+                 alt="Phone showing a recorded TireNet run: a temperature graph and min, average and max per wheel">
+          </button>
+          <figcaption>
+            <h3>Web UI graphs</h3>
+            <p>A phone joins the screen's WiFi to see graphs of live and recorded runs. Each run can be saved as a single page and viewed later offline.</p>
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section>
+      <h2>Architecture</h2>
+      <p>The head unit is the hub. It runs the WiFi network the cameras join, and the phone and analysis tools only ever talk to it.</p>
+      <figure class="arch">
+        <div class="scroll">
+          <svg viewBox="0 0 900 570" role="img" aria-labelledby="archT archD">
+            <title id="archT">TireNet system architecture</title>
+            <desc id="archD">Four ESP32-S3 thermal cameras stream over WiFi on TCP port 3333 to a CrowPanel ESP32-S3 head unit, which runs a WiFi access point at 192.168.10.1, shows a live dashboard on a 480 by 320 touchscreen, logs runs to flash and serves a phone web UI. A RaceBox GPS on the car records on its own. Off the car, the provisioning app flashes firmware and WiFi over USB, a phone browser talks to the head unit over HTTP, and the track analysis tool takes the temperature CSV from the head unit and the GPS log from the RaceBox and renders lap heat maps.</desc>
+            <defs>
+              <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                <path class="head" d="M0,0 L10,5 L0,10 z"/>
+              </marker>
+            </defs>
+
+            <rect class="zone" x="20" y="16" width="860" height="404" rx="16"/>
+            <text class="zone-t" x="40" y="42">ON THE CAR</text>
+
+            <g>
+              <rect class="box" x="40"  y="58" width="190" height="64" rx="12"/>
+              <text class="t" x="135" y="85">FL camera</text><text class="s" x="135" y="106">ESP32-S3 + thermal</text>
+              <rect class="box" x="250" y="58" width="190" height="64" rx="12"/>
+              <text class="t" x="345" y="85">FR camera</text><text class="s" x="345" y="106">ESP32-S3 + thermal</text>
+              <rect class="box" x="460" y="58" width="190" height="64" rx="12"/>
+              <text class="t" x="555" y="85">RL camera</text><text class="s" x="555" y="106">ESP32-S3 + thermal</text>
+              <rect class="box" x="670" y="58" width="190" height="64" rx="12"/>
+              <text class="t" x="765" y="85">RR camera</text><text class="s" x="765" y="106">ESP32-S3 + thermal</text>
+            </g>
+
+            <path class="wire" d="M135,122 V178" marker-end="url(#ah)"/>
+            <path class="wire" d="M345,122 V178" marker-end="url(#ah)"/>
+            <path class="wire" d="M555,122 V178" marker-end="url(#ah)"/>
+            <path class="wire" d="M765,122 V178" marker-end="url(#ah)"/>
+            <text class="lbl" x="145" y="155">WiFi · TCP 3333</text>
+
+            <rect class="hub" x="40" y="180" width="820" height="112" rx="14"/>
+            <text class="t" x="450" y="212">Head unit (CrowPanel ESP32-S3)</text>
+            <text class="s" x="450" y="237">WiFi access point · 192.168.10.1</text>
+            <text class="s" x="450" y="257">Live dashboard on a 480×320 touchscreen</text>
+            <text class="s" x="450" y="277">Logs runs to flash · serves a phone web UI</text>
+
+            <rect class="box" x="670" y="322" width="190" height="70" rx="12"/>
+            <text class="t" x="765" y="351">RaceBox GPS</text>
+            <text class="s" x="765" y="373">Records on its own</text>
+
+            <path class="wire" d="M165,470 V294" marker-end="url(#ah)"/>
+            <text class="lbl" x="177" y="385">USB flash</text>
+            <path class="wire" d="M450,294 V468" marker-start="url(#ah)" marker-end="url(#ah)"/>
+            <text class="lbl" x="462" y="385">HTTP</text>
+            <path class="wire" d="M640,292 V468" marker-end="url(#ah)"/>
+            <text class="lbl" x="628" y="385" text-anchor="end">temp CSV</text>
+            <path class="wire" d="M765,392 V468" marker-end="url(#ah)"/>
+            <text class="lbl" x="777" y="440">GPS log</text>
+
+            <rect class="box" x="40"  y="470" width="250" height="84" rx="12"/>
+            <text class="t" x="165" y="500">Provisioning app</text>
+            <text class="s" x="165" y="522">Flashes firmware + WiFi</text>
+            <text class="s" x="165" y="540">over USB, one click</text>
+
+            <rect class="box" x="325" y="470" width="250" height="84" rx="12"/>
+            <text class="t" x="450" y="500">Phone browser</text>
+            <text class="s" x="450" y="522">Settings, clock sync,</text>
+            <text class="s" x="450" y="540">saves runs for offline use</text>
+
+            <rect class="box" x="610" y="470" width="250" height="84" rx="12"/>
+            <text class="t" x="735" y="500">Track analysis tool</text>
+            <text class="s" x="735" y="522">Merges GPS + temperatures,</text>
+            <text class="s" x="735" y="540">renders lap heat maps</text>
+          </svg>
+        </div>
+        <figcaption>Four cameras stream to one head unit; three tools work off the car</figcaption>
+      </figure>
+    </section>
+  </div>
+
+  <div class="inner">
+    <section>
+      <h2>Provisioning app</h2>
+      <p>Every camera runs the same firmware image. Instead of compiling per camera, the app writes each camera's WiFi settings to a small separate storage partition. Buyers need no developer tools, the firmware's SHA-256 never changes, and changing WiFi rewrites only that partition.</p>
+      <ul class="points">
+        <li><b>One click</b><span>Finds the storage location from the chip's partition table, writes the firmware, writes the settings, then reads them back to confirm. A failed write would otherwise look normal.</span></li>
+        <li><b>Packaging</b><span>GUI and command line share one class. It installs its own dependencies and also ships as a single executable.</span></li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Head-unit firmware</h2>
+      <p>The touchscreen pulls frames from all four cameras over TCP and serves a web UI to phones. Each feature below fixed a problem found in testing.</p>
+      <ul class="points">
+        <li><b>Redraws left visible lines on screen</b><span>Redraw a card only when its displayed reading changes. Redraws fell from <strong>780 a minute to 1</strong>.</span></li>
+        <li><b>Cameras drop out</b><span>Escalating recovery: resend, reconnect, mark stale, then reset the camera.</span></li>
+        <li><b>Power cuts lost whole runs</b><span>Each sample is written to flash as it is recorded.</span></li>
+        <li><b>Crowded track-day WiFi</b><span>Picks the quietest channel at boot.</span></li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Track analysis</h2>
+      <p>The GPS unit and the screen record separately, so no laptop rides in the car. Afterwards the tool:</p>
+      <ul class="points">
+        <li><b>Reads the RaceBox</b><span>Over BLE, using its binary protocol implemented from the vendor spec.</span></li>
+        <li><b>Lines up the logs</b><span>Matches the two logs by time, correcting time-zone offsets automatically.</span></li>
+        <li><b>Splits laps</b><span>Cuts a lap wherever the car crosses a start/finish line, and draws a heat map per lap.</span></li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Reverse engineering</h2>
+      <p>The cameras run closed vendor firmware. By disassembling it, I found the storage keys it reads WiFi settings from, so no custom camera build was needed. I confirmed the result on real hardware: a full flash read back byte-for-byte.</p>
+    </section>
+
+    <section>
+      <h2>Tech stack</h2>
+      <dl class="stack">
+        <div><dt>Embedded</dt><dd>
+          <span class="chip">ESP32-S3</span><span class="chip">ESP-IDF</span><span class="chip">Arduino</span>
+          <span class="chip">LovyanGFX</span><span class="chip">LittleFS</span><span class="chip">TCP</span>
+        </dd></div>
+        <div><dt>Desktop tools</dt><dd>
+          <span class="chip">Python</span><span class="chip">Tkinter</span><span class="chip">PyInstaller</span>
+          <span class="chip">esptool</span><span class="chip">arduino-cli</span>
+        </dd></div>
+        <div><dt>Data &amp; protocols</dt><dd>
+          <span class="chip">BLE</span><span class="chip">UBX</span><span class="chip">HTTP</span><span class="chip">Matplotlib</span>
+        </dd></div>
+      </dl>
+    </section>
+
+    <a class="back" href="../index.html#projects">&lsaquo; All projects</a>
+  </div>
+</main>
+
+<footer>
+  <div class="foot">
+    <span>Jack Greer, Los Angeles</span>
+    <span>&copy; 2026</span>
+  </div>
+</footer>
+
+<dialog class="box" id="box">
+  <button class="x" id="boxx" aria-label="Close">&times;</button>
+  <img id="boximg" alt="">
+  <figcaption id="boxcap"></figcaption>
+</dialog>
+
+<script>
+(function(){
+  "use strict";
+  var box = document.getElementById("box"),
+      bimg = document.getElementById("boximg"),
+      bcap = document.getElementById("boxcap");
+  Array.prototype.forEach.call(document.querySelectorAll(".plate"), function(btn){
+    btn.addEventListener("click", function(){
+      var im = btn.querySelector("img");
+      bimg.src = im.src; bimg.alt = im.alt;
+      bcap.textContent = btn.closest(".part").querySelector("h3").textContent;
+      box.showModal ? box.showModal() : box.setAttribute("open","");
+    });
+  });
+  function hide(){ box.close ? box.close() : box.removeAttribute("open"); }
+  document.getElementById("boxx").addEventListener("click", hide);
+  box.addEventListener("click", function(e){ if (e.target === box) hide(); });
+})();
+</script>
+</body>
+</html>

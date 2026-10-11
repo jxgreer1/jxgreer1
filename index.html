@@ -13,7 +13,8 @@
 <meta property="og:image" content="https://greerjack.com/ig/01.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#FFFFFF">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%230A7D82'/><text x='50' y='70' text-anchor='middle' font-family='-apple-system,Helvetica,Arial' font-weight='600' font-size='52' fill='%23ffffff'>JG</text></svg>">
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="apple-touch-icon" href="assets/favicon.png">
 <title>Jack Greer</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -170,6 +171,31 @@ a{color:inherit}
 .tools dt{font-size:13px;font-weight:600;color:var(--accent);margin:0}
 .tools dd{margin:0;font-size:16px;line-height:1.55;color:var(--ink-2)}
 
+/* ---------- projects ---------- */
+.projects{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,420px),1fr));
+  gap:clamp(18px,2.6vw,30px);margin-top:clamp(30px,4vw,48px);
+}
+.proj{
+  display:flex;flex-direction:column;text-decoration:none;color:inherit;
+  background:var(--bg);border-radius:clamp(14px,1.6vw,20px);overflow:hidden;
+  box-shadow:0 1px 2px rgba(0,0,0,.04),0 0 0 1px rgba(0,0,0,.05);
+  transition:transform .5s cubic-bezier(.22,.61,.36,1),box-shadow .5s cubic-bezier(.22,.61,.36,1);
+}
+@media (hover:hover) and (prefers-reduced-motion:no-preference){
+  .proj:hover{transform:scale(1.03);box-shadow:0 18px 44px rgba(0,0,0,.16)}
+}
+.proj .cover{aspect-ratio:16/10;background:#1B1B1F}
+.proj .cover img{width:100%;height:100%;object-fit:cover}
+.proj .body{padding:clamp(20px,2.6vw,28px);display:flex;flex-direction:column;gap:8px}
+.proj .status{
+  align-self:flex-start;padding:2px 10px;border-radius:980px;
+  background:rgba(10,125,130,.1);color:var(--accent);font-weight:600;font-size:12px;
+}
+.proj h3{margin:4px 0 0;font-size:clamp(20px,2.4vw,24px);font-weight:600;letter-spacing:-.014em;line-height:1.2}
+.proj p{margin:0;color:var(--ink-2);font-size:16px;line-height:1.55}
+.proj .more{margin-top:6px;color:var(--accent);font-size:15px;font-weight:500}
+
 /* ---------- gallery ---------- */
 .gallery{max-width:var(--wide);margin:clamp(40px,5vw,64px) auto 0;padding-inline:var(--gut);
   display:flex;flex-direction:column;gap:clamp(16px,2.4vw,30px)}
@@ -270,6 +296,7 @@ footer{background:var(--bg-alt);border-top:1px solid var(--rule);padding-block:3
     <a class="sm" href="#currently">Right now</a>
     <a class="sm" href="#education">Education</a>
     <a class="sm" href="#experience">Experience</a>
+    <a href="#projects">Projects</a>
     <a href="#photographs">Photographs</a>
     <a href="#contact">Contact</a>
   </div>
@@ -358,7 +385,28 @@ footer{background:var(--bg-alt);border-top:1px solid var(--rule);padding-block:3
     </div>
   </section>
 
-  <section class="band" id="photographs">
+  <section class="band" id="projects">
+    <div class="inner">
+      <h2>Projects</h2>
+      <p class="sub">Things I'm building right now.</p>
+      <div class="projects">
+        <a class="proj" href="projects/tire-temps.html">
+          <div class="cover">
+            <img src="assets/projects/tire-temps/cover.jpg" width="1600" height="1000" loading="lazy"
+                 alt="TireNet cockpit screen showing live tire temperatures">
+          </div>
+          <div class="body">
+            <span class="status">Active</span>
+            <h3>Tire Temperature Thermal Cameras</h3>
+            <p>Four thermal cameras stream live tire temperatures to a cockpit screen, later matched to GPS laps.</p>
+            <span class="more">Learn more &rsaquo;</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="band alt" id="photographs">
     <div class="inner center">
       <h2>Photographs</h2>
       <p class="sub"><a href="https://www.instagram.com/jgreerfilm/" target="_blank" rel="noopener">@jgreerfilm</a></p>
@@ -507,6 +555,7 @@ footer{background:var(--bg-alt);border-top:1px solid var(--rule);padding-block:3
        arriving in one slab */
     var sel = ".band .inner > h2, .band .inner > .sub, .band .inner > .prose," +
               ".band .inner > .intro, .band .inner > .cv, .band .inner > .tools," +
+              ".band .inner > .projects," +
               ".band .inner > .cta, .gallery .shot";
     var targets = [];
     Array.prototype.forEach.call(document.querySelectorAll(sel), function(el){
@@ -537,7 +586,7 @@ footer{background:var(--bg-alt);border-top:1px solid var(--rule);padding-block:3
       if (links[e.target.id]) links[e.target.id].setAttribute("aria-current","true");
     });
   }, { rootMargin: "-45% 0px -50% 0px" });
-  ["currently","education","experience","photographs","contact"].forEach(function(id){
+  ["currently","education","experience","projects","photographs","contact"].forEach(function(id){
     var el = document.getElementById(id); if (el) spy.observe(el);
   });
 })();
