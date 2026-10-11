@@ -100,6 +100,32 @@ a{color:inherit}
 }
 .where .dot{width:7px;height:7px;border-radius:50%;background:var(--accent);flex:none}
 
+/* newest post, centered under the name */
+.latest{margin:clamp(40px,6vw,64px) auto 0;max-width:min(720px,100%);text-align:center}
+.latest .shot .plate{border-radius:clamp(14px,1.6vw,20px)}
+.latest figcaption{margin-top:14px;font-size:14px;color:var(--ink-2)}
+.latest figcaption .tag{
+  display:inline-block;margin-right:8px;padding:2px 10px;border-radius:980px;
+  background:rgba(10,125,130,.1);color:var(--accent);font-weight:600;font-size:12px;
+}
+.latest figcaption .t{color:var(--ink);font-weight:500}
+@media (prefers-reduced-motion:no-preference){
+  .latest{animation:heroIn .8s cubic-bezier(.22,.61,.36,1) .26s backwards}
+}
+
+/* ---------- intro ---------- */
+.intro{
+  display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);
+  gap:clamp(28px,5vw,64px);align-items:start;margin-top:clamp(30px,4vw,48px);
+}
+.intro .me{margin:0;border-radius:clamp(14px,1.6vw,20px);overflow:hidden;background:#E8E8ED;line-height:0}
+.intro .me img{width:100%;height:auto}
+@media (max-width:760px){
+  .intro{grid-template-columns:1fr}
+  .intro .me{max-width:420px;margin-inline:auto}
+}
+.band .intro .prose{margin-top:0}
+
 /* ---------- bands ---------- */
 .band{padding-block:clamp(72px,11vw,128px)}
 .band.alt{background:var(--bg-alt)}
@@ -122,14 +148,14 @@ a{color:inherit}
 /* ---------- experience ---------- */
 .cv{list-style:none;margin:clamp(30px,4vw,48px) 0 0;padding:0;display:flex;flex-direction:column}
 .cv li{
-  padding-block:clamp(22px,3vw,30px);border-top:1px solid var(--rule);
-  display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px 28px;
+  padding-block:clamp(34px,4.6vw,52px);border-top:1px solid var(--rule);
+  display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px 28px;
 }
 .cv li:last-child{border-bottom:1px solid var(--rule)}
 .cv .org{font-size:clamp(20px,2.6vw,27px);font-weight:600;letter-spacing:-.014em;line-height:1.2}
 .cv .when{font-size:14px;color:var(--ink-2);text-align:right;white-space:nowrap;padding-top:6px}
 .cv .role{grid-column:1/-1;margin:0;font-size:15px;font-weight:600;color:var(--accent)}
-.cv .what{grid-column:1/-1;margin:6px 0 0;color:var(--ink-2);max-width:64ch;font-size:16px;line-height:1.5}
+.cv .what{grid-column:1/-1;margin:12px 0 0;color:var(--ink-2);max-width:62ch;font-size:16px;line-height:1.7}
 @media (max-width:620px){
   .cv li{grid-template-columns:1fr}
   .cv .when{text-align:left;padding-top:0}
@@ -138,7 +164,7 @@ a{color:inherit}
 /* ---------- tools ---------- */
 .tools{
   display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));
-  gap:clamp(22px,3vw,40px);margin-top:clamp(30px,4vw,48px);
+  gap:clamp(22px,3vw,40px);margin-top:clamp(56px,7vw,88px);
 }
 .tools div{display:flex;flex-direction:column;gap:10px}
 .tools dt{font-size:13px;font-weight:600;color:var(--accent);margin:0}
@@ -158,7 +184,16 @@ a{color:inherit}
   width:100%;height:auto;
   transition:transform .9s cubic-bezier(.22,.61,.36,1),filter .4s ease;
 }
-.shot .plate:hover img{transform:scale(1.02)}
+/* Apple-style hover: the whole tile lifts and grows a touch */
+.shot .plate,.intro .me{
+  transition:transform .5s cubic-bezier(.22,.61,.36,1),box-shadow .5s cubic-bezier(.22,.61,.36,1);
+}
+@media (hover:hover) and (prefers-reduced-motion:no-preference){
+  .shot .plate:hover,.intro .me:hover{
+    transform:scale(1.03);
+    box-shadow:0 18px 44px rgba(0,0,0,.16);
+  }
+}
 
 /* ---------- contact ---------- */
 .cta{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:clamp(28px,4vw,40px)}
@@ -246,15 +281,21 @@ footer{background:var(--bg-alt);border-top:1px solid var(--rule);padding-block:3
     <h1>Jack Greer</h1>
     <p class="lede">Industrial Engineering student, Co-op at Tesla, Analog photographer.</p>
     <p class="where"><span class="dot"></span><span id="city">Flint</span></p>
+    <div class="latest" id="latest"></div>
   </header>
 
   <section class="band alt" id="currently">
     <div class="inner">
       <h2>Right now</h2>
-      <div class="prose">
-        <p>I study industrial engineering at Kettering. The school runs on alternating terms, so I spend three months in class and three months working, back and forth.</p>
-        <p>Currently I co-op at Tesla in the Bay Area. I'm a PCBA SIE, and I've built two apps for the team. One tracks capacity across all of our PCBA suppliers, and the other is a central hub where anyone can follow a part's whole process, from the first design all the way to end of life. I go on site as well and solve problems daily to help keep lines running.</p>
-        <p>I shoot film when I'm not doing that.</p>
+      <div class="intro">
+        <figure class="me">
+          <img src="assets/me.jpg" width="1200" height="1600" alt="Jack sitting on a wooden bench above the Big Sur coast at sunset">
+        </figure>
+        <div class="prose">
+          <p>I study industrial engineering at Kettering. The school runs on alternating terms, so I spend three months in class and three months working, back and forth.</p>
+          <p>Currently I co-op at Tesla in the Bay Area. I'm a PCBA SIE, and I've built two apps for the team. One tracks capacity across all of our PCBA suppliers, and the other is a central hub where anyone can follow a part's whole process, from the first design all the way to end of life. I go on site as well and solve problems daily to help keep lines running.</p>
+          <p>I shoot film when I'm not doing that.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -406,7 +447,17 @@ footer{background:var(--bg-alt);border-top:1px solid var(--rule);padding-block:3
     return fig;
   }
 
-  var g = document.getElementById("gallery"), rest = POSTS, n = 0, k = 0;
+  /* newest post sits centered under the name */
+  var lat = document.getElementById("latest");
+  if (POSTS.length){
+    var top0 = shot(POSTS[0], 0), cap = document.createElement("figcaption");
+    cap.innerHTML = '<span class="tag">Latest</span><span class="t"></span> &middot; ' + POSTS[0].d;
+    cap.querySelector(".t").textContent = POSTS[0].t;
+    top0.appendChild(cap);
+    lat.appendChild(top0);
+  }
+
+  var g = document.getElementById("gallery"), rest = POSTS.slice(1), n = 0, k = 0;
   while (n < rest.length){
     if (k % 3 === 0){
       g.appendChild(shot(rest[n], n)); n += 1;
@@ -455,7 +506,8 @@ footer{background:var(--bg-alt);border-top:1px solid var(--rule);padding-block:3
     /* each block reveals on its own, so a section cascades rather than
        arriving in one slab */
     var sel = ".band .inner > h2, .band .inner > .sub, .band .inner > .prose," +
-              ".band .inner > .cv, .band .inner > .tools, .band .inner > .cta, .shot";
+              ".band .inner > .intro, .band .inner > .cv, .band .inner > .tools," +
+              ".band .inner > .cta, .gallery .shot";
     var targets = [];
     Array.prototype.forEach.call(document.querySelectorAll(sel), function(el){
       if (el.getBoundingClientRect().top > window.innerHeight){
