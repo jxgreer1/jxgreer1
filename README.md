@@ -1,4 +1,4 @@
-<a href="https://jxgreer1.github.io/jxgreer1/">
+<a href="https://greerjack.com/">
   <img src="assets/banner.jpg" alt="Film photographs by Jack Greer" width="100%">
 </a>
 
@@ -9,14 +9,14 @@
 </p>
 
 <p align="center">
-  <a href="https://jxgreer1.github.io/jxgreer1/"><img alt="Website" src="https://img.shields.io/badge/Website-0A7D82?style=for-the-badge&logo=safari&logoColor=white"></a>
+  <a href="https://greerjack.com/"><img alt="Website" src="https://img.shields.io/badge/Website-0A7D82?style=for-the-badge&logo=safari&logoColor=white"></a>
   <a href="https://www.instagram.com/jgreerfilm/"><img alt="Instagram" src="https://img.shields.io/badge/@jgreerfilm-1D1D1F?style=for-the-badge&logo=instagram&logoColor=white"></a>
   <a href="https://www.linkedin.com/in/jack-greer-14b435104/"><img alt="LinkedIn" src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white"></a>
   <a href="https://github.com/jxgreer1"><img alt="GitHub" src="https://img.shields.io/badge/GitHub-1D1D1F?style=for-the-badge&logo=github&logoColor=white"></a>
   <a href="mailto:gree7626@kettering.edu"><img alt="Email" src="https://img.shields.io/badge/Email-6E6E73?style=for-the-badge&logo=maildotru&logoColor=white"></a>
 </p>
 
-<p align="center"><strong><a href="https://jxgreer1.github.io/jxgreer1/">See the full site →</a></strong></p>
+<p align="center"><strong><a href="https://greerjack.com/">See the full site →</a></strong></p>
 
 ---
 
@@ -106,7 +106,7 @@ These update themselves, see <i>How this repo works</i> below.
 </tr>
 </table>
 
-<p><a href="https://jxgreer1.github.io/jxgreer1/#photographs"><b>All of them, full size →</b></a></p>
+<p><a href="https://greerjack.com/#photographs"><b>All of them, full size →</b></a></p>
 
 </details>
 
@@ -141,7 +141,7 @@ full size copies in `ig/originals/`. These are the files as you uploaded them, w
 beats anything the public CDN serves.
 
 **Choosing which photos show.** Open **`picker.html`** (double click it, or visit
-[the hosted copy](https://jxgreer1.github.io/jxgreer1/picker.html)). Every post is
+[the hosted copy](https://greerjack.com/picker.html)). Every post is
 laid out as a grid: click to show or hide, switch to Manual order to arrange them,
 then copy the JSON it builds into `photos.config.json` and commit.
 
@@ -181,5 +181,5 @@ page, and switching it off lets individual slides through.
 <br>
 
 <p align="center">
-  <a href="https://jxgreer1.github.io/jxgreer1/"><img src="https://img.shields.io/badge/%E2%86%92%20jackgreer-Visit%20the%20site-0A7D82?style=for-the-badge"></a>
+  <a href="https://greerjack.com/"><img src="https://img.shields.io/badge/%E2%86%92%20jackgreer-Visit%20the%20site-0A7D82?style=for-the-badge"></a>
 </p>
