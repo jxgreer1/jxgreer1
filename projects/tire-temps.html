@@ -395,7 +395,7 @@ footer{background:var(--bg-alt);border-top:1px solid var(--rule);padding-block:3
             <text class="s" x="735" y="540">renders lap heat maps</text>
           </svg>
         </div>
-        <figcaption>Four cameras stream to one head unit; three tools work off the car</figcaption>
+        <figcaption>Four cameras stream to one head unit; three tools work off the car.</figcaption>
       </figure>
     </section>
   </div>
@@ -406,7 +406,7 @@ footer{background:var(--bg-alt);border-top:1px solid var(--rule);padding-block:3
       <p>Every camera runs the same firmware image. Instead of compiling per camera, the app writes each camera's WiFi settings to a small separate storage partition. Buyers need no developer tools, the firmware's SHA-256 never changes, and changing WiFi rewrites only that partition.</p>
       <ul class="points">
         <li><b>One click</b><span>Finds the storage location from the chip's partition table, writes the firmware, writes the settings, then reads them back to confirm. A failed write would otherwise look normal.</span></li>
-        <li><b>Packaging</b><span>GUI and command line share one class. It installs its own dependencies and also ships as a single executable.</span></li>
+        <li><b>Packaging</b><span>The GUI and command line share one class. It installs its own dependencies and also ships as a single executable.</span></li>
       </ul>
     </section>
 
@@ -414,7 +414,7 @@ footer{background:var(--bg-alt);border-top:1px solid var(--rule);padding-block:3
       <h2>Head-unit firmware</h2>
       <p>The touchscreen pulls frames from all four cameras over TCP and serves a web UI to phones. Each feature below fixed a problem found in testing.</p>
       <ul class="points">
-        <li><b>Redraws left visible lines on screen</b><span>Redraw a card only when its displayed reading changes. Redraws fell from <strong>780 a minute to 1</strong>.</span></li>
+        <li><b>Redraws left visible lines on screen</b><span>Redraws a card only when its displayed reading changes. Redraws fell from <strong>780 a minute to 1</strong>.</span></li>
         <li><b>Cameras drop out</b><span>Escalating recovery: resend, reconnect, mark stale, then reset the camera.</span></li>
         <li><b>Power cuts lost whole runs</b><span>Each sample is written to flash as it is recorded.</span></li>
         <li><b>Crowded track-day WiFi</b><span>Picks the quietest channel at boot.</span></li>
@@ -427,13 +427,13 @@ footer{background:var(--bg-alt);border-top:1px solid var(--rule);padding-block:3
       <ul class="points">
         <li><b>Reads the RaceBox</b><span>Over BLE, using its binary protocol implemented from the vendor spec.</span></li>
         <li><b>Lines up the logs</b><span>Matches the two logs by time, correcting time-zone offsets automatically.</span></li>
-        <li><b>Splits laps</b><span>Cuts a lap wherever the car crosses a start/finish line, and draws a heat map per lap.</span></li>
+        <li><b>Splits laps</b><span>Cuts a lap wherever the car crosses the start/finish line, and draws a heat map per lap.</span></li>
       </ul>
     </section>
 
     <section>
       <h2>Reverse engineering</h2>
-      <p>The cameras run closed vendor firmware. By disassembling it, I found the storage keys it reads WiFi settings from, so no custom camera build was needed. I confirmed the result on real hardware: a full flash read back byte-for-byte.</p>
+      <p>The cameras run closed vendor firmware. By disassembling it, I found the storage keys it reads WiFi settings from, so no custom camera build was needed. I confirmed the result on real hardware: a full read-back of the flash matched byte for byte.</p>
     </section>
 
     <section>

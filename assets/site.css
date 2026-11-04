@@ -284,7 +284,14 @@ a{color:inherit}
   .contact-body > *{animation:heroIn .7s cubic-bezier(.22,.61,.36,1) backwards}
   .contact-body > .sub{animation-delay:.08s}
   .contact-body > .ccards{animation-delay:.16s}
+  .contact-body > .quote{animation-delay:.24s}
 }
+.quote{margin:clamp(32px,4.5vw,48px) 0 0;padding-left:clamp(16px,2vw,22px);border-left:2px solid var(--accent)}
+.quote blockquote{margin:0}
+.quote p{margin:0;font-size:clamp(18px,1.8vw,21px);line-height:1.45;letter-spacing:-.012em;color:var(--ink)}
+.quote figcaption{margin-top:12px;font-size:14px;color:var(--ink-2)}
+.quote figcaption b{font-weight:600;color:var(--ink)}
+.quote figcaption b::after{content:", ";font-weight:400;color:var(--ink-2)}
 .contact-body .sub{margin-top:clamp(12px,1.6vw,16px)}
 .ccards{display:grid;grid-template-columns:1fr 1fr;gap:clamp(12px,1.6vw,16px);margin-top:clamp(28px,4vw,40px)}
 .ccard-wrap{position:relative}
