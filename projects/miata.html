@@ -21,7 +21,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap">
 <script type="module" src="https://cdn.jsdelivr.net/npm/@google/model-viewer@3.5.0/dist/model-viewer.min.js"></script>
 <style>
-/* same tokens as index.html */
+/* same tokens as assets/site.css */
 :root{
   color-scheme: light;
   --bg:#FFFFFF;
@@ -70,6 +70,9 @@ a{color:inherit}
 .nav a{text-decoration:none;font-size:13px;color:var(--ink-2);transition:color .2s ease;white-space:nowrap}
 .nav a:hover{color:var(--ink)}
 .nav .logo{font-size:15px;font-weight:600;color:var(--ink);margin-right:auto;letter-spacing:-.012em}
+.nav a[aria-current="page"]{color:var(--ink);font-weight:500}
+@media (max-width:520px){.nav-in{gap:14px}.nav a{font-size:12.5px}.nav .logo{font-size:14px}}
+@media (max-width:400px){.nav-in{gap:11px}.nav a{font-size:12px}}
 
 /* ---------- hero ---------- */
 .hero{text-align:center;padding-block:clamp(64px,10vw,120px) clamp(40px,6vw,64px)}
@@ -241,18 +244,34 @@ footer{background:var(--bg-alt);border-top:1px solid var(--rule);padding-block:3
 }
 .box .x:hover{background:rgba(0,0,0,.12)}
 </style>
+<link rel="stylesheet" href="../assets/project.css">
 </head>
 <body>
 <nav class="nav">
   <div class="nav-in">
     <a class="logo" href="../index.html">Jack Greer</a>
-    <a href="../index.html#projects">Projects</a>
-    <a href="../index.html#contact">Contact</a>
+    <a href="../experience.html">Experience</a>
+    <a href="../projects.html" aria-current="page">Projects</a>
+    <a href="../photographs.html">Photographs</a>
+    <a href="../contact.html">Contact</a>
+  </div>
+</nav>
+<nav class="subnav" aria-label="On this page">
+  <div class="subnav-in">
+    <a class="subnav-title" href="#top">Miata</a>
+    <div class="subnav-links">
+      <a href="#top">Overview</a>
+      <a href="#track">On track</a>
+      <a href="#laps">Lap times</a>
+      <a href="#alignment">Alignment</a>
+      <a href="#parts">Parts</a>
+      <a href="#scan">Scan</a>
+    </div>
   </div>
 </nav>
 
 <main>
-  <header class="hero inner">
+  <header class="hero inner" id="top">
     <span class="status">Active project</span>
     <span class="eyebrow">2016 Mazda MX-5 (ND1)</span>
     <h1>Track-Built Miata</h1>
@@ -260,7 +279,7 @@ footer{background:var(--bg-alt);border-top:1px solid var(--rule);padding-block:3
   </header>
 
   <div class="cover-wrap">
-    <div class="cover">
+    <div class="cover" style="view-transition-name:cover-miata;--ratio:1.5">
       <img src="../assets/projects/miata/cover.jpg" width="2000" height="1333"
            alt="The red Miata at speed at Thunderhill, side view, with its rear wing and front splitter">
     </div>
@@ -280,9 +299,15 @@ footer{background:var(--bg-alt);border-top:1px solid var(--rule);padding-block:3
       <h2>The idea</h2>
       <p>I'm not really trying to add power. The car makes close to what it made from the factory, so if I want to go faster, it has to come from me: braking better, carrying more speed through corners, cleaner lines. Anything I change on the car is there to give me more grip, keep it alive for a full session, or teach me something.</p>
     </section>
+  </div>
 
-    <section>
-      <h2>From the car</h2>
+  <div class="dark" id="track">
+    <div class="inner">
+      <section>
+        <h2>From the car</h2>
+      </section>
+    </div>
+    <div class="inner mid">
       <div class="video">
         <iframe src="https://www.youtube-nocookie.com/embed/AbQ1yvFJm60?rel=0"
                 title="Thunderhill East, Session 6, in-car"
@@ -290,9 +315,11 @@ footer{background:var(--bg-alt);border-top:1px solid var(--rule);padding-block:3
                 referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy"></iframe>
       </div>
       <p class="video-cap">Thunderhill East on the new repave, Sep 20, 2026. Best lap 2:05.76. <a href="https://www.youtube.com/@Jackxgreer" target="_blank" rel="noopener">More sessions on YouTube &rsaquo;</a></p>
-    </section>
+    </div>
+  </div>
 
-    <section>
+  <div class="inner">
+    <section id="laps">
       <h2>Lap times</h2>
       <p>I time every session with a RaceBox. These are my best laps from each session, in order, with the best of the day highlighted. Anything with a &#9654; has in-car video. I've also run Buttonwillow 13CW, but that was before I had the RaceBox, so no times from it.</p>
     </section>
@@ -380,7 +407,7 @@ footer{background:var(--bg-alt);border-top:1px solid var(--rule);padding-block:3
   </div>
 
   <div class="inner">
-    <section>
+    <section id="alignment">
       <h2>Learning the alignment</h2>
       <p>When I started, the car understeered. The front would wash out mid-corner and I'd have to wait for it. So I started learning what the alignment actually does and messing with it myself until the car turned the way I wanted. This is where I've ended up for now.</p>
       <ul class="points">
@@ -390,7 +417,7 @@ footer{background:var(--bg-alt);border-top:1px solid var(--rule);padding-block:3
       </ul>
     </section>
 
-    <section>
+    <section id="parts">
       <h2>Parts I designed</h2>
       <p>Some of what's on the car I designed or made myself.</p>
       <ul class="points">
@@ -455,7 +482,7 @@ footer{background:var(--bg-alt);border-top:1px solid var(--rule);padding-block:3
   </div>
 
   <div class="inner">
-    <section>
+    <section id="scan">
       <h2>Scanning the car</h2>
       <p>For the mirrors, we pulled the factory ones off and 3D scanned them so the new design could use the stock mounting. Since the car was already apart, we scanned the whole thing too, so I have it for whatever I design next. The scanning was done with Epsilon Aero and Bomex.</p>
     </section>
@@ -517,7 +544,7 @@ footer{background:var(--bg-alt);border-top:1px solid var(--rule);padding-block:3
       </a>
     </section>
 
-    <a class="back" href="../index.html#projects">&lsaquo; All projects</a>
+    <a class="back" href="../projects.html">&lsaquo; All projects</a>
   </div>
 </main>
 
@@ -553,5 +580,6 @@ footer{background:var(--bg-alt);border-top:1px solid var(--rule);padding-block:3
   box.addEventListener("click", function(e){ if (e.target === box) hide(); });
 })();
 </script>
+<script src="../assets/project.js"></script>
 </body>
 </html>

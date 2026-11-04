@@ -3,7 +3,8 @@
 
 Reads photos.manifest.js (whatever filled it: the Instagram export importer or
 a feed sync), picks according to photos.config.json, copies the chosen photos
-into ig/ and rewrites the POSTS array in index.html.
+into ig/ and rewrites the POSTS array in assets/posts.js (read by
+index.html and photographs.html).
 
     python3 tools/build_gallery.py
 """
@@ -16,7 +17,7 @@ import sys
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 MANIFEST = os.path.join(ROOT, "photos.manifest.js")
 CONFIG = os.path.join(ROOT, "photos.config.json")
-PAGE = os.path.join(ROOT, "index.html")
+PAGE = os.path.join(ROOT, "assets", "posts.js")
 IGDIR = os.path.join(ROOT, "ig")
 
 try:
@@ -109,10 +110,10 @@ def main():
     new, count = re.subn(r"  /\* POSTS:START.*?/\* POSTS:END \*/", block, page,
                          count=1, flags=re.S)
     if not count:
-        print("ERROR: POSTS markers not found in index.html", file=sys.stderr)
+        print("ERROR: POSTS markers not found in assets/posts.js", file=sys.stderr)
         return 1
     open(PAGE, "w", encoding="utf-8").write(new)
-    print("\nindex.html now shows %d of %d photos." % (len(rows), len(items)))
+    print("\nassets/posts.js now lists %d of %d photos." % (len(rows), len(items)))
     return 0
 
 

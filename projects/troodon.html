@@ -21,7 +21,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap">
 <link rel="preconnect" href="https://greer.autodesk360.com">
 <style>
-/* same tokens as index.html */
+/* same tokens as assets/site.css */
 :root{
   color-scheme: light;
   --bg:#FFFFFF;
@@ -70,6 +70,9 @@ a{color:inherit}
 .nav a{text-decoration:none;font-size:13px;color:var(--ink-2);transition:color .2s ease;white-space:nowrap}
 .nav a:hover{color:var(--ink)}
 .nav .logo{font-size:15px;font-weight:600;color:var(--ink);margin-right:auto;letter-spacing:-.012em}
+.nav a[aria-current="page"]{color:var(--ink);font-weight:500}
+@media (max-width:520px){.nav-in{gap:14px}.nav a{font-size:12.5px}.nav .logo{font-size:14px}}
+@media (max-width:400px){.nav-in{gap:11px}.nav a{font-size:12px}}
 
 /* ---------- hero ---------- */
 .hero{text-align:center;padding-block:clamp(64px,10vw,120px) clamp(40px,6vw,64px)}
@@ -159,6 +162,8 @@ section p strong{color:var(--ink);font-weight:600}
   position:relative;display:inline-block;padding:12px 24px;border-radius:980px;
   background:var(--accent);color:#fff;font:500 16px var(--sans);
 }
+.clip .wide-shot{display:block;width:100%;height:auto;border-radius:clamp(14px,1.6vw,22px);background:#E8E8ED}
+#shows{scroll-margin-top:72px}
 .clip figcaption{margin-top:12px;font-size:14px;color:var(--ink-2);text-align:center}
 
 /* ---------- stack ---------- */
@@ -180,18 +185,34 @@ footer{background:var(--bg-alt);border-top:1px solid var(--rule);padding-block:3
   display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:13px;color:var(--ink-2);
 }
 </style>
+<link rel="stylesheet" href="../assets/project.css">
 </head>
 <body>
 <nav class="nav">
   <div class="nav-in">
     <a class="logo" href="../index.html">Jack Greer</a>
-    <a href="../index.html#projects">Projects</a>
-    <a href="../index.html#contact">Contact</a>
+    <a href="../experience.html">Experience</a>
+    <a href="../projects.html" aria-current="page">Projects</a>
+    <a href="../photographs.html">Photographs</a>
+    <a href="../contact.html">Contact</a>
+  </div>
+</nav>
+<nav class="subnav" aria-label="On this page">
+  <div class="subnav-in">
+    <a class="subnav-title" href="#top">Troodon</a>
+    <div class="subnav-links">
+      <a href="#top">Overview</a>
+      <a href="#speed">Speed</a>
+      <a href="#specs">Specs</a>
+      <a href="#shows">Shows</a>
+      <a href="#pcbs">PCBs</a>
+      <a href="#model">Model</a>
+    </div>
   </div>
 </nav>
 
 <main>
-  <header class="hero inner">
+  <header class="hero inner" id="top">
     <span class="status">Active project</span>
     <span class="eyebrow">A3DP custom Troodon</span>
     <h1>Custom Troodon 3D Printer</h1>
@@ -199,7 +220,7 @@ footer{background:var(--bg-alt);border-top:1px solid var(--rule);padding-block:3
   </header>
 
   <div class="cover-wrap" id="coverwrap">
-    <div class="cover">
+    <div class="cover" style="view-transition-name:cover-troodon;--ratio:1.3333">
       <img src="../assets/projects/troodon/printer.jpg" width="1600" height="1200"
            alt="The enclosed Troodon on a shop shelf, lit up inside, with the FXD toolhead on the gantry and the touchscreen below the door">
     </div>
@@ -224,8 +245,8 @@ footer{background:var(--bg-alt);border-top:1px solid var(--rule);padding-block:3
     </section>
   </div>
 
-  <div class="inner mid">
-    <div class="parts">
+  <div class="rail">
+    <div class="rail-track">
       <figure class="part">
         <img src="../assets/projects/troodon/gantry-corner.jpg" width="1080" height="1440" loading="lazy"
              alt="A machined aluminum corner bracket on the gantry with idlers guiding the wide belts">
@@ -242,44 +263,32 @@ footer{background:var(--bg-alt);border-top:1px solid var(--rule);padding-block:3
         <figcaption><b>Toolhead.</b> The FXD extruder on top of the Chube hotend.</figcaption>
       </figure>
     </div>
+    <div class="rail-nav">
+      <button type="button" data-dir="-1" aria-label="Previous">&lsaquo;</button>
+      <button type="button" data-dir="1" aria-label="Next">&rsaquo;</button>
+    </div>
+  </div>
+
+  <div class="dark" id="speed">
+    <div class="inner">
+      <section>
+        <h2>How fast</h2>
+        <p>This is from back in 2023. At the time it was faster than about 95% of printers out there, which was really rare for a printer this big. The one in the video is the larger 400 &times; 400 &times; 500 mm version.</p>
+      </section>
+    </div>
+
+    <div class="inner mid">
+      <figure class="clip">
+        <video src="../assets/projects/troodon/speed-2023.mp4" width="640" height="360"
+               data-autoplay muted loop playsinline controls preload="metadata"
+               aria-label="The 400 by 400 by 500 mm version of the printer printing at high speed in 2023"></video>
+        <figcaption>Printing in 2023, on the 400 &times; 400 &times; 500 mm version.</figcaption>
+      </figure>
+    </div>
   </div>
 
   <div class="inner">
-    <section>
-      <h2>How fast</h2>
-      <p>This is from back in 2023. At the time it was faster than about 95% of printers out there, which was really rare for a printer this big. The one in the video is the larger 400 &times; 400 &times; 500 mm version.</p>
-    </section>
-  </div>
-
-  <div class="inner mid">
-    <figure class="clip">
-      <video src="../assets/projects/troodon/speed-2023.mp4" width="640" height="360"
-             autoplay muted loop playsinline controls preload="metadata"
-             aria-label="The 400 by 400 by 500 mm version of the printer printing at high speed in 2023"></video>
-      <figcaption>Printing in 2023, on the 400 &times; 400 &times; 500 mm version.</figcaption>
-    </figure>
-  </div>
-
-  <div class="inner">
-    <section>
-      <h2>The full model</h2>
-      <p>This is the whole printer in Fusion. Drag to spin it around, scroll to zoom, and click into parts to see how it all goes together.</p>
-    </section>
-  </div>
-
-  <div class="inner mid">
-    <figure class="clip">
-      <!-- the Fusion viewer is heavy, so it only loads when someone asks for it -->
-      <button class="cad cad-load" id="cadload" type="button"
-              data-src="https://greer.autodesk360.com/shares/public/SH90d2dQT28d5b6028112c8ff81e49e4e656?mode=embed">
-        <span>Load the 3D model</span>
-      </button>
-      <figcaption>Interactive model, viewed through Autodesk Fusion. It's a big model, so give it a few seconds.</figcaption>
-    </figure>
-  </div>
-
-  <div class="inner">
-    <section>
+    <section id="specs">
       <h2>What's on it</h2>
       <ul class="points">
         <li><b>Servos on XY</b><span>Full servo motors on the XY gantry in place of steppers. That's what lets it move at up to 3 meters a second.</span></li>
@@ -293,6 +302,33 @@ footer{background:var(--bg-alt);border-top:1px solid var(--rule);padding-block:3
       </ul>
     </section>
 
+    <section id="shows">
+      <h2>On the convention floor</h2>
+      <p>A3DP flew me out to showcase the printer and my boards at three conventions: <strong>ERRF</strong>, <strong>RMRRF</strong> and <strong>3D Printopia</strong>. I spent the days at our booth walking people through the builds and explaining what the boards were for.</p>
+      <p>I sold my boards right there at the table, along with the rest of what A3DP makes, like our extruders and other parts. A lot of people walked up with a custom printer project and a specific problem, so I'd work through it with them on the spot and put together a combination of parts that fit their build.</p>
+    </section>
+  </div>
+
+  <div class="rail wide">
+    <div class="rail-track">
+      <figure class="clip">
+        <img class="wide-shot" src="../assets/projects/troodon/booth-2024.jpg" width="1280" height="960" loading="lazy"
+             alt="Jack and four A3DP teammates in matching black A3DP shirts and exhibitor lanyards, standing arm in arm in front of the A3DP booth backdrop">
+        <figcaption>The team and me at the A3DP booth, 2024.</figcaption>
+      </figure>
+      <figure class="clip">
+        <img class="wide-shot" src="../assets/projects/troodon/booth-table-2024.jpg" width="1600" height="1200" loading="lazy"
+             alt="The A3DP booth: a large enclosed printer on the left of a branded table, with boards, extruders and spools of filament laid out in front of the A3DP backdrop">
+        <figcaption>The booth, with a printer, the boards and extruders on the table.</figcaption>
+      </figure>
+    </div>
+    <div class="rail-nav">
+      <button type="button" data-dir="-1" aria-label="Previous">&lsaquo;</button>
+      <button type="button" data-dir="1" aria-label="Next">&rsaquo;</button>
+    </div>
+  </div>
+
+  <div class="inner">
     <section>
       <h2>The rebuild</h2>
       <p>Right now it's stripped back down to the bare frame so I can rebuild everything.</p>
@@ -303,10 +339,10 @@ footer{background:var(--bg-alt);border-top:1px solid var(--rule);padding-block:3
       </figure>
     </section>
 
-    <section>
+    <section id="pcbs">
       <h2>Custom PCBs</h2>
       <p>Servos normally take a lot more wiring than steppers. I designed a small adapter board in KiCad that makes them plug and play with any standard 3D printer mainboard that uses TMC stepper drivers. Each one breaks out ground, power, direction, step, enable and alarm on a single connector, so a servo driver plugs straight in.</p>
-      <p>I had them made, and now I sell them. I also got to show the printer at 3DPrintopia with A3DP.</p>
+      <p>I had them made, and now I sell them.</p>
       <figure class="shot">
         <img src="../assets/projects/troodon/servo-pcb.jpg" width="1080" height="1440" loading="lazy"
              alt="A panel of fifteen black servo adapter boards, each with a white six-pin connector labeled GND PWR DIR STP EN ALM and A3DP x Jack">
@@ -329,7 +365,25 @@ footer{background:var(--bg-alt);border-top:1px solid var(--rule);padding-block:3
       </dl>
     </section>
 
-    <a class="back" href="../index.html#projects">&lsaquo; All projects</a>
+    <section id="model">
+      <h2>The full model</h2>
+      <p>This is the whole printer in Fusion. Drag to spin it around, scroll to zoom, and click into parts to see how it all goes together.</p>
+    </section>
+  </div>
+
+  <div class="inner mid">
+    <figure class="clip">
+      <!-- the Fusion viewer is heavy, so it only loads when someone asks for it -->
+      <button class="cad cad-load" id="cadload" type="button"
+              data-src="https://greer.autodesk360.com/shares/public/SH90d2dQT28d5b6028112c8ff81e49e4e656?mode=embed">
+        <span>Load the 3D model</span>
+      </button>
+      <figcaption>Interactive model, viewed through Autodesk Fusion. It's a big model, so give it a few seconds.</figcaption>
+    </figure>
+  </div>
+
+  <div class="inner">
+    <a class="back" href="../projects.html">&lsaquo; All projects</a>
   </div>
 </main>
 
@@ -355,5 +409,6 @@ footer{background:var(--bg-alt);border-top:1px solid var(--rule);padding-block:3
   });
 })();
 </script>
+<script src="../assets/project.js"></script>
 </body>
 </html>

@@ -20,7 +20,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap">
 <style>
-/* same tokens as index.html */
+/* same tokens as assets/site.css */
 :root{
   color-scheme: light;
   --bg:#FFFFFF;
@@ -69,6 +69,9 @@ a{color:inherit}
 .nav a{text-decoration:none;font-size:13px;color:var(--ink-2);transition:color .2s ease;white-space:nowrap}
 .nav a:hover{color:var(--ink)}
 .nav .logo{font-size:15px;font-weight:600;color:var(--ink);margin-right:auto;letter-spacing:-.012em}
+.nav a[aria-current="page"]{color:var(--ink);font-weight:500}
+@media (max-width:520px){.nav-in{gap:14px}.nav a{font-size:12.5px}.nav .logo{font-size:14px}}
+@media (max-width:400px){.nav-in{gap:11px}.nav a{font-size:12px}}
 
 /* ---------- hero ---------- */
 .hero{text-align:center;padding-block:clamp(64px,10vw,120px) clamp(40px,6vw,64px)}
@@ -207,18 +210,33 @@ footer{background:var(--bg-alt);border-top:1px solid var(--rule);padding-block:3
 }
 .box .x:hover{background:rgba(0,0,0,.12)}
 </style>
+<link rel="stylesheet" href="../assets/project.css">
 </head>
 <body>
 <nav class="nav">
   <div class="nav-in">
     <a class="logo" href="../index.html">Jack Greer</a>
-    <a href="../index.html#projects">Projects</a>
-    <a href="../index.html#contact">Contact</a>
+    <a href="../experience.html">Experience</a>
+    <a href="../projects.html" aria-current="page">Projects</a>
+    <a href="../photographs.html">Photographs</a>
+    <a href="../contact.html">Contact</a>
+  </div>
+</nav>
+<nav class="subnav" aria-label="On this page">
+  <div class="subnav-in">
+    <a class="subnav-title" href="#top">TireNet</a>
+    <div class="subnav-links">
+      <a href="#overview">Overview</a>
+      <a href="#system">System</a>
+      <a href="#arch">Architecture</a>
+      <a href="#firmware">Firmware</a>
+      <a href="#analysis">Analysis</a>
+    </div>
   </div>
 </nav>
 
 <main>
-  <header class="hero inner">
+  <header class="hero inner" id="top">
     <span class="status">Active project</span>
     <span class="eyebrow">TireNet</span>
     <h1>Tire Temperature Thermal Cameras</h1>
@@ -226,7 +244,7 @@ footer{background:var(--bg-alt);border-top:1px solid var(--rule);padding-block:3
   </header>
 
   <div class="cover-wrap">
-    <div class="cover">
+    <div class="cover" style="view-transition-name:cover-tire;--ratio:1.6">
       <img src="../assets/projects/tire-temps/cover.jpg" width="1600" height="1000"
            alt="The TireNet cockpit screen on the dash, showing live front-left and front-right tire temperature cards">
     </div>
@@ -240,7 +258,7 @@ footer{background:var(--bg-alt);border-top:1px solid var(--rule);padding-block:3
       <div><dt>Hardware</dt><dd>ESP32-S3, thermal cameras</dd></div>
     </dl>
 
-    <section>
+    <section id="overview">
       <h2>Overview</h2>
       <p>TireNet shows live tire temperatures on a race car. Four thermal cameras stream to a cockpit screen, and the data is later matched to GPS laps. I wrote three parts, about 6,600 lines:</p>
       <ul class="points">
@@ -251,10 +269,14 @@ footer{background:var(--bg-alt);border-top:1px solid var(--rule);padding-block:3
     </section>
   </div>
 
-  <div class="inner mid">
-    <section>
-      <h2>The system on the car</h2>
-      <div class="parts">
+  <div class="dark" id="system">
+    <div class="inner mid">
+      <section>
+        <h2>The system on the car</h2>
+      </section>
+    </div>
+    <div class="rail">
+      <div class="rail-track">
         <figure class="part">
           <button class="plate" type="button" aria-label="Enlarge: Wheel-well camera">
             <img src="../assets/projects/tire-temps/wheel-well.jpg" width="1080" height="1440" loading="lazy"
@@ -296,9 +318,15 @@ footer{background:var(--bg-alt);border-top:1px solid var(--rule);padding-block:3
           </figcaption>
         </figure>
       </div>
-    </section>
+      <div class="rail-nav">
+        <button type="button" data-dir="-1" aria-label="Previous">&lsaquo;</button>
+        <button type="button" data-dir="1" aria-label="Next">&rsaquo;</button>
+      </div>
+    </div>
+  </div>
 
-    <section>
+  <div class="inner mid">
+    <section id="arch">
       <h2>Architecture</h2>
       <p>The head unit is the hub. It runs the WiFi network the cameras join, and the phone and analysis tools only ever talk to it.</p>
       <figure class="arch">
@@ -382,7 +410,7 @@ footer{background:var(--bg-alt);border-top:1px solid var(--rule);padding-block:3
       </ul>
     </section>
 
-    <section>
+    <section id="firmware">
       <h2>Head-unit firmware</h2>
       <p>The touchscreen pulls frames from all four cameras over TCP and serves a web UI to phones. Each feature below fixed a problem found in testing.</p>
       <ul class="points">
@@ -393,7 +421,7 @@ footer{background:var(--bg-alt);border-top:1px solid var(--rule);padding-block:3
       </ul>
     </section>
 
-    <section>
+    <section id="analysis">
       <h2>Track analysis</h2>
       <p>The GPS unit and the screen record separately, so no laptop rides in the car. Afterwards the tool:</p>
       <ul class="points">
@@ -425,7 +453,7 @@ footer{background:var(--bg-alt);border-top:1px solid var(--rule);padding-block:3
       </dl>
     </section>
 
-    <a class="back" href="../index.html#projects">&lsaquo; All projects</a>
+    <a class="back" href="../projects.html">&lsaquo; All projects</a>
   </div>
 </main>
 
@@ -461,5 +489,6 @@ footer{background:var(--bg-alt);border-top:1px solid var(--rule);padding-block:3
   box.addEventListener("click", function(e){ if (e.target === box) hide(); });
 })();
 </script>
+<script src="../assets/project.js"></script>
 </body>
 </html>

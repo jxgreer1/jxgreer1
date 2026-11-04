@@ -106,7 +106,7 @@ These update themselves, see <i>How this repo works</i> below.
 </tr>
 </table>
 
-<p><a href="https://greerjack.com/#photographs"><b>All of them, full size →</b></a></p>
+<p><a href="https://greerjack.com/photographs.html"><b>All of them, full size →</b></a></p>
 
 </details>
 
@@ -117,7 +117,12 @@ These update themselves, see <i>How this repo works</i> below.
 This repo is two things at once: my GitHub profile, and the site itself.
 
 ```
-index.html                         the whole site, no build step
+index.html                         home, no build step
+experience.html, projects.html,
+photographs.html, contact.html     the other top-nav pages
+projects/                          one page per project
+assets/site.css, assets/site.js    shared styles and behaviour
+assets/posts.js                    photo list, rewritten by tools/build_gallery.py
 ig/                                the photographs
 tools/sync_instagram.py            pulls the latest posts
 .github/workflows/sync-instagram.yml   runs it daily

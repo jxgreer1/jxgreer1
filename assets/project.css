@@ -1,0 +1,121 @@
+/* Shared motion and layout for the pages under projects/. Loaded after each
+   page's own <style>, so it can override it. Everything that moves is behind
+   prefers-reduced-motion, and the scroll-linked parts are behind @supports,
+   so an older browser just gets the still layout. */
+
+/* ---------- page transitions ---------- */
+@view-transition{navigation:auto}
+.nav{view-transition-name:site-nav}
+::view-transition-old(root){animation:vt-out .26s cubic-bezier(.4,0,1,1) both}
+::view-transition-new(root){animation:vt-in .45s cubic-bezier(.22,.61,.36,1) both}
+@keyframes vt-out{to{opacity:0;transform:translateY(-10px)}}
+@keyframes vt-in{from{opacity:0;transform:translateY(16px)}}
+::view-transition-group(*){animation-duration:.55s;animation-timing-function:cubic-bezier(.22,.61,.36,1)}
+/* project cover morphs out of its card on the Projects page */
+::view-transition-image-pair(cover-troodon),
+::view-transition-image-pair(cover-miata),
+::view-transition-image-pair(cover-tire){overflow:hidden;border-radius:clamp(14px,1.6vw,22px)}
+::view-transition-old(cover-troodon),::view-transition-new(cover-troodon),
+::view-transition-old(cover-miata),::view-transition-new(cover-miata),
+::view-transition-old(cover-tire),::view-transition-new(cover-tire){height:100%;object-fit:cover}
+@media (prefers-reduced-motion:reduce){
+  ::view-transition-group(*),::view-transition-old(*),::view-transition-new(*){animation:none!important}
+}
+
+html{scroll-padding-top:104px}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+
+/* ---------- sub-nav ---------- */
+.subnav{
+  position:sticky;top:48px;z-index:49;height:44px;
+  background:rgba(255,255,255,.8);
+  backdrop-filter:saturate(180%) blur(20px);
+  -webkit-backdrop-filter:saturate(180%) blur(20px);
+  border-bottom:1px solid rgba(0,0,0,.09);
+  view-transition-name:subnav;
+}
+.subnav-in{
+  max-width:var(--wide);margin:0 auto;padding-inline:var(--gut);height:100%;
+  display:flex;align-items:center;gap:24px;
+}
+.subnav-title{
+  font-size:17px;font-weight:600;letter-spacing:-.015em;color:var(--ink);
+  text-decoration:none;white-space:nowrap;margin-right:auto;
+}
+.subnav-links{
+  display:flex;align-items:center;gap:clamp(14px,2.2vw,26px);
+  overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;
+}
+.subnav-links::-webkit-scrollbar{display:none}
+.subnav-links a{
+  font-size:12.5px;color:var(--ink-2);text-decoration:none;white-space:nowrap;
+  padding-block:4px;border-bottom:1px solid transparent;
+  transition:color .25s ease,border-color .25s ease;
+}
+.subnav-links a:hover{color:var(--ink)}
+.subnav-links a.on{color:var(--ink);border-bottom-color:var(--ink)}
+@media (max-width:640px){
+  .subnav-title{display:none}
+  .subnav-links{flex:1}
+}
+
+/* ---------- hero eases away as you scroll ---------- */
+@supports (animation-timeline: scroll()){
+  @media (prefers-reduced-motion:no-preference){
+    .hero{
+      animation:heroAway linear both;
+      animation-timeline:scroll(root);animation-range:0 55vh;
+    }
+    @keyframes heroAway{to{opacity:.12;transform:translateY(-5vh) scale(.94)}}
+  }
+}
+
+/* ---------- cover grows into place as you scroll ----------
+   Scales the whole card up at its own aspect ratio, so the full photo is
+   always visible; nothing is cropped. */
+@supports (animation-timeline: scroll()){
+  @media (prefers-reduced-motion:no-preference){
+    .cover{
+      animation:coverGrow linear both;
+      animation-timeline:scroll(root);animation-range:0 60vh;
+    }
+    @keyframes coverGrow{from{transform:scale(.9)}to{transform:scale(1)}}
+  }
+}
+
+/* ---------- dark band ---------- */
+.dark{
+  --ink:#F5F5F7;--ink-2:#A1A1A6;--rule:#3A3A3C;--bg-alt:#1C1C1E;
+  background:#000;color:var(--ink);
+  margin-top:clamp(64px,9vw,112px);padding-block:clamp(72px,10vw,128px);
+}
+.dark > .inner:first-child > section:first-child{margin-top:0}
+.dark a{color:#4FC3C8}
+
+/* ---------- swipe rows ---------- */
+.rail{margin-top:clamp(28px,4vw,44px)}
+.rail-track{
+  --pad:max(var(--gut), calc(50% - var(--mid) / 2 + var(--gut)));
+  display:flex;gap:clamp(14px,2vw,24px);
+  overflow-x:auto;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;
+  padding:14px var(--pad);margin-block:-14px;scroll-padding-inline:var(--pad);
+  scrollbar-width:none;-webkit-overflow-scrolling:touch;
+}
+.rail-track::-webkit-scrollbar{display:none}
+.rail-track > *{flex:0 0 min(78vw,340px);scroll-snap-align:start;margin:0}
+.rail.wide .rail-track > *{flex-basis:min(86vw,720px)}
+.rail-nav{
+  display:flex;justify-content:flex-end;gap:12px;
+  max-width:var(--mid);margin:20px auto 0;padding-inline:var(--gut);
+}
+.rail-nav[hidden]{display:none}
+.rail-nav button{
+  width:36px;height:36px;border-radius:50%;border:0;cursor:pointer;
+  display:grid;place-items:center;font-size:18px;line-height:1;
+  background:rgba(0,0,0,.07);color:var(--ink);
+  transition:background .2s ease,opacity .2s ease;
+}
+.rail-nav button:hover:not(:disabled){background:rgba(0,0,0,.13)}
+.rail-nav button:disabled{opacity:.3;cursor:default}
+.dark .rail-nav button{background:rgba(255,255,255,.14)}
+.dark .rail-nav button:hover:not(:disabled){background:rgba(255,255,255,.24)}
