@@ -1,0 +1,557 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="A 2016 Mazda MX-5 Jack Greer is using to learn track driving, with grip, aero and weight work and custom parts he designs himself.">
+<link rel="canonical" href="https://greerjack.com/projects/miata.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Jack Greer">
+<meta property="og:title" content="Track-Built Miata">
+<meta property="og:description" content="A 2016 MX-5 I'm using to learn track driving, with grip, aero and weight work and parts I design myself.">
+<meta property="og:url" content="https://greerjack.com/projects/miata.html">
+<meta property="og:image" content="https://greerjack.com/assets/projects/miata/cover.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#FFFFFF">
+<link rel="icon" type="image/png" href="../assets/favicon.png">
+<link rel="apple-touch-icon" href="../assets/favicon.png">
+<title>Track-Built Miata · Jack Greer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap">
+<script type="module" src="https://cdn.jsdelivr.net/npm/@google/model-viewer@3.5.0/dist/model-viewer.min.js"></script>
+<style>
+/* same tokens as index.html */
+:root{
+  color-scheme: light;
+  --bg:#FFFFFF;
+  --bg-alt:#F5F5F7;
+  --ink:#1D1D1F;
+  --ink-2:#6E6E73;
+  --rule:#D2D2D7;
+  --accent:#0A7D82;
+  --sans:-apple-system,BlinkMacSystemFont,"SF Pro Text","SF Pro Display","SF Pro",
+         "Inter","Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --gut:clamp(22px,5vw,48px);
+  --page:860px;
+  --mid:1100px;
+  --wide:1400px;
+  --ease:cubic-bezier(.22,.61,.36,1);
+}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+body{
+  margin:0;background:var(--bg);color:var(--ink);
+  font-family:var(--sans);
+  font-size:clamp(16px,1.1vw,17px);line-height:1.5;letter-spacing:-.003em;
+  -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
+}
+img{display:block;max-width:100%}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:4px;border-radius:4px}
+
+.inner{max-width:var(--page);margin:0 auto;padding-inline:var(--gut)}
+.inner.mid{max-width:var(--mid)}
+
+/* ---------- nav ---------- */
+.nav{
+  position:sticky;top:0;z-index:50;height:48px;
+  background:rgba(255,255,255,.86);
+  backdrop-filter:saturate(180%) blur(20px);
+  -webkit-backdrop-filter:saturate(180%) blur(20px);
+  border-bottom:1px solid rgba(0,0,0,.09);
+}
+.nav-in{
+  max-width:var(--wide);margin:0 auto;padding-inline:var(--gut);height:100%;
+  display:flex;align-items:center;gap:clamp(16px,3vw,34px);
+}
+.nav a{text-decoration:none;font-size:13px;color:var(--ink-2);transition:color .2s ease;white-space:nowrap}
+.nav a:hover{color:var(--ink)}
+.nav .logo{font-size:15px;font-weight:600;color:var(--ink);margin-right:auto;letter-spacing:-.012em}
+
+/* ---------- hero ---------- */
+.hero{text-align:center;padding-block:clamp(64px,10vw,120px) clamp(40px,6vw,64px)}
+.status{
+  display:inline-block;padding:3px 12px;border-radius:980px;
+  background:rgba(10,125,130,.1);color:var(--accent);font-weight:600;font-size:13px;
+}
+.eyebrow{display:block;margin-top:18px;font-size:15px;font-weight:600;color:var(--ink-2);letter-spacing:.01em}
+.hero h1{
+  margin:6px 0 0;font-size:clamp(38px,7vw,72px);font-weight:600;
+  line-height:1.05;letter-spacing:-.022em;text-wrap:balance;
+}
+.lede{
+  margin:clamp(16px,2.4vw,22px) auto 0;max-width:36ch;
+  font-size:clamp(19px,2.4vw,24px);line-height:1.35;font-weight:500;
+  letter-spacing:-.012em;color:var(--ink-2);text-wrap:balance;
+}
+@media (prefers-reduced-motion:no-preference){
+  .hero > *, .cover{animation:heroIn .7s var(--ease) backwards}
+  .hero h1{animation-delay:.06s}
+  .lede{animation-delay:.12s}
+  .cover{animation-delay:.2s}
+}
+@keyframes heroIn{from{opacity:0;transform:translateY(16px)}}
+
+.cover-wrap{padding-inline:var(--gut)}
+.cover{
+  max-width:var(--mid);margin:0 auto;aspect-ratio:3/2;
+  border-radius:clamp(14px,1.6vw,22px);overflow:hidden;background:#1B1B1F;
+}
+.cover img{width:100%;height:100%;object-fit:cover}
+.credit{max-width:var(--mid);margin:10px auto 0;font-size:13px;color:var(--ink-2);text-align:right}
+
+/* ---------- footage ---------- */
+.video{
+  margin-top:clamp(28px,4vw,40px);aspect-ratio:16/9;
+  border-radius:clamp(14px,1.6vw,22px);overflow:hidden;background:#1B1B1F;
+}
+.video iframe{display:block;width:100%;height:100%;border:0}
+.video-cap{margin:12px 0 0;font-size:14px;color:var(--ink-2);text-align:center}
+.video-cap a{color:var(--accent);text-decoration:none}
+.video-cap a:hover{opacity:.7}
+
+/* ---------- facts ---------- */
+.facts{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+  gap:clamp(18px,3vw,32px);margin:clamp(48px,7vw,80px) 0 0;padding:0;
+}
+.facts div{border-top:1px solid var(--rule);padding-top:14px}
+.facts dt{font-size:13px;font-weight:600;color:var(--accent);margin:0}
+.facts dd{margin:6px 0 0;font-size:16px;line-height:1.5;color:var(--ink)}
+
+/* ---------- sections ---------- */
+section{margin-top:clamp(64px,9vw,112px)}
+section h2{
+  margin:0;font-size:clamp(28px,4.4vw,44px);font-weight:600;
+  line-height:1.08;letter-spacing:-.017em;text-wrap:balance;
+}
+section p{margin:16px 0 0;font-size:clamp(17px,2vw,19px);line-height:1.65;color:var(--ink-2);max-width:62ch}
+section p strong{color:var(--ink);font-weight:600}
+section p a{color:var(--accent);text-decoration:none}
+section p a:hover{opacity:.7}
+
+/* labelled list: the bold lead-in carries the point, the rest explains */
+.points{list-style:none;margin:clamp(22px,3vw,30px) 0 0;padding:0;display:flex;flex-direction:column}
+.points li{
+  padding-block:clamp(16px,2.2vw,20px);border-top:1px solid var(--rule);
+  display:grid;grid-template-columns:minmax(150px,13em) minmax(0,1fr);gap:4px 28px;
+  font-size:16px;line-height:1.6;color:var(--ink-2);
+}
+.points li:last-child{border-bottom:1px solid var(--rule)}
+.points b,.points strong{color:var(--ink);font-weight:600}
+.points .soon{
+  display:inline-block;margin-left:8px;padding:1px 9px;border-radius:980px;vertical-align:1px;
+  background:rgba(10,125,130,.1);color:var(--accent);font-weight:600;font-size:12px;
+}
+@media (max-width:620px){.points li{grid-template-columns:1fr}}
+
+/* ---------- lap times ---------- */
+.days{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:clamp(16px,2.4vw,26px);margin-top:clamp(28px,4vw,40px)}
+.day{background:var(--bg-alt);border-radius:clamp(14px,1.6vw,20px);padding:clamp(20px,2.6vw,26px)}
+.day h3{margin:0;font-size:18px;font-weight:600;letter-spacing:-.01em}
+.day .date{margin:2px 0 0;font-size:14px;color:var(--ink-2)}
+.day table{width:100%;border-collapse:collapse;margin-top:16px;font-size:15px}
+.day th{text-align:left;font-size:12px;font-weight:600;color:var(--ink-2);padding:0 0 6px}
+.day td{padding:9px 0;border-top:1px solid var(--rule);color:var(--ink-2)}
+.day th.r,.day td.t{text-align:right}
+.day td{font-variant-numeric:tabular-nums}
+.day td.t{color:var(--ink);font-weight:600}
+.day tr.best td,.day tr.best td.t{color:var(--accent);font-weight:600}
+.day td a{color:inherit;text-decoration:none}
+.day td a:hover{color:var(--accent)}
+.day .gain{margin:14px 0 0;font-size:14px;color:var(--ink)}
+
+/* ---------- photos ---------- */
+.parts{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));
+  gap:clamp(16px,2.2vw,26px);margin-top:clamp(28px,4vw,44px);
+}
+.part{margin:0;display:flex;flex-direction:column;gap:12px}
+.part figcaption{font-size:15px;line-height:1.5;color:var(--ink-2)}
+.part figcaption b{color:var(--ink);font-weight:600}
+.parts.wide .plate img{aspect-ratio:3/2}
+
+/* ---------- 3D scan ---------- */
+.scan{margin:clamp(28px,4vw,44px) 0 0}
+.scan model-viewer{
+  display:block;width:100%;aspect-ratio:16/9;min-height:280px;
+  background:var(--bg-alt);border-radius:clamp(14px,1.6vw,22px);
+  --poster-color:transparent;
+}
+.scan figcaption{margin-top:12px;font-size:14px;color:var(--ink-2);text-align:center}
+.grow{display:grid;grid-template-columns:1fr 1fr;gap:clamp(16px,2.4vw,30px);margin-top:clamp(28px,4vw,44px)}
+@media (max-width:720px){.grow{grid-template-columns:1fr}}
+.grow .plate img{aspect-ratio:3/2}
+.plate{
+  display:block;width:100%;padding:0;border:0;cursor:zoom-in;line-height:0;
+  border-radius:clamp(12px,1.4vw,18px);overflow:hidden;background:#E8E8ED;
+  transition:transform .5s var(--ease),box-shadow .5s var(--ease);
+}
+.plate img{width:100%;height:auto;aspect-ratio:3/4;object-fit:cover}
+@media (hover:hover) and (prefers-reduced-motion:no-preference){
+  .plate:hover{transform:scale(1.03);box-shadow:0 18px 44px rgba(0,0,0,.16)}
+}
+
+/* ---------- link card ---------- */
+.link-card{
+  display:flex;align-items:center;justify-content:space-between;gap:20px;
+  margin-top:clamp(22px,3vw,30px);padding:clamp(18px,2.4vw,24px);
+  border-radius:clamp(14px,1.6vw,20px);text-decoration:none;color:inherit;
+  box-shadow:0 1px 2px rgba(0,0,0,.04),0 0 0 1px rgba(0,0,0,.05);
+  transition:transform .5s var(--ease),box-shadow .5s var(--ease);
+}
+@media (hover:hover) and (prefers-reduced-motion:no-preference){
+  .link-card:hover{transform:scale(1.02);box-shadow:0 18px 44px rgba(0,0,0,.12)}
+}
+.link-card b{display:block;font-size:18px;font-weight:600;letter-spacing:-.01em}
+.link-card span{font-size:15px;color:var(--ink-2)}
+.link-card .more{color:var(--accent);font-weight:500;white-space:nowrap}
+
+.back{
+  display:inline-flex;align-items:center;gap:6px;margin-top:clamp(64px,9vw,112px);
+  color:var(--accent);text-decoration:none;font-size:16px;font-weight:500;
+}
+.back:hover{opacity:.7}
+
+footer{background:var(--bg-alt);border-top:1px solid var(--rule);padding-block:30px 40px;margin-top:clamp(72px,10vw,128px)}
+.foot{
+  max-width:var(--wide);margin:0 auto;padding-inline:var(--gut);
+  display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:13px;color:var(--ink-2);
+}
+
+/* ---------- lightbox (same as the home page) ---------- */
+.box{
+  position:fixed;inset:0;z-index:99;border:0;margin:0;padding:0;width:100%;height:100%;
+  max-width:none;max-height:none;
+  background:rgba(245,245,247,.97);
+  backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
+  display:none;
+}
+.box[open]{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:clamp(18px,4vw,52px)}
+.box::backdrop{background:rgba(245,245,247,.97)}
+.box img{max-width:100%;max-height:82vh;width:auto;height:auto;object-fit:contain;border-radius:10px}
+.box figcaption{font-size:14px;color:var(--ink);font-weight:500;text-align:center}
+.box .x{
+  position:absolute;top:clamp(14px,2.4vw,26px);right:clamp(14px,2.4vw,26px);
+  width:34px;height:34px;border-radius:50%;border:0;cursor:pointer;
+  background:rgba(0,0,0,.06);color:var(--ink);font-size:17px;line-height:1;
+}
+.box .x:hover{background:rgba(0,0,0,.12)}
+</style>
+</head>
+<body>
+<nav class="nav">
+  <div class="nav-in">
+    <a class="logo" href="../index.html">Jack Greer</a>
+    <a href="../index.html#projects">Projects</a>
+    <a href="../index.html#contact">Contact</a>
+  </div>
+</nav>
+
+<main>
+  <header class="hero inner">
+    <span class="status">Active project</span>
+    <span class="eyebrow">2016 Mazda MX-5 (ND1)</span>
+    <h1>Track-Built Miata</h1>
+    <p class="lede">My 2016 Miata. I got it to learn how to drive on track, and I've been changing it piece by piece since. Mostly aero, suspension, brakes and weight, and a lot of the parts I design myself.</p>
+  </header>
+
+  <div class="cover-wrap">
+    <div class="cover">
+      <img src="../assets/projects/miata/cover.jpg" width="2000" height="1333"
+           alt="The red Miata at speed at Thunderhill, side view, with its rear wing and front splitter">
+    </div>
+    <p class="credit">Photo: Aries Photo for Turn8</p>
+  </div>
+
+  <div class="inner">
+    <dl class="facts">
+      <div><dt>Car</dt><dd>2016 MX-5, ND1</dd></div>
+      <div><dt>Tracks</dt><dd>Thunderhill West &amp; East, Sonoma, Streets of Willow, Buttonwillow 13CW</dd></div>
+      <div><dt>Best lap, Thunderhill West</dt><dd>1:27.93</dd></div>
+      <div><dt>Weight removed</dt><dd>About 100 lb</dd></div>
+      <div><dt>Focus</dt><dd>Getting faster as a driver</dd></div>
+    </dl>
+
+    <section>
+      <h2>The idea</h2>
+      <p>I'm not really trying to add power. The car makes close to what it made from the factory, so if I want to go faster, it has to come from me: braking better, carrying more speed through corners, cleaner lines. Anything I change on the car is there to give me more grip, keep it alive for a full session, or teach me something.</p>
+    </section>
+
+    <section>
+      <h2>From the car</h2>
+      <div class="video">
+        <iframe src="https://www.youtube-nocookie.com/embed/AbQ1yvFJm60?rel=0"
+                title="Thunderhill East, Session 6, in-car"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy"></iframe>
+      </div>
+      <p class="video-cap">Thunderhill East on the new repave, Sep 20, 2026. Best lap 2:05.76. <a href="https://www.youtube.com/@Jackxgreer" target="_blank" rel="noopener">More sessions on YouTube &rsaquo;</a></p>
+    </section>
+
+    <section>
+      <h2>Lap times</h2>
+      <p>I time every session with a RaceBox. These are my best laps from each session, in order, with the best of the day highlighted. Anything with a &#9654; has in-car video. I've also run Buttonwillow 13CW, but that was before I had the RaceBox, so no times from it.</p>
+    </section>
+  </div>
+
+  <div class="inner mid">
+    <div class="days">
+      <div class="day">
+        <h3>Streets of Willow Springs</h3>
+        <p class="date">Apr 25, 2026</p>
+        <table>
+          <thead><tr><th>Session</th><th>Laps</th><th class="r">Best lap</th></tr></thead>
+          <tbody>
+            <tr class="best"><td>3</td><td>3</td><td class="t">1:32.06</td></tr>
+            <tr><td>4</td><td>1</td><td class="t">1:49.28</td></tr>
+            <tr><td>5</td><td>1</td><td class="t">1:35.42</td></tr>
+            <tr><td>8</td><td>5</td><td class="t">1:32.22</td></tr>
+          </tbody>
+        </table>
+        <p class="gain">First track day in this car</p>
+      </div>
+      <div class="day">
+        <h3>Thunderhill West</h3>
+        <p class="date">Sep 4, 2026</p>
+        <table>
+          <thead><tr><th>Session</th><th>Laps</th><th class="r">Best lap</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td>8</td><td class="t">1:31.13</td></tr>
+            <tr><td><a href="https://www.youtube.com/watch?v=9R1MFi6ugPM" target="_blank" rel="noopener">2 &#9654;</a></td><td>10</td><td class="t">1:30.08</td></tr>
+            <tr><td>3</td><td>9</td><td class="t">1:29.23</td></tr>
+            <tr><td><a href="https://www.youtube.com/watch?v=VAs70PyXro0" target="_blank" rel="noopener">4 &#9654;</a></td><td>6</td><td class="t">1:28.40</td></tr>
+            <tr class="best"><td><a href="https://www.youtube.com/watch?v=oZ24BtKDKHo" target="_blank" rel="noopener">5 &#9654;</a></td><td>5</td><td class="t">1:27.93</td></tr>
+            <tr><td>6</td><td>2</td><td class="t">1:38.59</td></tr>
+          </tbody>
+        </table>
+        <p class="gain"><strong>3.20 s</strong> faster than my first session</p>
+      </div>
+      <div class="day">
+        <h3>Sonoma Raceway</h3>
+        <p class="date">Sep 12, 2026</p>
+        <table>
+          <thead><tr><th>Session</th><th>Laps</th><th class="r">Best lap</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td>5</td><td class="t">2:00.89</td></tr>
+            <tr><td><a href="https://www.youtube.com/watch?v=JTxcFziE2ig" target="_blank" rel="noopener">5 &#9654;</a></td><td>8</td><td class="t">1:57.97</td></tr>
+            <tr><td>7</td><td>8</td><td class="t">1:56.63</td></tr>
+            <tr class="best"><td><a href="https://www.youtube.com/watch?v=SwqphXVXhPs" target="_blank" rel="noopener">8 &#9654;</a></td><td>8</td><td class="t">1:56.19</td></tr>
+            <tr><td>11</td><td>4</td><td class="t">1:57.45</td></tr>
+          </tbody>
+        </table>
+        <p class="gain"><strong>4.70 s</strong> faster than my first session</p>
+      </div>
+      <div class="day">
+        <h3>Thunderhill East</h3>
+        <p class="date">Sep 20, 2026, new repave</p>
+        <table>
+          <thead><tr><th>Session</th><th>Laps</th><th class="r">Best lap</th></tr></thead>
+          <tbody>
+            <tr><td>2</td><td>2</td><td class="t">2:24.19</td></tr>
+            <tr><td>3</td><td>5</td><td class="t">2:10.97</td></tr>
+            <tr><td><a href="https://www.youtube.com/watch?v=wZKr9uzt74E" target="_blank" rel="noopener">5 &#9654;</a></td><td>8</td><td class="t">2:07.99</td></tr>
+            <tr class="best"><td><a href="https://www.youtube.com/watch?v=AbQ1yvFJm60" target="_blank" rel="noopener">6 &#9654;</a></td><td>11</td><td class="t">2:05.76</td></tr>
+          </tbody>
+        </table>
+        <p class="gain"><strong>5.21 s</strong> faster than my first full session</p>
+      </div>
+    </div>
+
+    <div class="grow">
+      <figure class="part">
+        <button class="plate" type="button" aria-label="Enlarge: On track">
+          <img src="../assets/projects/miata/track-corner.jpg" width="2000" height="1333" loading="lazy"
+               alt="The Miata turning through a sweeping corner, seen from above">
+        </button>
+        <figcaption hidden>On track</figcaption>
+      </figure>
+      <figure class="part">
+        <button class="plate" type="button" aria-label="Enlarge: Sonoma">
+          <img src="../assets/projects/miata/track-sonoma.jpg" width="2000" height="1333" loading="lazy"
+               alt="The Miata passing the pit wall at Sonoma Raceway">
+        </button>
+        <figcaption hidden>Sonoma</figcaption>
+      </figure>
+    </div>
+  </div>
+
+  <div class="inner">
+    <section>
+      <h2>Learning the alignment</h2>
+      <p>When I started, the car understeered. The front would wash out mid-corner and I'd have to wait for it. So I started learning what the alignment actually does and messing with it myself until the car turned the way I wanted. This is where I've ended up for now.</p>
+      <ul class="points">
+        <li><b>Camber: &minus;3.5&deg;</b><span>How much the top of the tire leans in. More of it keeps the tread flat on the ground when the car rolls in a corner.</span></li>
+        <li><b>Caster: 5&deg;</b><span>How far back the steering axis is tilted. It adds camber as you turn the wheel and gives the steering more weight and feel.</span></li>
+        <li><b>Toe: 0 front, slight toe-in rear</b><span>Whether the tires point in or out a little. Zero up front keeps turn-in clean, and a bit of toe-in at the back keeps the rear calm on straights and under braking.</span></li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Parts I designed</h2>
+      <p>Some of what's on the car I designed or made myself.</p>
+      <ul class="points">
+        <li><b>Brakes</b><span>Calipers I worked on with Darkworks. It's run by a close friend, the person who got me into racing in the first place. The calipers have no seals, so they take more heat, and the pads and rotors are bigger so I'm not replacing them as often.</span></li>
+        <li><b>Wheels</b><span>Custom wheels. I used FEA to find where the stress was low and took material out there to get the weight down. Less weight at the wheel is less unsprung mass for the suspension to deal with.</span></li>
+        <li><b>Fenders</b><span>Fiberglass front fenders I made, with a big vent behind each wheel and mesh across it. It gives the air in the wheel well somewhere to go.</span></li>
+        <li><b>Headlight add-on <span class="soon">In progress</span></b><span>Goes over the headlight to keep debris off it and smooth out the air over the front corner. Version 1 is on the car now.</span></li>
+        <li><b>Aero mirrors <span class="soon">In progress</span></b><span>Mirrors shaped to cut drag. We scanned the factory ones so the new ones bolt right onto the stock mounts.</span></li>
+      </ul>
+    </section>
+  </div>
+
+  <div class="inner mid">
+    <div class="parts">
+      <figure class="part">
+        <button class="plate" type="button" aria-label="Enlarge: Custom wheels">
+          <img src="../assets/projects/miata/wheels.jpg" width="1080" height="1440" loading="lazy"
+               alt="A machined six-spoke custom wheel held up in front of the Miata's front hub">
+        </button>
+        <figcaption><b>Custom wheels.</b> Weight optimized with FEA.</figcaption>
+      </figure>
+      <figure class="part">
+        <button class="plate" type="button" aria-label="Enlarge: Brakes">
+          <img src="../assets/projects/miata/brakes.jpg" width="1080" height="1440" loading="lazy"
+               alt="A hand on the large slotted rotor, showing its size next to the polished custom caliper">
+        </button>
+        <figcaption><b>Brakes.</b> Custom Darkworks calipers with bigger pads and rotors.</figcaption>
+      </figure>
+      <figure class="part" id="headlight">
+        <button class="plate" type="button" aria-label="Enlarge: Headlight add-on">
+          <img src="../assets/projects/miata/headlight-v1.jpg" width="1080" height="1440" loading="lazy"
+               alt="Matte black 3D-printed add-on fitted over the Miata's left headlight"
+               onerror="document.getElementById('headlight').hidden=true">
+        </button>
+        <figcaption><b>Headlight add-on.</b> Version 1, on the car. In progress.</figcaption>
+      </figure>
+    </div>
+
+    <div class="parts wide">
+      <figure class="part">
+        <button class="plate" type="button" aria-label="Enlarge: Fender vent">
+          <img src="../assets/projects/miata/fender-top.jpg" width="1500" height="1001" loading="lazy"
+               alt="Custom black fiberglass fender with a large vent behind the wheel arch">
+        </button>
+        <figcaption><b>Fender vent.</b> The opening behind the wheel arch.</figcaption>
+      </figure>
+      <figure class="part">
+        <button class="plate" type="button" aria-label="Enlarge: Mesh-backed duct">
+          <img src="../assets/projects/miata/fender-angle.jpg" width="1500" height="1000" loading="lazy"
+               alt="Angled view into the fender vent, showing the mesh across the outlet">
+        </button>
+        <figcaption><b>Mesh-backed duct.</b> Lets air out, keeps junk out.</figcaption>
+      </figure>
+      <figure class="part">
+        <button class="plate" type="button" aria-label="Enlarge: Fiberglass layup">
+          <img src="../assets/projects/miata/fender-inside.jpg" width="1500" height="1001" loading="lazy"
+               alt="Underside of the fender, showing the fiberglass layup of the duct and the mesh">
+        </button>
+        <figcaption><b>Fiberglass layup.</b> The inside of the duct.</figcaption>
+      </figure>
+    </div>
+  </div>
+
+  <div class="inner">
+    <section>
+      <h2>Scanning the car</h2>
+      <p>For the mirrors, we pulled the factory ones off and 3D scanned them so the new design could use the stock mounting. Since the car was already apart, we scanned the whole thing too, so I have it for whatever I design next. The scanning was done with Epsilon Aero and Bomex.</p>
+    </section>
+  </div>
+
+  <div class="inner mid">
+    <figure class="scan">
+      <model-viewer src="../assets/projects/miata/nd-scan.glb"
+                    alt="3D scan of an ND Miata body, shown in grey"
+                    camera-controls auto-rotate auto-rotate-delay="0" rotation-per-second="18deg"
+                    camera-orbit="35deg 72deg auto" interaction-prompt="none"
+                    shadow-intensity="1" exposure="1.05" loading="lazy"></model-viewer>
+      <figcaption>3D scan of the ND Miata, via Epsilon Aero. Drag to rotate.</figcaption>
+    </figure>
+    <div class="parts">
+      <figure class="part">
+        <button class="plate" type="button" aria-label="Enlarge: Front end apart for scanning">
+          <img src="../assets/projects/miata/scan-teardown.jpg" width="1080" height="1440" loading="lazy"
+               alt="The Miata in the shop with the hood up and the front bumper off">
+        </button>
+        <figcaption><b>Front end apart.</b> In the shop for scanning.</figcaption>
+      </figure>
+      <figure class="part">
+        <button class="plate" type="button" aria-label="Enlarge: Factory mirror removed">
+          <img src="../assets/projects/miata/mirror-mount.jpg" width="1080" height="1440" loading="lazy"
+               alt="Driver's door with the factory mirror removed, showing the bare mounting point">
+        </button>
+        <figcaption><b>Factory mirror off.</b> The original mount the new mirrors will use.</figcaption>
+      </figure>
+    </div>
+  </div>
+
+  <div class="inner">
+    <section>
+      <h2>What's on the car</h2>
+      <ul class="points">
+        <li><b>Aero</b><span>9 Lives Racing splitter and rear wing, plus underbody panels. Downforce at both ends keeps the balance from shifting at speed, and the panels clean up the air under the car.</span></li>
+        <li><b>Suspension</b><span>Shaftworks coilovers and spherical bearings everywhere. The bearings replace the rubber bushings, so there's no slop and I can feel a lot more of what the car is doing.</span></li>
+        <li><b>Brakes</b><span>The Darkworks calipers, with bigger pads and rotors.</span></li>
+        <li><b>Engine &amp; cooling</b><span>Oil cooler, headers and an Invidia N1 exhaust. The cooler keeps oil temps down over a whole session. Power stays close to stock on purpose.</span></li>
+        <li><b>Weight</b><span>About 100 lb out so far. Most of that is the stock seats, which I swapped for carbon Tillett B10s. The lighter wheels help too.</span></li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>What's next</h2>
+      <ul class="points">
+        <li><b>More aero</b><span>Finish the mirrors first, then start on the bumpers using the scan.</span></li>
+        <li><b>More seat time</b><span>Honestly the biggest one. More laps is still the fastest way to get faster.</span></li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Reading the tires</h2>
+      <p>Lap times tell me if something worked, not why. So I built TireNet, four thermal cameras that show live tire temps on a screen in the cockpit. The spread across the tread tells me if the alignment is actually using the whole tire.</p>
+      <a class="link-card" href="tire-temps.html">
+        <div><b>Tire Temperature Thermal Cameras</b><span>Live tire temps on a cockpit screen, matched to GPS laps</span></div>
+        <span class="more">Learn more &rsaquo;</span>
+      </a>
+    </section>
+
+    <a class="back" href="../index.html#projects">&lsaquo; All projects</a>
+  </div>
+</main>
+
+<footer>
+  <div class="foot">
+    <span>Jack Greer, Los Angeles</span>
+    <span>&copy; 2026</span>
+  </div>
+</footer>
+
+<dialog class="box" id="box">
+  <button class="x" id="boxx" aria-label="Close">&times;</button>
+  <img id="boximg" alt="">
+  <figcaption id="boxcap"></figcaption>
+</dialog>
+
+<script>
+(function(){
+  "use strict";
+  var box = document.getElementById("box"),
+      bimg = document.getElementById("boximg"),
+      bcap = document.getElementById("boxcap");
+  Array.prototype.forEach.call(document.querySelectorAll(".plate"), function(btn){
+    btn.addEventListener("click", function(){
+      var im = btn.querySelector("img");
+      bimg.src = im.src; bimg.alt = im.alt;
+      bcap.textContent = btn.closest("figure").querySelector("figcaption").textContent;
+      box.showModal ? box.showModal() : box.setAttribute("open","");
+    });
+  });
+  function hide(){ box.close ? box.close() : box.removeAttribute("open"); }
+  document.getElementById("boxx").addEventListener("click", hide);
+  box.addEventListener("click", function(e){ if (e.target === box) hide(); });
+})();
+</script>
+</body>
+</html>

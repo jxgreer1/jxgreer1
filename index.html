@@ -171,6 +171,23 @@ a{color:inherit}
 .tools dt{font-size:13px;font-weight:600;color:var(--accent);margin:0}
 .tools dd{margin:0;font-size:16px;line-height:1.55;color:var(--ink-2)}
 
+/* ---------- resume ----------
+   Live embed of the Google Doc, so edits there show up here with no redeploy.
+   Uses the Docs renderer (/preview, /export?format=pdf), not Drive's viewer,
+   which reflows the .docx onto two pages. Must be shared "Anyone with the link". */
+.resume{margin-top:clamp(56px,7vw,88px);scroll-margin-top:72px}
+.resume-head{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px}
+.resume-head h3{margin:0;font-size:clamp(22px,3vw,30px);font-weight:600;letter-spacing:-.014em}
+.resume .cta{margin-top:0}
+.resume .btn{padding:9px 20px;font-size:15px}
+.resume .doc{
+  margin-top:clamp(20px,3vw,28px);background:var(--bg);overflow:hidden;
+  border-radius:clamp(12px,1.4vw,18px);
+  box-shadow:0 1px 2px rgba(0,0,0,.04),0 0 0 1px rgba(0,0,0,.05);
+}
+.resume iframe{display:block;width:100%;aspect-ratio:8.5/11;max-height:90vh;border:0}
+@media (max-width:620px){.resume iframe{aspect-ratio:auto;height:80vh}}
+
 /* ---------- projects ---------- */
 .projects{
   display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,420px),1fr));
@@ -296,6 +313,7 @@ footer{background:var(--bg-alt);border-top:1px solid var(--rule);padding-block:3
     <a class="sm" href="#currently">Right now</a>
     <a class="sm" href="#education">Education</a>
     <a class="sm" href="#experience">Experience</a>
+    <a class="sm" href="#resume">Resume</a>
     <a href="#projects">Projects</a>
     <a href="#photographs">Photographs</a>
     <a href="#contact">Contact</a>
@@ -382,6 +400,20 @@ footer{background:var(--bg-alt);border-top:1px solid var(--rule);padding-block:3
         <div><dt>Method</dt><dd>Lean, 8D, A3, DFM for PCBA, PCB, and Flex</dd></div>
         <div><dt>Stack</dt><dd>Jira, Enovia, Git, Excel, LLM tooling</dd></div>
       </dl>
+
+      <div class="resume" id="resume">
+        <div class="resume-head">
+          <h3>Resume</h3>
+          <div class="cta">
+            <a class="btn" href="https://docs.google.com/document/d/1cQ-q45MvrqVST_3Hsrq_gAMxx80rNRZd/export?format=pdf">Download PDF</a>
+            <a class="btn ghost" href="https://docs.google.com/document/d/1cQ-q45MvrqVST_3Hsrq_gAMxx80rNRZd/preview" target="_blank" rel="noopener">Open in new tab</a>
+          </div>
+        </div>
+        <div class="doc">
+          <iframe src="https://docs.google.com/document/d/1cQ-q45MvrqVST_3Hsrq_gAMxx80rNRZd/preview"
+                  title="Jack Greer resume" loading="lazy"></iframe>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -399,6 +431,18 @@ footer{background:var(--bg-alt);border-top:1px solid var(--rule);padding-block:3
             <span class="status">Active</span>
             <h3>Tire Temperature Thermal Cameras</h3>
             <p>Four thermal cameras stream live tire temperatures to a cockpit screen, later matched to GPS laps.</p>
+            <span class="more">Learn more &rsaquo;</span>
+          </div>
+        </a>
+        <a class="proj" href="projects/miata.html">
+          <div class="cover">
+            <img src="assets/projects/miata/cover.jpg" width="2000" height="1333" loading="lazy"
+                 alt="The red Miata at speed at Thunderhill, side view, with its rear wing and front splitter">
+          </div>
+          <div class="body">
+            <span class="status">Active</span>
+            <h3>Track-Built Miata</h3>
+            <p>My 2016 Miata. I'm using it to learn how to drive on track, and designing a lot of its parts myself.</p>
             <span class="more">Learn more &rsaquo;</span>
           </div>
         </a>
@@ -555,6 +599,7 @@ footer{background:var(--bg-alt);border-top:1px solid var(--rule);padding-block:3
        arriving in one slab */
     var sel = ".band .inner > h2, .band .inner > .sub, .band .inner > .prose," +
               ".band .inner > .intro, .band .inner > .cv, .band .inner > .tools," +
+              ".band .inner > .resume," +
               ".band .inner > .projects," +
               ".band .inner > .cta, .gallery .shot";
     var targets = [];
