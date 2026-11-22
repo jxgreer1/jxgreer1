@@ -2,6 +2,15 @@
    Every photo available to pick from. Loaded by picker.html. */
 window.PHOTO_MANIFEST = [
   {
+    "code": "Df_e4RTNTkX",
+    "caption": "Pacific Ocean - infrared",
+    "date": "Nov 21, 2026",
+    "permalink": "https://www.instagram.com/p/Df_e4RTNTkX/",
+    "thumb": "ig/thumbs/Df_e4RTNTkX.jpg",
+    "full": "ig/originals/Df_e4RTNTkX.jpg",
+    "ts": "2026-11-21T05:31:32+0000"
+  },
+  {
     "code": "DceQvfAmdCo_1",
     "caption": "Laguna Seca - Car week 26",
     "date": "Aug 25, 2026",
